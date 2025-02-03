@@ -1,0 +1,10 @@
+table.wp-list-table.widefat.striped thead tr * {
+	font-weight: bold;
+	text-transform: uppercase;
+	width: 2%;
+	white-space: nowrap !important;
+}
+table.wp-list-table.widefat.striped thead tr td:first-child,
+table.wp-list-table.widefat.striped thead tr th:first-child {
+	width: unset;
+}

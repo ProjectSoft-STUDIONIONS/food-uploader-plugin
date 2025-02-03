@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"name": "WP plugin file-uploader-plugin",
+			"path": "."
+		}
+	],
+	"settings":  {
+		"default_line_ending": "unix",
+		"show_line_endings": true,
+		"font_size": 14,
+		"tab_size": 4
+	},
+	"build_systems": [
+		{
+			"name": "Запуск полной сборки проекта",
+			"working_dir": "${project_path}",
+			"cmd": ["start", "/wait", "grunt", "-v"],
+			"shell": true
+		}
+	]
+}

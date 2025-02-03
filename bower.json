@@ -1,0 +1,23 @@
+{
+	"name": "file-uploader-plugin",
+	"description": "WordPress Плагин для загрузки файлов (PDF и XLSX) в папку /food/, доступен только администраторам.",
+	"main": "Gruntfile.js",
+	"authors": [
+		"Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/ProjectSoft-STUDIONIONS/file-uploader-plugin",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"bootstrap": "3.4.1",
+		"jquery": "^3.6.0",
+		"js-cookie": "^2.2.1"
+	},
+	"devDependencies": {}
+}
