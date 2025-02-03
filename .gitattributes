@@ -10,6 +10,7 @@
 **/*.php text eol=lf
 **/*.webmanifest text eol=lf
 
+/.npmrc export-ignore
 /.editorconfig export-ignore
 /.github export-ignore
 /.gitattributes export-ignore
