@@ -1,0 +1,136 @@
+@import "../../bower_components/bootstrap/less/bootstrap";
+@import "../../bower_components/bootstrap/less/theme";
+
+h1,
+h2, h3, h4, h5, h6 {
+	font-weight: 700;
+}
+.fancybox-container {
+	z-index: 9999999 !important;
+}
+#food_plugin {
+	p {
+		font-size: 16px;
+		&#p_uploads {
+			font-size: 14px;
+			font-family: monospace;
+			white-space: pre;
+			text-align: right;
+			margin-bottom: 14px;
+		}
+	}
+	dl {
+		margin-bottom: 15px;
+		margin-top: 15px;
+	}
+	table {
+		a {
+			&.food-link {
+				display: inline-flex;
+				margin-left: 10px;
+				padding: 5px;
+				border-radius: 50%;
+				overflow: hidden;
+				line-height: 1;
+				user-select: none;
+				& {
+					color: #333;
+					box-shadow: 0 0 2px #333;
+					transition: all .3s ease;
+				}
+				&:hover {
+					background-color: #fff;
+					color: #f00;
+					box-shadow: 0 0 4px #000;
+				}
+				&:focus {
+					//box-shadow: inset 0 0 4px #000;
+				}
+				&:active {
+					//box-shadow: 0 0 2px #333;
+				}
+				&,
+				&:focus,
+				&:focus-within,
+				&:focus-visible,
+				&:hover,
+				&:active {
+					outline: unset !important;
+					outline-offset: unset !important;
+					text-decoration: none !important;
+				}
+				&.food-view {
+					&:hover {
+						color: #00f;
+					}
+				}
+				&.food-rename {
+					&:hover {
+						color: #00b200;
+					}
+				}
+				* {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+}
+
+#p_uploads {
+	&:empty {
+		&,
+		~ p {
+			display: none;
+		}
+	}
+}
+
+.text-pre {
+  	white-space: pre;
+	font-family: monospace;
+	font-size: 16px;
+}
+
+form {
+	&[name=upload_food] {
+		display: flex;
+		justify-content: flex-end;
+	}
+	&[name=food_mode] {
+		* {
+			display: none;
+		}
+		input[type=submit]{
+			display: inline;
+			//width: 1px;
+			//height: 1px;
+			//font-size: 0px;
+			//padding: 0;
+			//margin: 0;
+			//background: transparent;
+			//border: transparent;
+			//outline: unset !important;
+			//background-image: unset;
+		}
+	}
+}
+
+#uploader {
+	label {
+		margin-bottom: 15px;
+		padding-bottom: 4px;
+		[type=file] {
+			// Хак для того, чтобы был фркус
+			width: 1px;
+			height: 1px;
+			font-size: 0px;
+			padding: 0;
+			margin: 0;
+			background: transparent;
+			border: transparent;
+			outline: unset !important;
+			background-image: unset;
+		}
+	}
+}

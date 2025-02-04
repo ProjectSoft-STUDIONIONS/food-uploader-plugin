@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Food File Uploader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-04 17:13+0400\n"
+"PO-Revision-Date: 2025-02-04 13:22+0000\n"
+"Last-Translator: ProjectSoft <projectsoft2009@yandex.ru>\n"
+"Language-Team: Russian (Russia)\n"
+"Language: ru-RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Loco-Source-Locale: ru_RU\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: languages\n"
+
+#: file-uploader-plugin.php:46 file-uploader-plugin.php:104
+msgid "Daily Meal Menu"
+msgstr "Меню ежедневного питания"
+
+#: file-uploader-plugin.php:61
+msgid "You do not have access to this page."
+msgstr "У вас нет доступа к этой странице."
+
+#: file-uploader-plugin.php:108
+msgid "File upload block"
+msgstr "Блок загрузки файлов"
+
+#: file-uploader-plugin.php:110
+msgid "Select files"
+msgstr "Выбрать файлы"
+
+#: file-uploader-plugin.php:115 file-uploader-plugin.php:124
+msgid "SEND"
+msgstr "Отправить"
+
+#: file-uploader-plugin.php:147 file-uploader-plugin.php:219
+msgid "Error: Unable to create directory"
+msgstr "Ошибка: Невозможно создать каталог"
+
+#: file-uploader-plugin.php:168
+msgid "Error: Only XLSX files are allowed."
+msgstr "Ошибка: разрешены только файлы XLSX"
+
+#: file-uploader-plugin.php:189
+msgid "File uploaded"
+msgstr "Файл загружен"
+
+#: file-uploader-plugin.php:192
+msgid "Failed to move file"
+msgstr "Не удалось переместить файл"
+
+#: file-uploader-plugin.php:196
+msgid "Failed to upload file"
+msgstr "Не удалось загрузить файл"
+
+#: file-uploader-plugin.php:229
+msgid "Name"
+msgstr "Имя"
+
+#: file-uploader-plugin.php:230
+msgid "File permissions"
+msgstr "Права"
+
+#: file-uploader-plugin.php:231
+msgid "Time of change"
+msgstr "Изменён"
+
+#: file-uploader-plugin.php:232
+msgid "File size"
+msgstr "Размер"
+
+#: file-uploader-plugin.php:233
+msgid "Actions"
+msgstr "Действия"
+
+#: file-uploader-plugin.php:257
+msgid "View file"
+msgstr "Просмотр файла"
+
+#: file-uploader-plugin.php:260
+msgid "Rename file"
+msgstr "Переименовать файл"
+
+#: file-uploader-plugin.php:263
+msgid "Delete file"
+msgstr "Удалить файл"
+
+#: file-uploader-plugin.php:271
+msgid "Files not uploaded."
+msgstr "Файлы не загружены."
+
+#: file-uploader-plugin.php:274
+msgid "The food folder for download does not exist."
+msgstr "Папка food для загрузки не существует."
+
+#: file-uploader-plugin.php:309 file-uploader-plugin.php:357
+msgid "The file exists"
+msgstr "Файл существует."
+
+#: file-uploader-plugin.php:317
+msgid "Disable file renaming"
+msgstr "Запрет на переименование файла"
+
+#: file-uploader-plugin.php:350
+msgid "File renamed"
+msgstr "Файл переименован"
+
+#: file-uploader-plugin.php:353
+msgid "Failed to rename file"
+msgstr "Не удалось переименовать файл."
+
+#: file-uploader-plugin.php:361 file-uploader-plugin.php:378
+msgid "The file does not exist"
+msgstr "Файл не существует."
+
+#: file-uploader-plugin.php:373
+msgid "File deleted"
+msgstr "Удалить файл"
+
+#: file-uploader-plugin.php:375
+msgid "The file was not deleted"
+msgstr "Файл не был удален."
+
+#: file-uploader-plugin.php:386
+msgid "TB"
+msgstr "Тб"
+
+#: file-uploader-plugin.php:387
+msgid "GB"
+msgstr "Гб"
+
+#: file-uploader-plugin.php:388
+msgid "MB"
+msgstr "Мб"
+
+#: file-uploader-plugin.php:389
+msgid "KB"
+msgstr "Кб"
+
+#: file-uploader-plugin.php:390
+msgid "byte"
+msgstr "байт"
