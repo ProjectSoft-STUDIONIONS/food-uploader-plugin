@@ -121,7 +121,7 @@ function food_plugin_file_uploader_page() {
 	<input type="hidden" name="mode" value="">
 	<input type="hidden" name="file" value="">
 	<input type="hidden" name="new_file">
-	<input type="submit" name="submited" value="' . __("SEND", "file-uploader-plugin") . '">
+	<input type="submit" tabindex="-1" name="submited" value="' . __("SEND", "file-uploader-plugin") . '">
 	</form>';
 	// Отображение списка загруженных файлов
 	food_plugin_display_uploaded_files();
@@ -520,31 +520,22 @@ function translit_file($filename) {
 	if (!empty($file['filename'])) {
 		// Нижний регистр
 		$alias = strtolower($file['filename']);
-		echo "1. " . $alias . "<br>";
 		// Очищаем от html
 		$alias = strip_tags($alias);
-		echo "2. " . $alias . "<br>";
 		// Транслит
 		$alias = strtr($alias, $ret);
-		echo "3. " . $alias . "<br>";
 		// Удаляем все неразрешённые символы
 		$alias = preg_replace('/[^\.A-Za-z0-9 _-]/', '', $alias);
-		echo "4. " . $alias . "<br>";
 		// Удаляем все пробельные символы. Заменяем их на один дефис
 		$alias = preg_replace('/\s+/', '-', $alias);
-		echo "5. " . $alias . "<br>";
 		// Удаляем все дефисы. Заменяем на один дефис
 		$alias = preg_replace('/-+/', '-', $alias);
-		echo "6. " . $alias . "<br>";
 		// Удаляем все нижние подчёркивания. Заменяем на один знак подчёркивания
 		$alias = preg_replace('/_+/', '_', $alias);
-		echo "7. " . $alias . "<br>";
 		// Удаляем сначала и сконца дефисы
 		$alias = trim($alias, '-');
-		echo "8. " . $alias . "<br>";
 		// Удаляем сначала и сконца нижние подчёркивания
 		$alias = trim($alias, '_');
-		echo "9. " . $alias . "<br>";
 		$new .= $alias;
 	}
 	if (!empty($file['extension'])) {

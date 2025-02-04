@@ -7139,12 +7139,21 @@ form[name=upload_food] {
   justify-content: flex-end;
 }
 
-form[name=food_mode] * {
+form[name=modifed] * {
   display: none;
 }
 
-form[name=food_mode] input[type=submit] {
-  display: inline;
+form[name=modifed] input[type=submit] {
+  display: block;
+  width: 1px;
+  height: 1px;
+  font-size: 0px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: transparent;
+  outline: unset !important;
+  background-image: unset;
 }
 
 #uploader label {
