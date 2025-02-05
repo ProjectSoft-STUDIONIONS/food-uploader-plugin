@@ -159,7 +159,7 @@ module.exports = function(grunt) {
 						}
 					]
 				},
-				src: "food-uploader-plugin.phps",
+				src: "edit-file-plugin.phps",
 				dest: "food-uploader-plugin.php"
 			}
 		},

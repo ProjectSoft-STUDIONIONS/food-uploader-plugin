@@ -91,6 +91,10 @@ msgstr "Блок загрузки файлов"
 msgid "file-uploaded"
 msgstr "Файл загружен"
 
+#.
+msgid "food-create-directory"
+msgstr "Директория <code>food</code> создана"
+
 #. 
 msgid "food-folder-does-no-exist"
 msgstr "Папка food для загрузки не существует."
@@ -101,11 +105,11 @@ msgstr "Гб"
 
 #. 
 msgid "information-block"
-msgstr "Информационный блок"
+msgstr "Food Uploader Plugin"
 
 #. 
 msgid "information-text"
-msgstr "Информационный текст"
+msgstr "WordPress Плагин для загрузки файлов (XLSX) в директорию вашего сайта <code>food</code>, доступен только администраторам.\nВыберите файлы меню (<strong><code>yyyy</code>-<code>mm</code>-<code>dd</code>-sm.xlsx</strong>, <strong>findex.xlsx</strong>, <strong>kp<code>yyyy</code>.xlsx</strong>, <strong>tm<code>yyyy</code>-sm.xlsx</strong>), где <code>yyyy</code> - год, <code>mm</code> - месяц, <code>dd</code> - день.\nЗагрузите на сайт файлы нажав кнопку «ОТПРАВИТЬ». Одновременно вы можете загрузить %s файлов.\nПри первом запуске плагина директория <code>food</code> создаётся автоматически."
 
 #. 
 msgid "KB"

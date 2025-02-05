@@ -53,16 +53,18 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 
 function food_plugin_add_admin_menu() {
 	global $plugin_name;
-	$title = __("daily-meal-menu", "food-uploader-plugin");
-	add_menu_page(
-		$title,
-		$title,
-		'manage_options',
-		$plugin_name,//'food_uploader',
-		'food_plugin_file_uploader_page',
-		'dashicons-open-folder',
-		26
-	);
+	if (current_user_can('manage_options')) {
+		$title = __("daily-meal-menu", "food-uploader-plugin");
+		add_menu_page(
+			$title,
+			$title,
+			'manage_options',
+			$plugin_name,//'food_uploader',
+			'food_plugin_file_uploader_page',
+			'dashicons-open-folder',
+			26
+		);
+	}
 }
 
 // Функция отображения страницы загрузки файлов
@@ -84,11 +86,6 @@ function food_plugin_file_uploader_page() {
 
 	switch ($mode) {
 		// Обработка переименования
-		/*
-		mode
-		file
-		new_file
-		*/
 		case 'rename':
 			// code...
 			if(isset($_POST["file"]) && isset($_POST["new_file"])):
@@ -118,19 +115,19 @@ function food_plugin_file_uploader_page() {
 			<div class="display-flex-help">
 				<div class="alert alert-info">
 					<h4>' . __("information-block", "food-uploader-plugin") . '</h4>
-					' . nl2p(__("information-text", "food-uploader-plugin")) . '
+					' . nl2p(sprintf( __("information-text", "food-uploader-plugin"), $max_files)) . '
 				</div>
 			</div>
 			<form method="post" name="upload_food" enctype="multipart/form-data" action="' . food_admin_page_url() . '">
 				<div id="uploader" class="text-right">
-					<div class="text-center"><!-- Блок загрузки файлов -->' . __("file-upload-block", "food-uploader-plugin") . '</div>
+					<div class="text-center"><strong>' . __("file-upload-block", "food-uploader-plugin") . '</strong></div>
 					<label class="btn btn-default text-uppercase text-nowrap">
-						<!-- Выберите файлы --> ' . __("select-files", "food-uploader-plugin") . '
+						<i class="dashicons dashicons-media-spreadsheet"></i>&nbsp;' . __("select-files", "food-uploader-plugin") . '
 						<input type="file" name="food_plugin_file[]" accept=".xlsx" required multiple data-max="' . $max_files . '">
 					</label>
 					<p id="p_uploads" class="alert alert-info"></p>
 					<p>
-						<input type="submit" name="submit" class="btn btn-success text-uppercase text-nowrap" value="' . __("send", "food-uploader-plugin") . '">
+						<button class="btn btn-success text-uppercase text-nowrap" type="submit" name="submit" value="' . __("send", "food-uploader-plugin") . '"><i class="dashicons dashicons-upload"></i>&nbsp;' . __("send", "food-uploader-plugin") . '</button>
 					</p>
 				</div>
 			</form>
@@ -235,8 +232,10 @@ function food_plugin_display_uploaded_files() {
 	if (!file_exists($upload_dir)):
 		@mkdir($upload_dir, 0755, true);
 		if (!file_exists($upload_dir)):
-			echo '<div class="notice bg-danger"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong> <pre>food</pre>.</p></div>';
+			echo '<div class="notice bg-danger"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
 			return;
+		else:
+			echo '<div class="notice bg-success"><p><strong>' . __("food-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
 		endif;
 	endif;
 	echo '<h4>' . __("uploaded-files", "food-uploader-plugin") . ':</h4>';
@@ -246,10 +245,10 @@ function food_plugin_display_uploaded_files() {
 		<thead>
 			<tr>
 				<th class="manage-column column-primary text-nowrap text-left text-upercase">' . __("name", "food-uploader-plugin") . /*ИМЯ*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase">' . __("file-permissions", "food-uploader-plugin") . /*ПРАВА*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase">' . __("time-of-change", "food-uploader-plugin") . /*ИЗМЕНЁН*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase">' . __("file-size", "food-uploader-plugin") . /*РАЗМЕР ФАЙЛА*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase">' . __("actions", "food-uploader-plugin") . /*ДЕЙСТВИЯ*/ '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-permissions", "food-uploader-plugin") . /*ПРАВА*/ '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("time-of-change", "food-uploader-plugin") . /*ИЗМЕНЁН*/ '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-size", "food-uploader-plugin") . /*РАЗМЕР ФАЙЛА*/ '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("actions", "food-uploader-plugin") . /*ДЕЙСТВИЯ*/ '</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -385,20 +384,20 @@ function food_delete_file($file) {
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738789557', false );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738794330', false );
 	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738789557', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738789557', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738794330', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738794330', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738789557', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738794330', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 

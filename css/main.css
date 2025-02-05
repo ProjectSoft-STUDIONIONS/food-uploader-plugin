@@ -7064,7 +7064,7 @@ h6 {
   display: flex;
   -ms-flex-direction: row;
   flex-direction: row;
-  gap: 2rem;
+  gap: 1.3rem;
 }
 
 .display-flex-help {
@@ -8235,6 +8235,17 @@ form[name=modifed] input[type=submit] {
 
   .hidden-md {
     display: none !important;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .display-flex-help .alert {
+    margin-bottom: unset;
+  }
+
+  .display-flex {
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
 }
 

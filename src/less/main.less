@@ -13,12 +13,18 @@ h2, h3, h4, h5, h6 {
 	&-flex {
 		display: flex;
 		flex-direction: row;
-		gap: 2rem;
+		gap: 1.3rem;
 		&-help {
 			flex: 1;
 			.alert {
 				margin-bottom: 10px;
+				@media screen and (max-width: 678px) {
+					margin-bottom: unset;
+				}
 			}
+		}
+		@media screen and (max-width: 678px) {
+			flex-direction: column;
 		}
 	}
 }

@@ -89,6 +89,10 @@ msgstr "File upload block"
 msgid "file-uploaded"
 msgstr "File uploaded"
 
+#.
+msgid "food-create-directory"
+msgstr "The <code>food</code> directory has been created"
+
 #. 
 msgid "food-folder-does-no-exist"
 msgstr "The food folder for download does not exist"
@@ -99,11 +103,11 @@ msgstr "GB"
 
 #. 
 msgid "information-block"
-msgstr "Information block"
+msgstr "Food Uploader Plugin"
 
 #. 
 msgid "information-text"
-msgstr "Information text"
+msgstr "WordPress plugin for uploading files (XLSX) to your site's <code>food</code> directory, available only to administrators.\nSelect menu files (<strong><code>yyyy</code>-<code>mm</code>-<code>dd</code>-sm.xlsx</strong>, <strong>findex.xlsx</strong>, <strong>kp<code>yyyy</code>.xlsx</strong>, <strong>tm<code>yyyy</code>-sm.xlsx</strong>), where <code>yyyy</code> is the year, <code>mm</code> is the month, <code>dd</code> is the day.\nUpload the files to your site by clicking the «SEND» button. You can upload %s files at a time.\nThe first time you run the plugin, the <code>food</code> directory is created automatically."
 
 #. 
 msgid "KB"
