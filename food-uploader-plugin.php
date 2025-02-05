@@ -1,9 +1,18 @@
 <?php
 /*
-Plugin Name: Food File Uploader
-Description: WordPress Плагин для загрузки файлов (PDF и XLSX) в папку /food/, доступен только администраторам.
-Version: 1.0
-Author: Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+	Plugin Name:        Food File Uploader
+	Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
+	Description:        WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
+	Version:            1.0.0
+	Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
+	Author URI:         https://projectsoft.ru/
+	GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest
+	License:            GPL v2 or later
+	License URI:        https://www.gnu.org/licenses/gpl-2.0.html
+	Donate link:        https://projectsoft.ru/donate/
+ *
+ * @link https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
+
 */
 
 if (!defined('ABSPATH')) die();
@@ -384,20 +393,20 @@ function food_delete_file($file) {
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738795025', false );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738798419', false );
 	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738795025', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738795025', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738798419', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738798419', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738795025', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738798419', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 

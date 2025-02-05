@@ -22,8 +22,9 @@
 /README.md export-ignore
 
 /src export-ignore
-/*.phps export-ignore
+/*.php5 export-ignore
 /*.zip export-ignore
 /*.inf export-ignore
 /*.ini export-ignore
 /*.ico export-ignore
+/*.png export-ignore
