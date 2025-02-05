@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 						new NpmImportPlugin({prefix: '~'})
 					],
 					modifyVars: {
-						'icon-font-path': '/wp-content/plugins/file-uploader-plugin/fonts/',
+						'icon-font-path': '../fonts/',
 					}
 				},
 				files : {
@@ -150,6 +150,18 @@ module.exports = function(grunt) {
 					},
 				]
 			},
+			php: {
+				options: {
+					patterns: [
+						{
+							match: /%time%/g,
+							replacement: parseInt((new Date()).getTime() / 1000)
+						}
+					]
+				},
+				src: "food-uploader-plugin.phps",
+				dest: "food-uploader-plugin.php"
+			}
 		},
 		cssmin: {
 			options: {
@@ -190,20 +202,20 @@ module.exports = function(grunt) {
 		compress: {
 			main: {
 				options: {
-					archive: 'file-uploader-plugin.zip'
+					archive: 'food-uploader-plugin.zip'
 				},
 				files: [
 					{
 						expand: true,
 						cwd: '.',
 						src: [
-							'file-uploader-plugin.php',
+							'food-uploader-plugin.php',
 							'css/**',
 							'fonts/**',
 							'js/**',
 							'languages/**'
 						],
-						dest: '/file-uploader-plugin/'
+						dest: '/food-uploader-plugin/'
 					},
 				],
 			},
