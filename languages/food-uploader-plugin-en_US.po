@@ -137,6 +137,10 @@ msgstr "TB"
 msgid "time-of-change"
 msgstr "Time of change"
 
+#.
+msgid "uploaded-files"
+msgstr "Uploaded files"
+
 #. 
 msgid "view-file"
 msgstr "View file"

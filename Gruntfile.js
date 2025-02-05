@@ -16,9 +16,11 @@ module.exports = function(grunt) {
 			"cssmin",
 			"copy",
 			"compress",
+			"po2mo"
 		]
 	};
 	NpmImportPlugin = require("less-plugin-npm-import");
+	require('./src/modules/po2mo.js')(grunt);
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
 	grunt.initConfig({
@@ -171,13 +173,18 @@ module.exports = function(grunt) {
 			},
 		},
 		po2mo: {
-			en_US: {
-				src: 'languages/file-uploader-plugin-en_US.po',
-				dest: 'languages/file-uploader-plugin-en_US.mo'
-			},
-			ru_RU: {
-				src: 'languages/file-uploader-plugin-ru_RU.po',
-				dest: 'languages/file-uploader-plugin-ru_RU.mo'
+			main: {
+				files: [
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'languages/*.po'
+						],
+						dest: 'languages/',
+						filter: 'isFile'
+					},
+				]
 			},
 		},
 		compress: {
