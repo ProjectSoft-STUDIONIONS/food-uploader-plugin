@@ -21,4 +21,11 @@ src/temp
 # Debug end Develop
 *.sql
 
+# Window OS
+*.ini
+*.inf
+*.ico
+*.zip
+*.db
+
 !.gitignore

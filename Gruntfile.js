@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 			"replace",
 			"cssmin",
 			"copy",
+			"compress",
 		]
 	};
 	NpmImportPlugin = require("less-plugin-npm-import");
@@ -169,7 +170,27 @@ module.exports = function(grunt) {
 				dest: 'fonts/',
 			},
 		},
+		compress: {
+			main: {
+				options: {
+					archive: 'file-uploader-plugin.zip'
+				},
+				files: [
+					{
+						expand: true,
+						cwd: '.',
+						src: [
+							'file-uploader-plugin.php',
+							'css/**',
+							'fonts/**',
+							'js/**',
+							'languages/**'
+						],
+						dest: '/file-uploader-plugin/'
+					},
+				],
+			},
+		},
 	});
 	grunt.registerTask('default',	gc.default);
-	grunt.registerTask('speed',	gc.speed);
 };
