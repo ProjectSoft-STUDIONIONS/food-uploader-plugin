@@ -170,6 +170,16 @@ module.exports = function(grunt) {
 				dest: 'fonts/',
 			},
 		},
+		po2mo: {
+			en_US: {
+				src: 'languages/file-uploader-plugin-en_US.po',
+				dest: 'languages/file-uploader-plugin-en_US.mo'
+			},
+			ru_RU: {
+				src: 'languages/file-uploader-plugin-ru_RU.po',
+				dest: 'languages/file-uploader-plugin-ru_RU.mo'
+			},
+		},
 		compress: {
 			main: {
 				options: {

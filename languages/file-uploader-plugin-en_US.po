@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: localizely.com\n"
+"Last-Translator: localizely.com\n"
+"Language-Team: localizely.com\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#. 
+msgid "actions"
+msgstr "Actions"
+
+#. 
+msgid "byte"
+msgstr "byte"
+
+#. 
+msgid "daily-meal-menu"
+msgstr "Daily Meal Menu"
+
+#. 
+msgid "delete-file"
+msgstr "Delete file"
+
+#. 
+msgid "disable-file-renaming"
+msgstr "Disable file renaming"
+
+#. 
+msgid "error-only-xlsx-files"
+msgstr "Error: Only XLSX files are allowed."
+
+#. 
+msgid "error-unable-create-directory"
+msgstr "Error: Unable to create directory"
+
+#. 
+msgid "failed-move-file"
+msgstr "Failed to move file"
+
+#. 
+msgid "failed-rename-file"
+msgstr "Failed to rename file"
+
+#. 
+msgid "failed-upload-file"
+msgstr "Failed to upload file"
+
+#. 
+msgid "file-deleted"
+msgstr "File deleted"
+
+#. 
+msgid "file-exists"
+msgstr "The file exists"
+
+#. 
+msgid "file-not-deleted"
+msgstr "The file was not deleted"
+
+#. 
+msgid "file-not-exist"
+msgstr "The file does not exist"
+
+#. 
+msgid "file-permissions"
+msgstr "File permissions"
+
+#. 
+msgid "file-renamed"
+msgstr "File renamed"
+
+#. 
+msgid "file-size"
+msgstr "File size"
+
+#. 
+msgid "files-not-uploaded"
+msgstr "Files not uploaded"
+
+#. 
+msgid "file-upload-block"
+msgstr "File upload block"
+
+#. 
+msgid "file-uploaded"
+msgstr "File uploaded"
+
+#. 
+msgid "food-folder-does-no-exist"
+msgstr "The food folder for download does not exist"
+
+#. 
+msgid "GB"
+msgstr "GB"
+
+#. 
+msgid "information-block"
+msgstr "Information block"
+
+#. 
+msgid "information-text"
+msgstr "Information text"
+
+#. 
+msgid "KB"
+msgstr "KB"
+
+#. 
+msgid "MB"
+msgstr "MB"
+
+#. 
+msgid "name"
+msgstr "Name"
+
+#. 
+msgid "rename-file"
+msgstr "Rename file"
+
+#. 
+msgid "select-files"
+msgstr "Select files"
+
+#. 
+msgid "send"
+msgstr "Send"
+
+#. 
+msgid "TB"
+msgstr "TB"
+
+#. 
+msgid "time-of-change"
+msgstr "Time of change"
+
+#. 
+msgid "view-file"
+msgstr "View file"
+
+#. 
+msgid "you-not-access"
+msgstr "You do not have access to this page"

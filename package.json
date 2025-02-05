@@ -30,6 +30,7 @@
 		"grunt-contrib-uglify-es": "^3.3.0",
 		"grunt-group-css-media-queries": "^1.0.1",
 		"grunt-lineending": "^1.0.0",
+		"grunt-po2mo": "^0.1.2",
 		"grunt-replace": "^2.0.1",
 		"less-plugin-npm-import": "^2.1.0",
 		"load-grunt-tasks": "^5.1.0",

@@ -8,69 +8,99 @@ h2, h3, h4, h5, h6 {
 .fancybox-container {
 	z-index: 9999999 !important;
 }
-#food_plugin {
-	p {
-		font-size: 16px;
-		&#p_uploads {
-			font-size: 14px;
-			font-family: monospace;
-			white-space: pre;
-			text-align: right;
-			margin-bottom: 14px;
+
+.display {
+	&-flex {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+		&-help {
+			flex: 1;
+			.alert {
+				margin-bottom: 10px;
+			}
 		}
 	}
-	dl {
-		margin-bottom: 15px;
-		margin-top: 15px;
-	}
-	table {
-		a {
-			&.food-link {
-				display: inline-flex;
-				margin-left: 10px;
-				padding: 5px;
-				border-radius: 50%;
-				overflow: hidden;
-				line-height: 1;
-				user-select: none;
-				& {
-					color: #333;
-					box-shadow: 0 0 2px #333;
-					transition: all .3s ease;
-				}
-				&:hover {
-					background-color: #fff;
-					color: #f00;
-					box-shadow: 0 0 4px #000;
-				}
-				&:focus {
-					//box-shadow: inset 0 0 4px #000;
-				}
-				&:active {
-					//box-shadow: 0 0 2px #333;
-				}
-				&,
-				&:focus,
-				&:focus-within,
-				&:focus-visible,
-				&:hover,
-				&:active {
-					outline: unset !important;
-					outline-offset: unset !important;
-					text-decoration: none !important;
-				}
-				&.food-view {
-					&:hover {
-						color: #00f;
+}
+
+#food {
+	&_plugin {
+		min-height: ~'calc(100vh - 120px)';
+		@media screen and (max-width: 782px) {
+			min-height: ~'calc(100vh - 150px)';
+		}
+		p {
+			font-size: 16px;
+			&#p_uploads {
+				font-size: 14px;
+				font-family: monospace;
+				white-space: pre;
+				text-align: right;
+				margin-bottom: 14px;
+			}
+		}
+		dl {
+			margin-bottom: 15px;
+			margin-top: 15px;
+		}
+		table {
+			.food {
+				&-link {
+					&-wrap {
+						display: flex;
+						flex-direction: row;
+						justify-content: flex-end;
+						gap: 1rem;
 					}
 				}
-				&.food-rename {
-					&:hover {
-						color: #00b200;
+			}
+			a {
+				&.food-link {
+					display: inline-flex;
+					padding: 5px;
+					border-radius: 50%;
+					overflow: hidden;
+					line-height: 1;
+					user-select: none;
+					& {
+						color: #333;
+						box-shadow: 0 0 2px #333;
+						transition: all .3s ease;
 					}
-				}
-				* {
-					pointer-events: none;
+					&:hover {
+						background-color: #fff;
+						color: #f00;
+						box-shadow: 0 0 4px #000;
+					}
+					&:focus {
+						//box-shadow: inset 0 0 4px #000;
+					}
+					&:active {
+						//box-shadow: 0 0 2px #333;
+					}
+					&,
+					&:focus,
+					&:focus-within,
+					&:focus-visible,
+					&:hover,
+					&:active {
+						outline: unset !important;
+						outline-offset: unset !important;
+						text-decoration: none !important;
+					}
+					&.food-view {
+						&:hover {
+							color: #00f;
+						}
+					}
+					&.food-rename {
+						&:hover {
+							color: #00b200;
+						}
+					}
+					* {
+						pointer-events: none;
+					}
 				}
 			}
 		}

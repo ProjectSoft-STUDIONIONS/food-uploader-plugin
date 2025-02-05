@@ -7059,6 +7059,27 @@ h6 {
   z-index: 9999999 !important;
 }
 
+.display-flex {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.display-flex-help {
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.display-flex-help .alert {
+  margin-bottom: 10px;
+}
+
+#food_plugin {
+  min-height: calc(100vh - 120px);
+}
+
 #food_plugin p {
   font-size: 16px;
 }
@@ -7076,10 +7097,19 @@ h6 {
   margin-top: 15px;
 }
 
+#food_plugin table .food-link-wrap {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
 #food_plugin table a.food-link {
   display: -ms-inline-flexbox;
   display: inline-flex;
-  margin-left: 10px;
   padding: 5px;
   border-radius: 50%;
   overflow: hidden;
@@ -8205,6 +8235,12 @@ form[name=modifed] input[type=submit] {
 
   .hidden-md {
     display: none !important;
+  }
+}
+
+@media screen and (max-width: 782px) {
+  #food_plugin {
+    min-height: calc(100vh - 150px);
   }
 }
 
