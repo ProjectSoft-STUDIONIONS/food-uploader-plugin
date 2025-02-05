@@ -17,16 +17,20 @@ $abs_path = rtrim(preg_replace('/\\\\/', '/', ABSPATH), '/');
 define('FOOD_ABSPATH', $abs_path);
 
 
-global $mask_extensions, $allowed_types, $mask_folder, $all;
+global $mask_extensions, $allowed_types, $mask_folder, $all, $plugin_name;
 
 $mask_extensions = array("xlsx");
 $allowed_types = array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
 $mask_folder = array("food");
 
+$plugin_name = dirname( plugin_basename( __FILE__ ) );
+
 $local = get_user_locale();
 
-load_plugin_textdomain( 'file-uploader-plugin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+
+load_plugin_textdomain( 'file-uploader-plugin', false, $plugin_name . '/languages/' );
 
 // Добавление стилей, добавление скриптов
 add_action('admin_enqueue_scripts', 'food_plugin_add_admin_style_script');
@@ -35,7 +39,8 @@ add_action('admin_enqueue_scripts', 'food_plugin_add_admin_style_script');
 add_action('admin_menu', 'food_plugin_add_admin_menu', 30);
 
 function food_admin_page_url($query = null, array $esc_options = []) {
-	$url = menu_page_url('food_uploader', false);
+	global $plugin_name;
+	$url = menu_page_url($plugin_name, false);
 	if($query) {
 		$url .= '&' . (is_array($query) ? http_build_query($query) : (string) $query);
 	}
@@ -43,12 +48,13 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 }
 
 function food_plugin_add_admin_menu() {
+	global $plugin_name;
 	$title = __("Daily Meal Menu", "file-uploader-plugin");
 	add_menu_page(
 		$title,
 		$title,
 		'manage_options',
-		'food_uploader',
+		$plugin_name,//'food_uploader',
 		'food_plugin_file_uploader_page',
 		'dashicons-open-folder',
 		26
@@ -57,11 +63,13 @@ function food_plugin_add_admin_menu() {
 
 // Функция отображения страницы загрузки файлов
 function food_plugin_file_uploader_page() {
+	global $plugin_name;
 	if (!current_user_can('manage_options')) {
 		wp_die(__("You do not have access to this page.", "file-uploader-plugin"));
 	}
 	$max_files = ini_get("max_file_uploads");
 	// Контейнер
+	echo $plugin_name;
 	echo '<div id="food_plugin" class="container-fluid">
 	<div class="row">
 		<div class="wrap">';
@@ -282,8 +290,9 @@ function food_plugin_display_uploaded_files() {
 
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
-	wp_register_style( 'file-uploader-plugin', plugins_url( 'file-uploader-plugin/css/main.css' ), array(), '1.0.0-dev-'.time(), false );
-	wp_register_script( 'file-uploader-plugin_app', plugin_dir_url( __FILE__ ) . 'js/appjs.min.js', array(), '1.0.0', true );
+	global $plugin_name;
+	wp_register_style( 'file-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-'.time(), false );
+	wp_register_script( 'file-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'file-uploader-plugin' );
 	wp_enqueue_script( 'file-uploader-plugin_app');
 
@@ -295,7 +304,7 @@ function food_plugin_add_admin_style_script() {
 		wp_enqueue_script( 'file-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'file-uploader-plugin_main', plugin_dir_url( __FILE__ ) . 'js/main.min.js', array(), '1.0.0-dev-'.time(), true );
+	wp_register_script( 'file-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-'.time(), true );
 	wp_enqueue_script( 'file-uploader-plugin_main');
 }
 
@@ -419,12 +428,6 @@ function food_path_join (...$strings) {
 		$result[] = rtrim( $n, '/' );
 	endforeach;
 	return implode('/', $strings);
-}
-
-// Объединение строк
-function string_join(...$string) {
-	$result = "<p>" . implode("</p><p>", $string) . "</p>";
-	return $result;
 }
 
 // Транслит имени файлаfunction translit_file($filename)
