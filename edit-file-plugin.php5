@@ -6,7 +6,7 @@
 	Version:            1.0.0
 	Author:             Чернышёв Андрей aka ProjectSoft
 	Author URI:         https://projectsoft.ru/
-	GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest
+	GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
 	License:            GPL v2 or later
 	License URI:        https://www.gnu.org/licenses/gpl-2.0.html
 	Donate link:        https://projectsoft.ru/donate/
