@@ -14,6 +14,8 @@ WordPress Плагин для загрузки файлов (XLSX) в дирек
 
 ![XLSX в директорию food](screenshot.png?raw=true)
 
+~Current Version: 1.0.0~
+
 [comment]: <> ( Plugin Name:        Food File Uploader )
 [comment]: <> ( Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
 [comment]: <> ( Description:        WordPress Плагин для загрузки файлов \(XLSX\) в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России. )
