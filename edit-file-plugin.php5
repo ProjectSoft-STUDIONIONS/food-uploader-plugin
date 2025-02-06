@@ -125,7 +125,7 @@ function food_plugin_file_uploader_page() {
 	// Заголовок
 	echo '<h1>' . __("daily-meal-menu", "food-uploader-plugin") . '</h1>';
 	// Форма загрузки файла
-	echo '<div><pre><code>' . print_r(get_plugin_data(__FILE__), true) . '</code></pre></div>';
+	//echo '<div><pre><code>' . print_r(get_plugin_data(__FILE__), true) . '</code></pre></div>';
 	echo '<div class="display-flex">
 			<div class="display-flex-help">
 				<div class="alert alert-info">
