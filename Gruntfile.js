@@ -210,6 +210,7 @@ module.exports = function(grunt) {
 						cwd: '.',
 						src: [
 							'food-uploader-plugin.php',
+							'screenshot.png',
 							'README.md',
 							'LICENSE',
 							'css/**',
