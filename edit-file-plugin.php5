@@ -249,6 +249,7 @@ function food_plugin_display_uploaded_files() {
 	endif;
 	echo '<h4>' . __("uploaded-files", "food-uploader-plugin") . ':</h4>';
 	echo '
+<p>' . get_user_locale() . '</p>
 <div class="table-responsive">
 	<table class="table table-bordered table-hover">
 		<thead>

@@ -1,4 +1,4 @@
-# food-uploader-plugin
+# Food Uploader Plugin
 
 WordPress Плагин для загрузки файлов (XLSX) в директорию `food`, доступен только администраторам. 
 

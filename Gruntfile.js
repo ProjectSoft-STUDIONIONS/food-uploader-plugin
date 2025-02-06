@@ -191,7 +191,7 @@ module.exports = function(grunt) {
 						expand: true,
 						flatten : true,
 						src: [
-							'languages/*.po'
+							'src/languages/*.po'
 						],
 						dest: 'languages/',
 						filter: 'isFile'
@@ -224,4 +224,5 @@ module.exports = function(grunt) {
 		},
 	});
 	grunt.registerTask('default',	gc.default);
+	grunt.registerTask('zip',	["compress"]);
 };
