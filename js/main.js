@@ -41,14 +41,14 @@
 							reg2 = /^((?:kp\d{4})\.xlsx)$/,
 							// Type menu tmyyyyy-sm.xlsx;
 							reg3 = /^((?:tm\d{4}-sm)\.xlsx)$/;
-						if( (m = reg1.exec(a.name)) !== null || (m = reg2.exec(a.name)) !== null || (m = reg3.exec(a.name)) !== null ){
+						//if( (m = reg1.exec(a.name)) !== null || (m = reg2.exec(a.name)) !== null || (m = reg3.exec(a.name)) !== null ){
 							out.push(a.name);
-						}else{
-							info.html("");
-							alert("Неверное имя файла!\n\n" + a.name + "\n\n");
-							document.upload_food.reset();
-							return !1;
-						}
+						//}else{
+						//	info.html("");
+						//	alert("Неверное имя файла!\n\n" + a.name + "\n\n");
+						//	document.upload_food.reset();
+						//	return !1;
+						//}
 					}else{
 						info.html("");
 						alert("Нельзя загрузить данный тип файла!\n\n" + a.type + "\n\n");

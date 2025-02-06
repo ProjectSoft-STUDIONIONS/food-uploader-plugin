@@ -349,6 +349,13 @@ function food_rename_file($new_file="", $file=""){
 		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
 		return $all;
 	endif;
+	// Проверить на формат имени фвйла!
+	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm))|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm))\.xlsx)$/',
+	if(!preg_match( $reg1 ,  $new_file)):
+		// Не поддерживаемое имя файла
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") /*Не поддерживаемое имя файла*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
+		return;
+	endif;
 	$oFile = path_join($startpath, $file);
 	$nFile = path_join($startpath, $new_file);
 	// Существование исходного файла
