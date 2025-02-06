@@ -1,23 +1,19 @@
 <?php
 /*
 	Plugin Name:        Food File Uploader
-	Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
-	Description:        WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
-	Version:            1.0.0
-	Author:             Чернышёв Андрей aka ProjectSoft
+	Plugin URI:         %homepage%
+	Description:        %description%
+	Version:            %version%
+	Author:             %author%
 	Author URI:         https://projectsoft.ru/
-	GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
-	License:            GPL v2 or later
-	License URI:        https://www.gnu.org/licenses/gpl-2.0.html
+	GitHub Plugin URI:  %homepage%
+	License:            %license%
+	License URI:        %license_uri%
 	Donate link:        https://projectsoft.ru/donate/
 	Domain Path:        languages/
-	Text Domain:        food-uploader-plugin
+	Text Domain:        %name%
 	Requires at least:  5.7
 	Requires PHP:       7.4
-	Update URI:         https://projectsoft.ru/food-uploader-plugin/
- *
- * @link https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
-
 */
 
 if (!defined('ABSPATH')) die();

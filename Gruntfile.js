@@ -156,7 +156,35 @@ module.exports = function(grunt) {
 						{
 							match: /%time%/g,
 							replacement: parseInt((new Date()).getTime() / 1000)
-						}
+						},
+						{
+							match: /%name%/g,
+							replacement: PACK.name
+						},
+						{
+							match: /%description%/g,
+							replacement: PACK.description
+						},
+						{
+							match: /%version%/g,
+							replacement: PACK.version
+						},
+						{
+							match: /%author%/g,
+							replacement: PACK.author
+						},
+						{
+							match: /%homepage%/g,
+							replacement: PACK.homepage
+						},
+						{
+							match: /%license%/g,
+							replacement: PACK.license
+						},
+						{
+							match: /%license_uri%/g,
+							replacement: PACK.license_uri
+						},
 					]
 				},
 				src: "edit-file-plugin.php5",

@@ -1,6 +1,6 @@
 {
 	"name": "food-uploader-plugin",
-	"description": "WordPress Плагин для загрузки файлов (PDF и XLSX) в папку /food/, доступен только администраторам.",
+	"description": "WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам.",
 	"main": "Gruntfile.js",
 	"authors": [
 		"Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>"
