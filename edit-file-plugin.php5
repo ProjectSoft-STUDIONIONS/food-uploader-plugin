@@ -63,6 +63,12 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 
 function food_plugin_add_admin_menu() {
 	global $plugin_name;
+	if(class_exists('Transliteration')):
+		$trans = new Transliteration();
+		$trans->remove_action( 'admin_notices', 'notice__give_us_vote', 1 );
+		$trans->remove_action( 'admin_notices', 'notice__buy_me_a_coffee', 1 );
+		$trans->remove_action( 'admin_notices', 'notice__ads', 1 );
+	endif;
 	if (current_user_can('manage_options')) {
 		$title = __("daily-meal-menu", "food-uploader-plugin");
 		add_menu_page(

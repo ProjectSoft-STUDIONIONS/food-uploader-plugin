@@ -34,11 +34,24 @@
 				let m;
 				if ((m = regex.exec(a.name)) !== null) {
 					let ex = m[0].toLowerCase();
-					if(ex == "xlsx" || ex == "pdf"){
-						out.push(a.name);
+					if(ex == "xlsx"){
+							// Menu yyyy-mm-dd-sm.xlsx
+						let reg1 = /^((?:\d{4}-\d{2}-\d{2}-sm)\.xlsx)$/,
+							// Calendar kpyyyy.xlsx
+							reg2 = /^((?:kp\d{4})\.xlsx)$/,
+							// Type menu tmyyyyy-sm.xlsx;
+							reg3 = /^((?:tm\d{4}-sm)\.xlsx)$/;
+						if( (m = reg1.exec(a.name)) !== null || (m = reg2.exec(a.name)) !== null || (m = reg3.exec(a.name)) !== null ){
+							out.push(a.name);
+						}else{
+							info.html("");
+							alert("Неверное имя файла!\n\n" + a.name + "\n\n");
+							document.upload_food.reset();
+							return !1;
+						}
 					}else{
 						info.html("");
-						alert("Нельзя загрузить данный тип файла!\n" + a.type);
+						alert("Нельзя загрузить данный тип файла!\n\n" + a.type + "\n\n");
 						document.upload_food.reset();
 						return !1;
 					}

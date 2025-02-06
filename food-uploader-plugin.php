@@ -63,6 +63,12 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 
 function food_plugin_add_admin_menu() {
 	global $plugin_name;
+	if(class_exists('Transliteration')):
+		$trans = new Transliteration();
+		$trans->remove_action( 'admin_notices', 'notice__give_us_vote', 1 );
+		$trans->remove_action( 'admin_notices', 'notice__buy_me_a_coffee', 1 );
+		$trans->remove_action( 'admin_notices', 'notice__ads', 1 );
+	endif;
 	if (current_user_can('manage_options')) {
 		$title = __("daily-meal-menu", "food-uploader-plugin");
 		add_menu_page(
@@ -395,20 +401,20 @@ function food_delete_file($file) {
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738851883', false );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738874436', false );
 	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738851883', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738851883', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738874436', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738874436', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738851883', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738874436', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 
