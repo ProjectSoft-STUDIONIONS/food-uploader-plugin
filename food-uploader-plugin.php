@@ -2,7 +2,7 @@
 /*
 	Plugin Name:        Food File Uploader
 	Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
-	Description:        WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
+	Description:        WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 	Version:            1.0.1
 	Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
 	Author URI:         https://projectsoft.ru/
@@ -395,20 +395,20 @@ function food_delete_file($file) {
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738850284', false );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738851777', false );
 	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738850284', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738850284', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738851777', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738851777', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738850284', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738851777', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 

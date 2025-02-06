@@ -150,6 +150,46 @@ module.exports = function(grunt) {
 					},
 				]
 			},
+			md: {
+				options: {
+					patterns: [
+						{
+							match: /%time%/g,
+							replacement: parseInt((new Date()).getTime() / 1000)
+						},
+						{
+							match: /%name%/g,
+							replacement: PACK.name
+						},
+						{
+							match: /%description%/g,
+							replacement: PACK.description
+						},
+						{
+							match: /%version%/g,
+							replacement: PACK.version
+						},
+						{
+							match: /%author%/g,
+							replacement: PACK.author
+						},
+						{
+							match: /%homepage%/g,
+							replacement: PACK.homepage
+						},
+						{
+							match: /%license%/g,
+							replacement: PACK.license
+						},
+						{
+							match: /%license_uri%/g,
+							replacement: PACK.license_uri
+						},
+					]
+				},
+				src: "src/md",
+				dest: "README.md"
+			},
 			php: {
 				options: {
 					patterns: [
