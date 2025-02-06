@@ -171,7 +171,7 @@ function food_plugin_handle_file_upload($files) {
 	if (!file_exists($upload_dir)):
 		@mkdir($upload_dir, 0755, true);
 		if (!file_exists($upload_dir)):
-			echo '<div class="notice bg-danger"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin") . '</strong> <pre>food</pre>.</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin") . '</strong> <pre>food</pre>.</p></div>';
 			return;
 		endif;
 	endif;
@@ -226,10 +226,10 @@ function food_plugin_handle_file_upload($files) {
 	endforeach;
 
 	if($all["error"]):
-		echo '<div class="notice bg-danger"><dl class="dl-horizontal">' . $all["error"] . '</dl><a class="notice-close" href="notice-close">Close</a></div>';
+		echo '<div class="notice bg-danger is-dismissible"><dl class="dl-horizontal">' . $all["error"] . '</dl></div>';
 	endif;
 	if($all["success"]):
-		echo '<div class="notice bg-success"><dl class="dl-horizontal">' . $all["success"] . '</dl><a class="notice-close" href="notice-close">Close</a></div>';
+		echo '<div class="notice bg-success is-dismissible"><dl class="dl-horizontal">' . $all["success"] . '</dl></div>';
 	endif;
 }
 
@@ -243,10 +243,10 @@ function food_plugin_display_uploaded_files() {
 	if (!file_exists($upload_dir)):
 		@mkdir($upload_dir, 0755, true);
 		if (!file_exists($upload_dir)):
-			echo '<div class="notice bg-danger"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
 			return;
 		else:
-			echo '<div class="notice bg-success"><p><strong>' . __("food-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("food-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
 		endif;
 	endif;
 	echo '<h4>' . __("uploaded-files", "food-uploader-plugin") . ':</h4>';
@@ -318,7 +318,7 @@ function food_rename_file($new_file="", $file=""){
 	$msg = '';
 	// Если имена одинаковые - ничего не делаем. Выходим
 	if($file == $new_file):
-		echo '<div class="notice bg-danger"><p><strong>' . __("file-exists", "food-uploader-plugin") /*Файл существует*/ . '</strong><br>' . $file . '</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-exists", "food-uploader-plugin") /*Файл существует*/ . '</strong><br>' . $file . '</p></div>';
 		return;
 	endif;
 	// Исходный файл
@@ -326,7 +326,7 @@ function food_rename_file($new_file="", $file=""){
 	$old_pathinfo['extension'] = trim($old_pathinfo['extension']);
 	// Переименование только pdf или xlsx
 	if(!in_array($old_pathinfo['extension'], $mask_extensions)):
-		echo '<div class="notice bg-danger"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") /*Запрет на переименование файла*/ . '</strong><br>' . $file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") /*Запрет на переименование файла*/ . '</strong><br>' . $file . '</p></div>';
 		return;
 	endif;
 	// Транслит имени файла
@@ -346,7 +346,7 @@ function food_rename_file($new_file="", $file=""){
 	$new_file = $f_name . "." . $old_pathinfo['extension'];
 	// Если имена одинаковые - выходим c ошибкой
 	if($file == $new_file):
-		echo '<div class="notice bg-danger"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
 		return $all;
 	endif;
 	$oFile = path_join($startpath, $file);
@@ -359,18 +359,18 @@ function food_rename_file($new_file="", $file=""){
 			// Переименовываем
 			if(@rename($oFile, $nFile)):
 				// Удачно
-				echo '<div class="notice bg-success"><p><strong>' . __("file-renamed", "food-uploader-plugin") /*Файл переименован*/ . '</strong><br>' . "$file => $new_file" . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+				echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-renamed", "food-uploader-plugin") /*Файл переименован*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
 			else:
 				// Не удачно
-				echo '<div class="notice bg-danger"><p><strong>' . __("failed-rename-file", "food-uploader-plugin") /*Не удалось переименовать файл*/ . '</strong><br>' . "$file => $new_file" . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+				echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("failed-rename-file", "food-uploader-plugin") /*Не удалось переименовать файл*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
 			endif;
 		else:
 			// Уже есть данный файл
-			echo '<div class="notice bg-danger"><p><strong>' . __("file-exists", "food-uploader-plugin") /*Файл существует*/ . '</strong><br>' . $new_file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-exists", "food-uploader-plugin") /*Файл существует*/ . '</strong><br>' . $new_file . '</p></div>';
 		endif;
 	else:
 		// Не существует
-		echo '<div class="notice bg-danger"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p></div>';
 	endif;
 	return;
 }
@@ -382,12 +382,12 @@ function food_delete_file($file) {
 	$old_file = path_join($startpath, $file);
 	if(is_file($old_file)):
 		if(@unlink($old_file)):
-			echo '<div class="notice bg-success"><p><strong>' . __("file-deleted", "food-uploader-plugin") /*Файл удалён*/ . '</strong><br>' . $file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-deleted", "food-uploader-plugin") /*Файл удалён*/ . '</strong><br>' . $file . '</p></div>';
 		else:
-			echo '<div class="notice bg-danger"><p><strong>' . __("file-not-deleted", "food-uploader-plugin") /*Файл не удалён*/ . '</strong><br>' . $file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-deleted", "food-uploader-plugin") /*Файл не удалён*/ . '</strong><br>' . $file . '</p></div>';
 		endif;
 	else:
-		echo '<div class="notice bg-danger"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p><a class="notice-close" href="notice-close">Close</a></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p></div>';
 	endif;
 	return;
 }
