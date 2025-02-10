@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 				src: [
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/js-cookie/src/js.cookie.js',
-					'bower_components/bootstrap/dist/js/bootstrap.js'
+					//'bower_components/bootstrap/dist/js/bootstrap.js'
 
 				],
 				dest: 'js/appjs.js'
