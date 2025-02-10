@@ -237,7 +237,14 @@ module.exports = function(grunt) {
 					eol: 'lf'
 				},
 				files: {
-					'food-uploader-plugin.php': ['food-uploader-plugin.php'],
+					'food-uploader-plugin.php': ['food-uploader-plugin.php']
+				}
+			},
+			readme: {
+				options: {
+					eol: 'crlf'
+				},
+				files: {
 					'README.md': ['README.md']
 				}
 			}
