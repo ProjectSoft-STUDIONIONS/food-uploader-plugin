@@ -27,16 +27,16 @@ $abs_path = rtrim(preg_replace('/\\\\/', '/', ABSPATH), '/');
 define('FOOD_ABSPATH', $abs_path);
 
 
-global $mask_extensions, $allowed_types, $mask_folder, $all, $plugin_name;
+global $mask_extensions, $allowed_types, $plugin_name;
 
+// Тие файла. Расширение загружаемых, изменяемых или существующих файлов
 $mask_extensions = array("xlsx");
+// Тип файла. Content type
+// Полученный при загрузке файлов
 $allowed_types = array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
-$mask_folder = array("food");
-
+// Имя плагина получаем из имени директории
 $plugin_name = dirname( plugin_basename( __FILE__ ) );
-
-$local = get_user_locale();
 
 // Инициализация
 add_action( 'init', 'food_plugin_init' );
@@ -47,11 +47,13 @@ add_action('admin_enqueue_scripts', 'food_plugin_add_admin_style_script');
 // Создание страницы в админ-панели
 add_action('admin_menu', 'food_plugin_add_admin_menu', 30);
 
+// Функция инициализация плагина
 function food_plugin_init() {
 	global $plugin_name;
 	load_plugin_textdomain( 'food-uploader-plugin', false, $plugin_name . '/languages/' );
 }
 
+// Функция получения пути запроса к плагину
 function food_admin_page_url($query = null, array $esc_options = []) {
 	global $plugin_name;
 	$url = menu_page_url($plugin_name, false);
@@ -61,6 +63,7 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 	return esc_url($url, ...$esc_options);
 }
 
+// Функция добавления пункта меню в админке
 function food_plugin_add_admin_menu() {
 	global $plugin_name;
 	if (current_user_can('manage_options')) {
@@ -69,7 +72,7 @@ function food_plugin_add_admin_menu() {
 			$title,
 			$title,
 			'manage_options',
-			$plugin_name,//'food_uploader',
+			$plugin_name,
 			'food_plugin_file_uploader_page',
 			'dashicons-open-folder',
 			26
@@ -94,10 +97,10 @@ function food_plugin_file_uploader_page() {
 	}
 	$mode = isset($_POST["mode"]) ? $_POST['mode'] : "";
 
+	// Если был запрос на переименование или удаление файла
 	switch ($mode) {
 		// Обработка переименования
 		case 'rename':
-			// code...
 			if(isset($_POST["file"]) && isset($_POST["new_file"])):
 				$file = trim($_POST['file']);
 				$new_file = trim($_POST['new_file']);
@@ -108,7 +111,6 @@ function food_plugin_file_uploader_page() {
 			break;
 		// Обработка удаления
 		case 'delete':
-			// code...
 			if(isset($_POST["file"])):
 				$file = trim($_POST['file']);
 				if($file):
@@ -121,7 +123,6 @@ function food_plugin_file_uploader_page() {
 	// Заголовок
 	echo '<h1>' . __("daily-meal-menu", "food-uploader-plugin") . '</h1>';
 	// Форма загрузки файла
-	//echo '<div><pre><code>' . print_r(get_plugin_data(__FILE__), true) . '</code></pre></div>';
 	echo '<div class="display-flex">
 			<div class="display-flex-help">
 				<div class="alert alert-info">
@@ -157,7 +158,7 @@ function food_plugin_file_uploader_page() {
 </div>';
 }
 
-// Функция обработки загрузки файла
+// Функция обработки загрузки файлов
 function food_plugin_handle_file_upload($files) {
 	global $allowed_types;
 	
@@ -213,14 +214,14 @@ function food_plugin_handle_file_upload($files) {
 						@chmod($upload_dir . $name, 0644);
 					endif;
 					// Собираем удачную загрузку
-					$all["success"] .= '<dt>' . __("file-uploaded", "food-uploader-plugin") /*$_lang["file_success"]*/ . '</dt><dd>' . $name . '</dd>';
+					$all["success"] .= '<dt>' . __("file-uploaded", "food-uploader-plugin") . '</dt><dd>' . $name . '</dd>';
 				else:
 					// Не удалось переместить файл
-					$all["error"] .= '<dt>' . __("failed-move-file", "food-uploader-plugin") /*$_lang["error_movied_file"]*/ . '</dt><dd>' . $files['name'][$i] . '</dd>';
+					$all["error"] .= '<dt>' . __("failed-move-file", "food-uploader-plugin") . '</dt><dd>' . $files['name'][$i] . '</dd>';
 				endif;
 			else:
 				// Не удалось загрузить файл
-				$all["error"] .= '<dt>' . __("failed-upload-file", "food-uploader-plugin") /*$_lang["error_upload_file"]*/ . '</dt><dd>' . $files['name'][$i] . '</dd>';
+				$all["error"] .= '<dt>' . __("failed-upload-file", "food-uploader-plugin") . '</dt><dd>' . $files['name'][$i] . '</dd>';
 			endif;
 		endif;
 	endforeach;
@@ -243,27 +244,25 @@ function food_plugin_display_uploaded_files() {
 	if (!file_exists($upload_dir)):
 		@mkdir($upload_dir, 0755, true);
 		if (!file_exists($upload_dir)):
-			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("error-unable-create-directory", "food-uploader-plugin") . '</strong>.</p></div>';
 			return;
 		else:
-			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("food-create-directory", "food-uploader-plugin")/*$_lang["error_createdir"]*/ . '</strong>.</p></div>';
+			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("food-create-directory", "food-uploader-plugin") . '</strong>.</p></div>';
 		endif;
 	endif;
 	echo '<h4>' . __("uploaded-files", "food-uploader-plugin") . ':</h4>';
-	echo '
-<div class="table-responsive">
+	echo '<div class="table-responsive">
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th class="manage-column column-primary text-nowrap text-left text-upercase">' . __("name", "food-uploader-plugin") . /*ИМЯ*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-permissions", "food-uploader-plugin") . /*ПРАВА*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("time-of-change", "food-uploader-plugin") . /*ИЗМЕНЁН*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-size", "food-uploader-plugin") . /*РАЗМЕР ФАЙЛА*/ '</th>
-				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("actions", "food-uploader-plugin") . /*ДЕЙСТВИЯ*/ '</th>
+				<th class="manage-column column-primary text-nowrap text-left text-upercase">' . __("name", "food-uploader-plugin") . '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-permissions", "food-uploader-plugin") . '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("time-of-change", "food-uploader-plugin") . '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("file-size", "food-uploader-plugin") . '</th>
+				<th class="manage-column text-nowrap text-right text-upercase" width="1%">' . __("actions", "food-uploader-plugin") . '</th>
 			</tr>
 		</thead>
-		<tbody>
-';
+		<tbody>';
 	if (file_exists($upload_dir)):
 		$files = scandir($upload_dir);
 		$files = array_diff($files, array('.', '..'));
@@ -284,13 +283,13 @@ function food_plugin_display_uploaded_files() {
 				<td class="column text-pre text-right">' . food_plugin_nicesize($size) . '</td>
 				<td class="column text-nowrap text-right">
 					<span class="food-link-wrap">
-						<a class="food-link food-view" data-fansybox data-src="' . $url . '" href="' . $url . '" target="_blank" title="' . __("view-file", "food-uploader-plugin") /*Просмотр файла*/ . '">
+						<a class="food-link food-view" data-fansybox data-src="' . $url . '" href="' . $url . '" target="_blank" title="' . __("view-file", "food-uploader-plugin") . '">
 							<i class="glyphicon glyphicon-eye-open"></i>
 						</a>
-						<a class="food-link food-rename" href="' . $url . '" target="_blank" title="' . __("rename-file", "food-uploader-plugin") /*Переименовать файл*/ . '" data-mode="rename">
+						<a class="food-link food-rename" href="' . $url . '" target="_blank" title="' . __("rename-file", "food-uploader-plugin") . '" data-mode="rename">
 							<i class="glyphicon glyphicon-pencil"></i>
 						</a>
-						<a class="food-link food-delete" href="' . $url . '" target="_blank" title="' . __("delete-file", "food-uploader-plugin") /*Удалить файл*/ . '" data-mode="delete">
+						<a class="food-link food-delete" href="' . $url . '" target="_blank" title="' . __("delete-file", "food-uploader-plugin") . '" data-mode="delete">
 							<i class="glyphicon glyphicon-trash"></i>
 						</a>
 					</span>
@@ -299,10 +298,10 @@ function food_plugin_display_uploaded_files() {
 				endif;
 			endforeach;
 		else:
-			echo '<tr><td colspan="5">' . __("files-not-uploaded", "food-uploader-plugin") /*$_lang["files_not_found"]*/ . '</td></tr>';
+			echo '<tr><td colspan="5">' . __("files-not-uploaded", "food-uploader-plugin") . '</td></tr>';
 		endif;
 	else:
-		echo '<tr><td colspan="5">' . __("food-folder-does-no-exist", "food-uploader-plugin") /*$_lang["files_food_not_found"]*/ . '</td></tr>';
+		echo '<tr><td colspan="5">' . __("food-folder-does-no-exist", "food-uploader-plugin") . '</td></tr>';
 	endif;
 			echo '
 		</tbody>
@@ -311,7 +310,7 @@ function food_plugin_display_uploaded_files() {
 
 }
 
-// Переименование файла
+// Функция переименования файла
 function food_rename_file($new_file="", $file=""){
 	global $mask_extensions;
 	$startpath = food_path_join(FOOD_ABSPATH, "food") . '/';
@@ -348,10 +347,9 @@ function food_rename_file($new_file="", $file=""){
 	// Если имена одинаковые - выходим c ошибкой
 	if($file == $new_file):
 		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
-		return $all;
+		return;
 	endif;
-
-	/*
+/*
 	// Проверить на формат имени фвйла! Для папки food
 	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm)|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm)))\.xlsx)$/';
 	$reg2 = '/^((?:tm)(?:\d{4})(?:-sm)\.xlsx)$/';
@@ -362,8 +360,7 @@ function food_rename_file($new_file="", $file=""){
 		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") . '</strong><br>' . "$file => $new_file" . '</p></div>';
 		return;
 	endif;
-	*/
-
+*/
 	$oFile = path_join($startpath, $file);
 	$nFile = path_join($startpath, $new_file);
 	// Существование исходного файла
@@ -374,40 +371,40 @@ function food_rename_file($new_file="", $file=""){
 			// Переименовываем
 			if(@rename($oFile, $nFile)):
 				// Удачно
-				echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-renamed", "food-uploader-plugin") /*Файл переименован*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
+				echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-renamed", "food-uploader-plugin") . '</strong><br>' . "$file => $new_file" . '</p></div>';
 			else:
 				// Не удачно
-				echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("failed-rename-file", "food-uploader-plugin") /*Не удалось переименовать файл*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
+				echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("failed-rename-file", "food-uploader-plugin") . '</strong><br>' . "$file => $new_file" . '</p></div>';
 			endif;
 		else:
 			// Уже есть данный файл
-			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-exists", "food-uploader-plugin") /*Файл существует*/ . '</strong><br>' . $new_file . '</p></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-exists", "food-uploader-plugin") . '</strong><br>' . $new_file . '</p></div>';
 		endif;
 	else:
 		// Не существует
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 	endif;
 	return;
 }
 
-// Удаление файла
+// Функция удаления файла
 function food_delete_file($file) {
 	global $mask_extensions;
 	$startpath = food_path_join(FOOD_ABSPATH, "food") . '/';
 	$old_file = path_join($startpath, $file);
 	if(is_file($old_file)):
 		if(@unlink($old_file)):
-			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-deleted", "food-uploader-plugin") /*Файл удалён*/ . '</strong><br>' . $file . '</p></div>';
+			echo '<div class="notice bg-success is-dismissible"><p><strong>' . __("file-deleted", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 		else:
-			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-deleted", "food-uploader-plugin") /*Файл не удалён*/ . '</strong><br>' . $file . '</p></div>';
+			echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-deleted", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 		endif;
 	else:
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") /*Файл не существует*/ . '</strong><br>' . $file . '</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("file-not-exist", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 	endif;
 	return;
 }
 
-// Добавление стилей
+// Функция добавления стилей и скриптов в административную панель
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
 	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-%time%', false );
@@ -427,7 +424,7 @@ function food_plugin_add_admin_style_script() {
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 
-// Размер файла
+// Функция получения размера файла
 function food_plugin_nicesize($size)
 {
 	$TB = __("TB", "food-uploader-plugin");
@@ -448,7 +445,7 @@ function food_plugin_nicesize($size)
 	return '0 b';
 }
 
-// Формат времени
+// Функция форматирования времени
 function food_plugin_date_format(int $timestamp = 0)
 {
 	$timestamp = trim($timestamp);
@@ -459,7 +456,7 @@ function food_plugin_date_format(int $timestamp = 0)
 	return $strTime;
 }
 
-// Объединени пути
+// Функция Объединения пути
 function food_path_join (...$strings) {
 	$result = [];
 	foreach ($strings as $n):
@@ -478,92 +475,92 @@ function nl2p (string $string="") {
 	return $result;
 }
 
-// Транслит имени файлаfunction translit_file($filename)
+// Функция Транслита имени файла
 function translit_file($filename) {
 	$ret = array(
-			// russian
-			'А'  => 'A',
-			'а'  => 'a',
-			'Б'  => 'B',
-			'б'  => 'b',
-			'В'  => 'V',
-			'в'  => 'v',
-			'Г'  => 'G',
-			'г'  => 'g',
-			'Д'  => 'D',
-			'д'  => 'd',
-			'Е'  => 'E',
-			'е'  => 'e',
-			'Ё'  => 'Jo',
-			'ё'  => 'jo',
-			'Ж'  => 'Zh',
-			'ж'  => 'zh',
-			'З'  => 'Z',
-			'з'  => 'z',
-			'И'  => 'I',
-			'и'  => 'i',
-			'Й'  => 'J',
-			'й'  => 'j',
-			'К'  => 'K',
-			'к'  => 'k',
-			'Л'  => 'L',
-			'л'  => 'l',
-			'М'  => 'M',
-			'м'  => 'm',
-			'Н'  => 'N',
-			'н'  => 'n',
-			'О'  => 'O',
-			'о'  => 'o',
-			'П'  => 'P',
-			'п'  => 'p',
-			'Р'  => 'R',
-			'р'  => 'r',
-			'С'  => 'S',
-			'с'  => 's',
-			'Т'  => 'T',
-			'т'  => 't',
-			'У'  => 'U',
-			'у'  => 'u',
-			'Ф'  => 'F',
-			'ф'  => 'f',
-			'Х'  => 'H',
-			'х'  => 'h',
-			'Ц'  => 'C',
-			'ц'  => 'c',
-			'Ч'  => 'Ch',
-			'ч'  => 'ch',
-			'Ш'  => 'Sh',
-			'ш'  => 'sh',
-			'Щ'  => 'Shh',
-			'щ'  => 'shh',
-			'Ъ'  => '',
-			'ъ'  => '',
-			'Ы'  => 'Y',
-			'ы'  => 'y',
-			'Ь'  => '',
-			'ь'  => '',
-			'Э'  => 'Je',
-			'э'  => 'je',
-			'Ю'  => 'Ju',
-			'ю'  => 'ju',
-			'Я'  => 'Ja',
-			'я'  => 'ja',
-			// global
-			'Ґ'  => 'G',
-			'ґ'  => 'g',
-			'Є'  => 'Ie',
-			'є'  => 'ie',
-			'І'  => 'I',
-			'і'  => 'i',
-			'Ї'  => 'I',
-			'ї'  => 'i',
-			'Ї' => 'i',
-			'ї' => 'i',
-			'Ё' => 'Jo',
-			'ё' => 'jo',
-			'й' => 'i',
-			'Й' => 'I'
-		);
+		// russian
+		'А'  => 'A',
+		'а'  => 'a',
+		'Б'  => 'B',
+		'б'  => 'b',
+		'В'  => 'V',
+		'в'  => 'v',
+		'Г'  => 'G',
+		'г'  => 'g',
+		'Д'  => 'D',
+		'д'  => 'd',
+		'Е'  => 'E',
+		'е'  => 'e',
+		'Ё'  => 'Jo',
+		'ё'  => 'jo',
+		'Ж'  => 'Zh',
+		'ж'  => 'zh',
+		'З'  => 'Z',
+		'з'  => 'z',
+		'И'  => 'I',
+		'и'  => 'i',
+		'Й'  => 'J',
+		'й'  => 'j',
+		'К'  => 'K',
+		'к'  => 'k',
+		'Л'  => 'L',
+		'л'  => 'l',
+		'М'  => 'M',
+		'м'  => 'm',
+		'Н'  => 'N',
+		'н'  => 'n',
+		'О'  => 'O',
+		'о'  => 'o',
+		'П'  => 'P',
+		'п'  => 'p',
+		'Р'  => 'R',
+		'р'  => 'r',
+		'С'  => 'S',
+		'с'  => 's',
+		'Т'  => 'T',
+		'т'  => 't',
+		'У'  => 'U',
+		'у'  => 'u',
+		'Ф'  => 'F',
+		'ф'  => 'f',
+		'Х'  => 'H',
+		'х'  => 'h',
+		'Ц'  => 'C',
+		'ц'  => 'c',
+		'Ч'  => 'Ch',
+		'ч'  => 'ch',
+		'Ш'  => 'Sh',
+		'ш'  => 'sh',
+		'Щ'  => 'Shh',
+		'щ'  => 'shh',
+		'Ъ'  => '',
+		'ъ'  => '',
+		'Ы'  => 'Y',
+		'ы'  => 'y',
+		'Ь'  => '',
+		'ь'  => '',
+		'Э'  => 'Je',
+		'э'  => 'je',
+		'Ю'  => 'Ju',
+		'ю'  => 'ju',
+		'Я'  => 'Ja',
+		'я'  => 'ja',
+		// global
+		'Ґ'  => 'G',
+		'ґ'  => 'g',
+		'Є'  => 'Ie',
+		'є'  => 'ie',
+		'І'  => 'I',
+		'і'  => 'i',
+		'Ї'  => 'I',
+		'ї'  => 'i',
+		'Ї' => 'i',
+		'ї' => 'i',
+		'Ё' => 'Jo',
+		'ё' => 'jo',
+		'й' => 'i',
+		'Й' => 'I'
+	);
 
 	$new = '';
 	$filename = urldecode( $filename );
