@@ -1,59 +1,115 @@
+@charset "UTF-8";
 
-// Core variables and mixins
+// Bootstrap styles
 @import "../../bower_components/bootstrap/less/variables.less";
 @import "../../bower_components/bootstrap/less/mixins.less";
-
-// Reset and dependencies
 @import "../../bower_components/bootstrap/less/normalize.less";
-//@import "print.less";
 @import "../../bower_components/bootstrap/less/glyphicons.less";
-
-// Core CSS
-//@import "scaffolding.less";
 @import "../../bower_components/bootstrap/less/type.less";
 @import "../../bower_components/bootstrap/less/code.less";
-//@import "grid.less";
 @import "../../bower_components/bootstrap/less/tables.less";
-//@import "forms.less";
 @import "../../bower_components/bootstrap/less/buttons.less";
-
-// Components
-//@import "component-animations.less";
-//@import "dropdowns.less";
-//@import "button-groups.less";
-//@import "input-groups.less";
-//@import "navs.less";
-//@import "navbar.less";
-//@import "breadcrumbs.less";
-//@import "pagination.less";
-//@import "pager.less";
-//@import "labels.less";
-//@import "../../bower_components/bootstrap/less/badges.less";
-//@import "jumbotron.less";
-//@import "thumbnails.less";
 @import "../../bower_components/bootstrap/less/alerts.less";
-//@import "progress-bars.less";
-//@import "media.less";
-//@import "list-group.less";
-//@import "panels.less";
-//@import "responsive-embed.less";
-//@import "wells.less";
 @import "../../bower_components/bootstrap/less/close.less";
-
-// Components w/ JavaScript
-//@import "modals.less";
-//@import "tooltip.less";
-//@import "popovers.less";
-//@import "carousel.less";
-
-// Utility classes
 @import "../../bower_components/bootstrap/less/utilities.less";
-//@import "responsive-utilities.less";
+
+// Theme bootstarap styles
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+  @shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+  .box-shadow(@shadow);
+
+  &:active,
+  &.active {
+    .box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    .box-shadow(none);
+  }
+
+  .badge {
+    text-shadow: none;
+  }
+}
+
+.btn-styles(@btn-color: #555) {
+  #gradient > .vertical(@start-color: @btn-color; @end-color: darken(@btn-color, 12%));
+  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners; see https://github.com/twbs/bootstrap/issues/10620
+  background-repeat: repeat-x;
+  border-color: darken(@btn-color, 14%);
+
+  &:hover,
+  &:focus  {
+    background-color: darken(@btn-color, 12%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@btn-color, 12%);
+    border-color: darken(@btn-color, 14%);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: darken(@btn-color, 12%);
+      background-image: none;
+    }
+  }
+}
+
+.btn {
+  &:active,
+  &.active {
+    background-image: none;
+  }
+}
+
+.btn-default {
+  .btn-styles(@btn-default-bg);
+  text-shadow: 0 1px 0 #fff;
+  border-color: #ccc;
+}
+
+.btn-primary { .btn-styles(@btn-primary-bg); }
+.btn-success { .btn-styles(@btn-success-bg); }
+.btn-info    { .btn-styles(@btn-info-bg); }
+.btn-warning { .btn-styles(@btn-warning-bg); }
+.btn-danger  { .btn-styles(@btn-danger-bg); }
 
 
-//@import "../../bower_components/bootstrap/less/bootstrap";
-//@import "../../bower_components/bootstrap/less/theme";
+.alert {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .2);
+  @shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
+  .box-shadow(@shadow);
+}
 
+.alert-styles(@color) {
+  #gradient > .vertical(@start-color: @color; @end-color: darken(@color, 7.5%));
+  border-color: darken(@color, 15%);
+}
+
+.alert-success    { .alert-styles(@alert-success-bg); }
+.alert-info       { .alert-styles(@alert-info-bg); }
+.alert-warning    { .alert-styles(@alert-warning-bg); }
+.alert-danger     { .alert-styles(@alert-danger-bg); }
+
+// Custom styles
 h1,
 h2, h3, h4, h5, h6 {
 	font-weight: 700;
