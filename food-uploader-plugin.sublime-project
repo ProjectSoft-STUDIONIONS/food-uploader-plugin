@@ -5,7 +5,6 @@
 			"name": "WP plugin food-uploader-plugin",
 			"path": ".",
 			"folder_exclude_patterns": [
-				"bower_components",
 				"node_modules"
 			],
 			"file_exclude_patterns": [
