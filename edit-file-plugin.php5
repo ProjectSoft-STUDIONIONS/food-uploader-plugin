@@ -326,7 +326,8 @@ function food_rename_file($new_file="", $file=""){
 	$old_pathinfo['extension'] = trim($old_pathinfo['extension']);
 	// Переименование только pdf или xlsx
 	if(!in_array($old_pathinfo['extension'], $mask_extensions)):
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") /*Запрет на переименование файла*/ . '</strong><br>' . $file . '</p></div>';
+		// Запрет на переименование файла
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 		return;
 	endif;
 	// Транслит имени файла
@@ -349,13 +350,20 @@ function food_rename_file($new_file="", $file=""){
 		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
 		return $all;
 	endif;
-	// Проверить на формат имени фвйла!
-	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm))|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm))\.xlsx)$/',
-	if(!preg_match( $reg1 ,  $new_file)):
+
+	/*
+	// Проверить на формат имени фвйла! Для папки food
+	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm)|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm)))\.xlsx)$/';
+	$reg2 = '/^((?:tm)(?:\d{4})(?:-sm)\.xlsx)$/';
+	$reg3 = '/^((?:kp)(?:\d{4})\.xlsx)$/';
+	$reg4 = '/^((?:findex)\.xlsx)$/';
+	if(!preg_match( $reg1 ,  $new_file) || !preg_match( $reg2 ,  $new_file) || !preg_match( $reg3 ,  $new_file) || !preg_match( $reg4 ,  $new_file) ):
 		// Не поддерживаемое имя файла
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") /*Не поддерживаемое имя файла*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") . '</strong><br>' . "$file => $new_file" . '</p></div>';
 		return;
 	endif;
+	*/
+
 	$oFile = path_join($startpath, $file);
 	$nFile = path_join($startpath, $new_file);
 	// Существование исходного файла

@@ -326,7 +326,8 @@ function food_rename_file($new_file="", $file=""){
 	$old_pathinfo['extension'] = trim($old_pathinfo['extension']);
 	// Переименование только pdf или xlsx
 	if(!in_array($old_pathinfo['extension'], $mask_extensions)):
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") /*Запрет на переименование файла*/ . '</strong><br>' . $file . '</p></div>';
+		// Запрет на переименование файла
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("disable-file-renaming", "food-uploader-plugin") . '</strong><br>' . $file . '</p></div>';
 		return;
 	endif;
 	// Транслит имени файла
@@ -349,13 +350,20 @@ function food_rename_file($new_file="", $file=""){
 		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . $new_file . '</strong><br>Файл существует.</p></div>';
 		return $all;
 	endif;
-	// Проверить на формат имени фвйла!
-	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm))|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm))\.xlsx)$/',
-	if(!preg_match( $reg1 ,  $new_file)):
+
+	/*
+	// Проверить на формат имени фвйла! Для папки food
+	$reg1 = '/^((?:(?:\d{4}-\d{2}-\d{2}-sm)|(?:(?:kp\d{4}))|(?:(?:tm\d{4}-sm)))\.xlsx)$/';
+	$reg2 = '/^((?:tm)(?:\d{4})(?:-sm)\.xlsx)$/';
+	$reg3 = '/^((?:kp)(?:\d{4})\.xlsx)$/';
+	$reg4 = '/^((?:findex)\.xlsx)$/';
+	if(!preg_match( $reg1 ,  $new_file) || !preg_match( $reg2 ,  $new_file) || !preg_match( $reg3 ,  $new_file) || !preg_match( $reg4 ,  $new_file) ):
 		// Не поддерживаемое имя файла
-		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") /*Не поддерживаемое имя файла*/ . '</strong><br>' . "$file => $new_file" . '</p></div>';
+		echo '<div class="notice bg-danger is-dismissible"><p><strong>' . __("Не поддерживаемое имя файла", "food-uploader-plugin") . '</strong><br>' . "$file => $new_file" . '</p></div>';
 		return;
 	endif;
+	*/
+
 	$oFile = path_join($startpath, $file);
 	$nFile = path_join($startpath, $new_file);
 	// Существование исходного файла
@@ -402,20 +410,20 @@ function food_delete_file($file) {
 // Добавление стилей
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1738877454', false );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.css' ), array(), '1.0.0-dev-1739199185', false );
 	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), '1.0.0', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1738877454', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1738877454', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), '1.0.0-dev-1739199185', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), '1.0.0-dev-1739199185', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1738877454', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), '1.0.0-dev-1739199185', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 
