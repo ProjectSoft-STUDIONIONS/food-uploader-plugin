@@ -2132,6 +2132,10 @@ h6 {
   font-weight: 700;
 }
 
+.btn {
+  outline: unset !important;
+}
+
 .fancybox-container {
   z-index: 9999999 !important;
 }

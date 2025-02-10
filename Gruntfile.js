@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 			"autoprefixer",
 			"group_css_media_queries",
 			"replace",
+			"lineending",
 			"cssmin",
 			"copy",
 			"compress",
@@ -225,10 +226,24 @@ module.exports = function(grunt) {
 							match: /%license_uri%/g,
 							replacement: PACK.license_uri
 						},
+						{
+							match: /\r\n/g,
+							replacement: '\n'
+						},
 					]
 				},
 				src: "edit-file-plugin.php5",
 				dest: "food-uploader-plugin.php"
+			}
+		},
+		lineending: {
+			main: {
+				options: {
+					eol: 'lf'
+				},
+				files: {
+					'food-uploader-plugin.php': ['food-uploader-plugin.php']
+				}
 			}
 		},
 		cssmin: {
