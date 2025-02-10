@@ -13,11 +13,11 @@ module.exports = function(grunt) {
 			"autoprefixer",
 			"group_css_media_queries",
 			"replace",
-			"lineending",
 			"cssmin",
 			"copy",
 			"compress",
-			"po2mo"
+			"po2mo",
+			"lineending"
 		]
 	};
 	NpmImportPlugin = require("less-plugin-npm-import");
@@ -225,10 +225,6 @@ module.exports = function(grunt) {
 							match: /%license_uri%/g,
 							replacement: PACK.license_uri
 						},
-						{
-							match: /\r\n/g,
-							replacement: '\n'
-						},
 					]
 				},
 				src: "edit-file-plugin.php5",
@@ -241,7 +237,8 @@ module.exports = function(grunt) {
 					eol: 'lf'
 				},
 				files: {
-					'food-uploader-plugin.php': ['food-uploader-plugin.php']
+					'food-uploader-plugin.php': ['food-uploader-plugin.php'],
+					'README.md': ['README.md']
 				}
 			}
 		},
