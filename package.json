@@ -1,6 +1,6 @@
 {
 	"name": "food-uploader-plugin",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.",
 	"homepage": "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin",
 	"bugs": {
