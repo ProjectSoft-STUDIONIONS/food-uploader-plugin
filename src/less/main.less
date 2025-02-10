@@ -14,76 +14,77 @@
 @import "../../bower_components/bootstrap/less/utilities.less";
 
 // Theme bootstarap styles
+// Buttons
 .btn-default,
 .btn-primary,
 .btn-success,
 .btn-info,
 .btn-warning,
 .btn-danger {
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
-  @shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
-  .box-shadow(@shadow);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+	@shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+	.box-shadow(@shadow);
 
-  &:active,
-  &.active {
-    .box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
-  }
+	&:active,
+	&.active {
+		.box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
+	}
 
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    .box-shadow(none);
-  }
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		.box-shadow(none);
+	}
 
-  .badge {
-    text-shadow: none;
-  }
+	.badge {
+		text-shadow: none;
+	}
 }
 
 .btn-styles(@btn-color: #555) {
-  #gradient > .vertical(@start-color: @btn-color; @end-color: darken(@btn-color, 12%));
-  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners; see https://github.com/twbs/bootstrap/issues/10620
-  background-repeat: repeat-x;
-  border-color: darken(@btn-color, 14%);
+	#gradient > .vertical(@start-color: @btn-color; @end-color: darken(@btn-color, 12%));
+	.reset-filter();
+	background-repeat: repeat-x;
+	border-color: darken(@btn-color, 14%);
 
-  &:hover,
-  &:focus  {
-    background-color: darken(@btn-color, 12%);
-    background-position: 0 -15px;
-  }
+	&:hover,
+	&:focus  {
+		background-color: darken(@btn-color, 12%);
+		background-position: 0 -15px;
+	}
 
-  &:active,
-  &.active {
-    background-color: darken(@btn-color, 12%);
-    border-color: darken(@btn-color, 14%);
-  }
+	&:active,
+	&.active {
+		background-color: darken(@btn-color, 12%);
+		border-color: darken(@btn-color, 14%);
+	}
 
-  &.disabled,
-  &[disabled],
-  fieldset[disabled] & {
-    &,
-    &:hover,
-    &:focus,
-    &.focus,
-    &:active,
-    &.active {
-      background-color: darken(@btn-color, 12%);
-      background-image: none;
-    }
-  }
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&,
+		&:hover,
+		&:focus,
+		&.focus,
+		&:active,
+		&.active {
+			background-color: darken(@btn-color, 12%);
+			background-image: none;
+		}
+	}
 }
 
 .btn {
-  &:active,
-  &.active {
-    background-image: none;
-  }
+	&:active,
+	&.active {
+		background-image: none;
+	}
 }
 
 .btn-default {
-  .btn-styles(@btn-default-bg);
-  text-shadow: 0 1px 0 #fff;
-  border-color: #ccc;
+	.btn-styles(@btn-default-bg);
+	text-shadow: 0 1px 0 #fff;
+	border-color: #ccc;
 }
 
 .btn-primary { .btn-styles(@btn-primary-bg); }
@@ -92,16 +93,16 @@
 .btn-warning { .btn-styles(@btn-warning-bg); }
 .btn-danger  { .btn-styles(@btn-danger-bg); }
 
-
+// Alerts
 .alert {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .2);
-  @shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
-  .box-shadow(@shadow);
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .2);
+	@shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
+	.box-shadow(@shadow);
 }
 
 .alert-styles(@color) {
-  #gradient > .vertical(@start-color: @color; @end-color: darken(@color, 7.5%));
-  border-color: darken(@color, 15%);
+	#gradient > .vertical(@start-color: @color; @end-color: darken(@color, 7.5%));
+	border-color: darken(@color, 15%);
 }
 
 .alert-success    { .alert-styles(@alert-success-bg); }
@@ -237,7 +238,7 @@ h2, h3, h4, h5, h6 {
 }
 
 .text-pre {
-  	white-space: pre;
+		white-space: pre;
 	font-family: monospace;
 	font-size: 16px;
 }
