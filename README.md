@@ -1,5 +1,7 @@
 # Food Uploader Plugin
 
+![food-uploader-plugin.zip](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
+
 WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 
 ## Скачать
