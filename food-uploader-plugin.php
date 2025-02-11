@@ -408,20 +408,20 @@ function food_delete_file($file) {
 function food_plugin_add_admin_style_script() {
 	global $plugin_name;
 	$version = '1.0.2';
-	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.min.css' ), array(), $version . '-1739249466', false );
-	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), $version . '-1739249466', true );
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.min.css' ), array(), $version . '-1739249718', false );
+	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), $version . '-1739249718', true );
 	wp_enqueue_style( 'food-uploader-plugin' );
 	wp_enqueue_script( 'food-uploader-plugin_app');
 
 	// Подключение моего вьювера если он установлен
 	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
-		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), $version . '-1739249466', true );
-		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), $version . '-1739249466', false );
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), $version . '-1739249718', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), $version . '-1739249718', false );
 		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
 		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
 	endif;
 
-	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), $version . '-1739249466', true );
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), $version . '-1739249718', true );
 	wp_enqueue_script( 'food-uploader-plugin_main');
 }
 
