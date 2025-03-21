@@ -3,13 +3,13 @@
 ![Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
 ![License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
 ![Size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
-![food-uploader-plugin.zip](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
+![Uploads](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
 
 %description%
 
 ## ВНИМАНИЕ!
 
-Плагин находится в разработке и будет полностью переписан.
+Плагин находится в разработке и будет полностью переписан. Будут добавлены настройки плагина, изменится отображение и работа плагина.
 
 Для установки плагина на сайт скачивать только из реализов - [food-uploader-plugin.zip](../../releases/latest/download/food-uploader-plugin.zip).
 
@@ -30,7 +30,7 @@
 [comment]: <> ( Description:        %description% )
 [comment]: <> ( Version:            %version% )
 [comment]: <> ( Author:             %author% )
-[comment]: <> ( Author URI:         https://projectsoft.ru/ )
+[comment]: <> ( Author URI:         https://github.com/ProjectSoft-STUDIONIONS )
 [comment]: <> ( GitHub Plugin URI:  %homepage% )
 [comment]: <> ( License:            %license% )
 [comment]: <> ( License URI:        %license_uri% )
