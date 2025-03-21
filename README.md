@@ -7,9 +7,15 @@
 
 WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 
+## ВНИМАНИЕ!
+
+Плагин находится в разработке и будет полностью переписан.
+
+Для установки плагина на сайт скачивать только из реализов - [food-uploader-plugin.zip](../../releases/latest/download/food-uploader-plugin.zip).
+
 ## Скачать
 
-Скачать архив [food-uploader-plugin.zip](https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest/download/food-uploader-plugin.zip) и установить в WordPress CMS `Плагины` -> `Добавить плагин` -> `Загрузить плагин`. После загрузки не забудьте активировать плагин.
+Скачать архив [food-uploader-plugin.zip](../../releases/latest/download/food-uploader-plugin.zip) и установить в WordPress CMS `Плагины` -> `Добавить плагин` -> `Загрузить плагин`. После загрузки не забудьте активировать плагин.
 
 После установки у вас должен появиться пункт меню «Меню ежедневного питания»
 

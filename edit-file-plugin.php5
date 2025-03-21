@@ -29,23 +29,41 @@ define('FOOD_ABSPATH', $abs_path);
 
 global $mask_extensions, $allowed_types, $plugin_name;
 
-// Тие файла. Расширение загружаемых, изменяемых или существующих файлов
-$mask_extensions = array("xlsx");
+// Тип файла. Расширение загружаемых, изменяемых или существующих файлов
+$mask_extensions = array(
+	'xlsx', // Excel xlsx file
+	'pdf' // PDF File
+);
 // Тип файла. Content type
 // Полученный при загрузке файлов
-$allowed_types = array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+$allowed_types = array(
+	'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Excel xlsx file
+	'application/pdf' // PDF File
+);
 
 // Имя плагина получаем из имени директории
 $plugin_name = dirname( plugin_basename( __FILE__ ) );
 
-// Инициализация
-add_action( 'init', 'food_plugin_init' );
+//
+add_filter( 'plugin_row_meta', 'add_settings_link', 10, 4 );
+add_filter( 'plugin_action_links', 'add_settings_link', 10, 2 );
 
-// Добавление стилей, добавление скриптов
-add_action('admin_enqueue_scripts', 'food_plugin_add_admin_style_script');
+function add_settings_link( $meta, $plugin_file ){
+	if( false === strpos( $plugin_file, basename(__FILE__) ) )
+		return $meta;
 
-// Создание страницы в админ-панели
-add_action('admin_menu', 'food_plugin_add_admin_menu', 30);
+	$meta[] = '<a href="options-general.php?page='. basename(dirname(__FILE__)).'/options.php' .'">' . __('Settings') . '</a>';
+	return $meta; 
+}
+
+//add_filter('plugin_action_links', )
+
+if (is_admin()) {
+	// Инициализация
+	add_action( 'init', 'food_plugin_init' );
+	// Создание страницы в админ-панели
+	add_action('admin_menu', 'food_plugin_add_admin_menu', 30);
+}
 
 // Функция инициализация плагина
 function food_plugin_init() {
@@ -63,6 +81,7 @@ function food_admin_page_url($query = null, array $esc_options = []) {
 	return esc_url($url, ...$esc_options);
 }
 
+// Вид и Настройки
 // Функция добавления пункта меню в админке
 function food_plugin_add_admin_menu() {
 	global $plugin_name;
@@ -77,16 +96,51 @@ function food_plugin_add_admin_menu() {
 			'dashicons-open-folder',
 			26
 		);
+		add_submenu_page( 
+			'options-general.php', 
+			$title, 
+			$title, 
+			'manage_options', 
+			basename( dirname(__FILE__) ) . '/options.php'
+		);
 	}
 }
 
 // Функция отображения страницы загрузки файлов
 function food_plugin_file_uploader_page() {
 	global $plugin_name;
+	// Добавление стилей, добавление скриптов
+//start
+	$version = '1.0.2';
+	wp_register_style( 'food-uploader-plugin', plugins_url( $plugin_name . '/css/main.min.css' ), array(), $version . '-%time%', false );
+	wp_register_script( 'food-uploader-plugin_app', plugins_url( $plugin_name . '/js/appjs.min.js' ), array(), $version . '-%time%', true );
+	wp_enqueue_style( 'food-uploader-plugin' );
+	wp_enqueue_script( 'food-uploader-plugin_app');
+
+	// Подключение моего вьювера если он установлен
+	if(is_file(FOOD_ABSPATH . '/viewer/fancybox.min.js')):
+		wp_register_script( 'food-uploader-plugin_fancybox_js', site_url('viewer/fancybox.min.js'), array(), $version . '-%time%', true );
+		wp_register_style( 'food-uploader-plugin_fancybox_css', site_url('viewer/app.min.css'), array(), $version . '-%time%', false );
+		wp_enqueue_style( 'food-uploader-plugin_fancybox_css' );
+		wp_enqueue_script( 'food-uploader-plugin_fancybox_js');
+	endif;
+
+	wp_register_script( 'food-uploader-plugin_main', plugins_url( $plugin_name . '/js/main.min.js' ), array(), $version . '-%time%', true );
+	wp_enqueue_script( 'food-uploader-plugin_main');
+//end
 	if (!current_user_can('manage_options')) {
 		wp_die(__("you-not-access", "food-uploader-plugin"));
 	}
 	$max_files = ini_get("max_file_uploads");
+	$params = new WP_REST_Request();
+	// Определяем параметр dir
+	// dir указывает на директорию управления.
+	// Если dir не существует или неверный - нужно сделать редирект на основную страницу плагина
+
+	// Определяем действие mode
+	// mode переименование, загрузка, удаление
+	// mode может быть только при наличии параметра dir
+
 	// Контейнер
 	echo '<div id="food_plugin" class="container-fluid">
 	<div class="row">
@@ -153,7 +207,8 @@ function food_plugin_file_uploader_page() {
 	</form>';
 	// Отображение списка загруженных файлов
 	food_plugin_display_uploaded_files();
-	echo '</div>
+	echo '<pre><code>' . print_r($params->get_params(), true) . '
+		</div>
 	</div>
 </div>';
 }
