@@ -23,8 +23,6 @@
 
 ![XLSX в директорию food](screenshot.png?raw=true)
 
-~Current Version: %version%~
-
 [comment]: <> ( Plugin Name:        Food File Uploader )
 [comment]: <> ( Plugin URI:         %homepage% )
 [comment]: <> ( Description:        %description% )
