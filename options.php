@@ -1,4 +1,45 @@
-<?php
-if (!defined('ABSPATH')) die();
-
-echo 'Settings';
+<?php if (!defined('ABSPATH')) die(); ?>
+<h1><i class="dashicons dashicons-admin-generic"></i>&nbsp;<?= esc_html(get_admin_page_title());?></h1>
+<div class="wrap">
+	<form action="options-general.php?page=food-uploader-plugin%2Foptions.php" method="post">
+		<?php settings_fields( 'food-group' ); ?>
+		<?php do_settings_sections( 'food-group' ); ?>
+		<table class="form-table" style="width: 100%;">
+			<tr valign="top">
+				<th scope="row">Дополнительные директории</th>
+				<td>
+					<input type="text" name="food_folders" value="<?= esc_attr( get_option('food_folders', '') );?>" style="width: 100%;">
+					<p class="description"><em>Вводить через пробел, запятую или точку с запятой<br>Директория <code>food</code> присутствует всегда и независимо от этой настройки</em></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Автоудаление старых файлов</th>
+				<td>
+					<select name="food_auto_delete" value="<?= esc_attr( get_option('food_auto_delete', '0') );?>">
+						<option value="1" <?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "selected" : "";?>>Да</option>
+						<option value="0"<?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "" : "selected";?>>Нет</option>
+					</select>
+					<p class="description"><em></em></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">Автоудаление старых файлов старше</th>
+				<td>
+					<input type="number" name="food_auto_year" value="<?= esc_attr( get_option('food_auto_year', '5') );?>" min="1" max="5"> Года/Лет
+					<p class="description"><em></em></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td colspan="2" style="text-align: right;">
+					<?php submit_button(); ?>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<!--pre><code><?= FOOD->print();?></code></pre-->
+</div>
+<style>
+	p.submit {
+		text-align: right;
+	}
+</style>

@@ -44,6 +44,8 @@ module.exports = function(grunt) {
 				src: [
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/js-cookie/src/js.cookie.js',
+					'bower_components/datatables.net/js/dataTables.js',
+					'bower_components/datatables.net-bs/js/dataTables.bootstrap.js'
 
 				],
 				dest: 'js/appjs.js'
@@ -97,6 +99,7 @@ module.exports = function(grunt) {
 				},
 				files : {
 					'css/main.css' : [
+						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
 						'src/less/main.less'
 					],
 				}
@@ -303,7 +306,8 @@ module.exports = function(grunt) {
 							'css/**',
 							'fonts/**',
 							'js/**',
-							'languages/**'
+							'languages/**',
+							'lib/**'
 						],
 						dest: '/food-uploader-plugin/'
 					},

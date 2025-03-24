@@ -20,8 +20,16 @@ msgid "byte"
 msgstr "байт"
 
 #. 
-msgid "daily-meal-menu"
+msgid "food-menu-settings"
+msgstr "ПИТАНИЕ"
+
+#. 
+msgid "food-menu-plugin"
 msgstr "Меню ежедневного питания"
+
+#. 
+msgid "food-settings"
+msgstr "Настройки"
 
 #. 
 msgid "delete-file"
@@ -154,3 +162,39 @@ msgstr "Просмотр файла"
 #. 
 msgid "you-not-access"
 msgstr "У вас нет доступа к этой странице"
+
+#.
+msgid "files-not-found"
+msgstr "Нет файлов для отображения"
+
+#.
+msgid "dir-root"
+msgstr "Корневая директория"
+
+#.
+msgid "dir-food"
+msgstr "Директория <code>/%s/</code>"
+
+#.
+msgid "dir-error"
+msgstr "Директория <code>/%s/</code> не используется"
+
+#.
+msgid "dir-not"
+msgstr "Директория не определена"
+
+#.
+msgid "dir-top"
+msgstr "На верхний уровень"
+
+#.
+msgid "food-table-dirs"
+msgstr "Директории"
+
+#.
+msgid "food-upload-btn"
+msgstr "Загрузить"
+
+#.
+msgid "food-select-btn"
+msgstr "Выбрать файлы"

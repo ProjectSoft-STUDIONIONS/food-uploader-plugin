@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<title>Директория: <!--#include virtual="/icons-full/header.php" --></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<base href='<!--#include virtual="/icons-full/header.php" -->'><!--#config timefmt="%y%m%d%H%M%S"-->
+		<link rel="stylesheet" type="text/css" href='/icons-full/style.css?<!--#flastmod virtual="/icons-full/style.css"-->'>
+		<link rel="stylesheet" type="text/css" href='/viewer/app.min.css?<!--#flastmod virtual="/viewer/app.min.css"-->'>
+		<link rel="shortcut icon" href="/favicon.ico">
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="main">
+				<h1>Директория: <!--#include virtual="/icons-full/header.php" --></h1>

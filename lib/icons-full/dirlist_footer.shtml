@@ -1,0 +1,14 @@
+				</div><!--#config timefmt="%Y" -->
+				<p style="width:100%;font-size:1em;text-align:center;">
+					<a href="https://github.com/ProjectSoft-STUDIONIONS/food" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food</a><br>&copy; 2016 - <!--#echo var="DATE_LOCAL"--><br>Разработчик: <a href="https://vk.com/projectsoft" target="_blank">ProjectSoft</a><br><span id="time"><!--#config timefmt="%Y-%m-%dT%H:%M:%S" --><!--#echo var="DATE_LOCAL"--></span>
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript">
+			(function(k){'use strict';function f(){var a=new Date;let b=a.getDate(),c=a.getMonth(),l=a.getFullYear(),d=a.getHours(),e=a.getMinutes();a=a.getSeconds();b=String(b).padStart(2,"0");c=m[c];d=String(d).padStart(2,"0");e=String(e).padStart(2,"0");a=String(a).padStart(2,"0");g=`${b} ${c} ${l} \u0433\u043e\u0434\u0430<br>${d}:${e}:${a}`;h.innerHTML=g;k.requestAnimationFrame(f)}const h=document.querySelector("#time"),m="\u044f\u043d\u0432\u0430\u0440\u044f \u0444\u0435\u0432\u0440\u0430\u043b\u044f \u043c\u0430\u0440\u0442\u0430 \u0430\u043f\u0440\u0435\u043b\u044f \u043c\u0430\u044f \u0438\u044e\u043d\u044f \u0438\u044e\u043b\u044f \u0430\u0432\u0433\u0443\u0441\u0442\u0430 \u0441\u0435\u043d\u0442\u044f\u0431\u0440\u044f \u043e\u043a\u0442\u044f\u0431\u0440\u044f \u043d\u043e\u044f\u0431\u0440\u044f \u0434\u0435\u043a\u0430\u0431\u0440\u044f".split(" ");let g=h.textContent;f()})(window);
+		</script><!--#config timefmt="%y%m%d%H%M%S"-->
+		<script src='/viewer/jquery.min.js?<!--#flastmod virtual="/viewer/jquery.min.js"-->'></script>
+		<script src='/viewer/fancybox.min.js?<!--#flastmod virtual="/viewer/fancybox.min.js"-->'></script>
+		<script src='/viewer/app.min.js?<!--#flastmod virtual="/viewer/app.min.js"-->'></script>
+	</body>
+</html>

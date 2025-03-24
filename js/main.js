@@ -18,6 +18,13 @@
 			ZOOM: "Увеличить"
 		};
 	}
+	let search = location.search.replace(/\?/g, '');
+	let search_api = search.split('&').map((item, index, array) => {
+		let param = item.split('=');
+		return param;
+	});
+	const searchAPI = Object.fromEntries(search_api);
+	window.searchAPI = searchAPI;
 	$(document)
 		.on("input", "#uploader [type=file]", (e) => {
 			let input = document.querySelector("#uploader [type=file]"),
@@ -33,7 +40,7 @@
 				let m;
 				if ((m = regex.exec(a.name)) !== null) {
 					let ex = m[0].toLowerCase();
-					if(ex == "xlsx"){
+					if(ex == "xlsx" || ex == "pdf"){
 						out.push(a.name);
 					}else{
 						info.html("");
@@ -121,4 +128,43 @@
 			}
 			return !1;
 		});
+	if(searchAPI.dir) {
+		let table = $('.table').dataTable({
+			columns: [
+				{ name: 'file' },
+				{ name: 'permission' },
+				{ name: 'date' },
+				{ name: 'size' },
+				{ name: '' }
+			],
+			columnDefs : [
+				{ 
+				   'searchable'    : false, 
+				   'targets'       : [1,2,3,4] 
+				},
+			],
+			ordering: false,
+			stateSave: true,
+			stateSaveCallback: function (settings, data) {
+				localStorage.setItem(
+					'DataTables_' + settings.sInstance + '_' + searchAPI.dir,
+					JSON.stringify(data)
+				);
+			},
+			stateLoadCallback: function (settings) {
+				return JSON.parse(localStorage.getItem('DataTables_' + settings.sInstance + '_' + searchAPI.dir));
+			},
+			language: {
+				info: 'Просмотр страницы: _PAGE_ из _PAGES_',
+				infoEmpty: 'Нет доступных записей',
+				infoFiltered: '(отфильтровано из _MAX_ общего количества записей)',
+				lengthMenu: 'Отображение записей _MENU_ на странице',
+				zeroRecords: 'Ничего не найдено - извините',
+				search: 'Поиск файла:&nbsp;'
+			}
+		});
+	}else{
+		$('.food-row').addClass('row-disabled');
+	}
+	$('.food-row').removeClass('hidden');
 }(jQuery));
