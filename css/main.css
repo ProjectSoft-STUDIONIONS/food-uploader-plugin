@@ -3778,6 +3778,26 @@ fieldset[disabled] #wpbody .btn-danger.active {
   margin-bottom: 10px;
 }
 
+#wpbody .display-flex.wp-heading-title {
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+#wpbody .display-flex.wp-heading-title span {
+  font-size: 23px;
+  font-weight: 400;
+  margin: 0;
+  padding: 9px 0 4px;
+  line-height: 1.3;
+}
+
+#wpbody .display-flex.wp-heading-title span .dashicons,
+#wpbody .display-flex.wp-heading-title span .dashicons-before:before {
+  width: auto;
+  height: auto;
+  font-size: 115%;
+}
+
 #wpbody #food_plugin {
   min-height: calc(100vh - 120px);
 }
@@ -4017,6 +4037,25 @@ fieldset[disabled] #wpbody .btn-danger.active {
   z-index: 999999;
 }
 
+#TB_window.plugin-food-settings-modal {
+  top: 0px;
+  overflow: hidden;
+  height: calc(100vh - 70px);
+  margin-top: 33px;
+  visibility: visible;
+  margin-bottom: 33px;
+  background-color: #fff;
+}
+
+#TB_ajaxWindowTitle {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 767px) {
   div.dt-container div.dt-layout-row:not(.dt-layout-table) {
     display: block;
@@ -4141,6 +4180,12 @@ fieldset[disabled] #wpbody .btn-danger.active {
   #wpbody .display-flex {
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 824px) {
+  #wpbody .display-flex.wp-heading-title span {
+    display: none;
   }
 }
 

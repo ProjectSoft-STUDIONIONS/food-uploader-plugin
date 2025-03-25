@@ -166,4 +166,71 @@
 		$('.food-row').addClass('row-disabled');
 	}
 	$('.food-row').removeClass('hidden');
+
+	$('body').on('thickbox:removed', function() {
+		window.location.reload();
+	});
+
+
+	window.tb_position = function () {
+		var wid = $(window).width(),
+			height = $(window).height() - (792 < wid ? 60 : 20),
+			width = 792 < wid ? 772 : wid - 20;
+		let frm = $("#TB_window");
+		console.log(frm.length ? frm[0] : "none");
+		if(frm.length) {
+			frm.width(width).height(height);
+			$("#TB_iframeContent").width(width).height(height);
+			frm.css({ "margin-left": "-" + parseInt(width / 2, 10) + "px" });
+			if(document.body.style.maxWidth) {
+				frm.css({ top: "30px", "margin-top": "0" })
+			}
+		}
+		$("a.thickbox").each(function () {
+			var t = $(this).attr("href");
+			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), $(this).attr("href", t + "&width=" + width + "&height=" + height));
+		});
+	}
+
+	window.tb_position();
+
+	$(document).on('thickbox:iframe:loaded', '#TB_window', function() {
+		$(window).trigger('resize');
+		let title = "Настройки «Меню ежедневного питания»";
+		$("#TB_window")
+			.attr({
+				'role': 'dialog',
+				'aria-label': title
+			})
+			.addClass( 'plugin-food-settings-modal' );
+		// Set title attribute on the iframe.
+		$("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
+	})
+
+	$(window).on('resize', function(e) {
+		var wid = $(window).width(),
+			height = $(window).height() - 70,// - (792 < wid ? 60 : 20),
+			width = 792 < wid ? 772 : wid - 60;
+		let frm = $("#TB_window");
+		if(frm.length) {
+			frm.width(width).height(height);
+			$("#TB_iframeContent").width(width).height(height);
+			frm.css({
+				"margin-left"   : "-" + parseInt(width / 2, 10) + "px",
+				"margin-top"    : "33px",
+				"margin-bottom" : "33px",
+				"overflow"      : "hidden",
+				"top"           : "0"
+			});
+			if(document.body.style.maxWidth) {
+				//frm.css({ top: "30px", "margin-top": "0" })
+			}
+		}
+		$("a.thickbox").each(function () {
+			var t = $(this).attr("href");
+			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), $(this).attr("href", t + "&width=" + width + "&height=" + height));
+		});
+		//window.tb_position();
+	}).trigger('resize');
+
 }(jQuery));

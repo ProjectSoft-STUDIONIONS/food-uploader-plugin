@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Версионность файлов
  * Время последнего изменения файлов
  */
-$path = FOOD->realPath(ABSPATH);
+$path = $this->realPath(ABSPATH);
 $versions = array();
 
 $main_css = join("/", array(
@@ -47,9 +47,16 @@ $versions = array(
 <link rel="stylesheet" href="/viewer/app.min.css?<?= $versions["app_css"];?>">
 <link rel="stylesheet" href="/wp-content/plugins/<?= $this::FOOD_NAME;?>/css/main.min.css?<?= $versions["main_css"];?>">
 <div class="wrap" id="wp-plugins-food">
-	<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("food-menu-plugin", $this::FOOD_NAME);?></h1>
+	<div class="display-flex wp-heading-title">
+		<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("food-menu-plugin", $this::FOOD_NAME);?></h1>
+		<span>
+			<a class="dashicons dashicons-admin-generic thickbox open-plugin-details-modal" href="options-general.php?page=food-uploader-plugin%2Foptions.php&tab=plugin-settings&TB_iframe=true&width=772&height=623"></a>
+		</span>
+	</div>
 	<hr class="wp-header-end">
-	<?php if($this->dir):?>
+<?php
+	if($this->dir):
+?>
 	<div class="clearfix">
 		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mode" value="upload">
@@ -71,37 +78,41 @@ $versions = array(
 		<h3>Директория <code>/<?= $this->dir;?>/</code> <a href="/<?= $this->dir;?>/" target="_blank"></a></h3>
 		<p class="food-title-root"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>">На верхний уровень</a></p>
 	</div>
-	<?php else: ?>
+<?php
+	else:
+?>
 	<div class="clearfix"></div>
 	<div class="folder-title">
 		<h3>Корневая директория</h3>
 	</div>
-	<?php endif; ?>
+<?php
+	endif;
+?>
 	<div class="food-row hidden">
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover text-nowrap">
 				<thead>
 					<tr>
-						<?php
+<?php
 						if($this->dir):
-						?>
+?>
 						<th data-dt-name="name" class="manage-column column-primary text-nowrap text-left text-upercase"><?= __("name", $this::FOOD_NAME);?></th>
 						<th data-dt-name="permissions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("file-permissions", $this::FOOD_NAME);?></th>
 						<th data-dt-name="change" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("time-of-change", $this::FOOD_NAME);?></th>
 						<th data-dt-name="size" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("file-size", $this::FOOD_NAME);?></th>
 						<th data-dt-name="actions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("actions", $this::FOOD_NAME);?></th>
-						<?php
+<?php
 						else:
-						?>
+?>
 						<th><?= __("food-table-dirs", $this::FOOD_NAME);?></th>
 						<th style="width: 1%;"></th>
-						<?php
+<?php
 						endif;
-						?>
+?>
 					</tr>
 				</thead>
 				<tbody>
-					<?php
+<?php
 					if($this->dir):
 						if(count($this->files)):
 							foreach($this->files as $key => $value):
@@ -114,7 +125,7 @@ $versions = array(
 								$size = $this->getSize($file);
 								$ltime = strtotime(wp_timezone_string(), filemtime($file));
 								$date = $this->toDateFormat($ltime);
-					?>
+?>
 					<tr>
 						<td><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
 						<td><?= $perms; ?></td>
@@ -127,10 +138,10 @@ $versions = array(
 							</div>
 						</td>
 					</tr>
-					<?php
+<?php
 							endforeach;
 						else:
-					?>
+?>
 					<tr>
 						<td><?= __('files-not-found', $this::FOOD_NAME);?></td>
 						<td></td>
@@ -138,19 +149,19 @@ $versions = array(
 						<td></td>
 						<td></td>
 					</tr>
-					<?php
+<?php
 						endif;
 					else:
 						foreach ($this->folders as $key => $value):
-					?>
+?>
 					<tr>
 						<td><a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $value;?>"><?= $value;?></a></td>
 						<th style="width: 1%;"><a href="/<?= $value;?>/" target="_blank" class="glyphicon glyphicon-new-window"></a></th>
 					</tr>
-					<?php
+<?php
 						endforeach;
 					endif;
-					?>
+?>
 				</tbody>
 			</table>
 		</div>
@@ -158,9 +169,7 @@ $versions = array(
 <?php
 $tmp_folders = get_option('food_folders', '');
 $tmp_folders = preg_split('/[\s,;]+/', $tmp_folders);
-/** <?= FOOD->print();?>**/
 ?>
-	<!--code><pre></pre></code-->
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>
 <script src="/viewer/fancybox.min.js?<?= $versions["fansybox_js"];?>"></script>

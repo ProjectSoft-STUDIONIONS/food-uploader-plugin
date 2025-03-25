@@ -1,7 +1,13 @@
 <?php if (!defined('ABSPATH')) die(); ?>
 <h1><i class="dashicons dashicons-admin-generic"></i>&nbsp;<?= esc_html(get_admin_page_title());?></h1>
 <div class="wrap">
-	<form action="options-general.php?page=food-uploader-plugin%2Foptions.php" method="post">
+<?php
+$url = (isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] )) ? 
+		"options-general.php?&tab=plugin-settings&page=food-uploader-plugin%2Foptions.php"
+		: 
+		"options-general.php?page=food-uploader-plugin%2Foptions.php";
+?>
+	<form action="<?= $url;?>" method="post">
 		<?php settings_fields( 'food-group' ); ?>
 		<?php do_settings_sections( 'food-group' ); ?>
 		<table class="form-table" style="width: 100%;">
@@ -36,10 +42,21 @@
 			</tr>
 		</table>
 	</form>
-	<!--pre><code><?= FOOD->print();?></code></pre-->
 </div>
 <style>
 	p.submit {
 		text-align: right;
 	}
 </style>
+<script>
+<?php
+if(IFRAME_REQUEST && isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] ) && isset($_REQUEST['food_folders'])):
+?>
+let wind;
+if(wind = window.parent.document.querySelector("#TB_closeWindowButton")) {
+	wind.click();
+}
+<?php
+endif;
+?>
+</script>

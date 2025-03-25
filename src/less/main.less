@@ -181,6 +181,25 @@
 					}
 				}
 			}
+			&.wp-heading-title {
+				justify-content: space-between;
+				span {
+					font-size: 23px;
+					font-weight: 400;
+					margin: 0;
+					padding: 9px 0 4px;
+					line-height: 1.3;
+					.dashicons,
+					.dashicons-before:before {
+						width: auto;
+						height: auto;
+						font-size: 115%;
+					}
+					@media (max-width: 824px) {
+						display: none;
+					}
+				}
+			}
 			@media screen and (max-width: 678px) {
 				flex-direction: column;
 			}
@@ -414,3 +433,23 @@
 .fancybox-container {
 	z-index: 999999;
 }
+
+#TB {
+	&_window {
+		&.plugin-food-settings-modal {
+			top: 0px;
+			overflow: hidden;
+			height: ~'calc(100vh - 70px)';
+			margin-top: 33px;
+			visibility: visible;
+			margin-bottom: 33px;
+			background-color: #fff;
+		}
+	}
+	&_ajaxWindowTitle {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+}
+//<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»

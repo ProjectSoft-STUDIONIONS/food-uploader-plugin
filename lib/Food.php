@@ -127,6 +127,19 @@ class Food {
 		return $actions;
 	}
 
+	// Меню к кнопке добавить
+	public function admin_bar_link($wp_admin_bar) {
+		$wp_admin_bar->remove_node('new-media');
+		$wp_admin_bar->remove_node('new-user');
+		$wp_admin_bar->add_node( array(
+			'id' => 'food-menu-add',
+			'title' => mb_strtoupper(__('food-menu-plugin', $this::FOOD_NAME)),
+			'href' => admin_url('admin.php?page=food-uploader-plugin&dir=food'),
+			'parent' => 'new-content',
+			'meta' => array('class' => 'ab-item')
+		));
+	}
+
 	// Вывод
 	public function food_page() {
 		include $this->realPath(dirname(__FILE__)) . "/tmpl/page.php";
@@ -144,16 +157,18 @@ class Food {
 
 	// add actions
 	private function registerAction() {
-		add_action('init',       array($this, 'food_init'));
-		add_action('admin_init', array($this, 'food_admin_init'));
-		add_action('admin_menu', array($this, 'food_admin_menu'));
+		add_action('init',            array($this, 'food_init'));
+		add_action('admin_init',      array($this, 'food_admin_init'));
+		add_action('admin_menu',      array($this, 'food_admin_menu'));
+		add_action('admin_bar_menu',  array($this, 'admin_bar_link'), 100 );
+		add_thickbox();
 		return $this;
 	}
 
 	// add filters
 	private function registerFilter() {
-		add_filter( 'plugin_row_meta',  array($this, 'row_meta_link'), 10, 4 );
-		add_filter( 'plugin_action_links',  array($this, 'settings_link'), 10, 2 );
+		add_filter( 'plugin_row_meta',     array($this, 'row_meta_link'), 10, 4 );
+		add_filter( 'plugin_action_links', array($this, 'settings_link'), 10, 2 );
 		return $this;
 	}
 
@@ -210,37 +225,51 @@ class Food {
 			update_option("food_folders", $tmp_folders);
 			update_option("food_auto_delete", $autodelete);
 			update_option("food_auto_year", $autodelete_year);
-			// Пробегаемся по директориям
-			// Перезаписываем htaccess
-			foreach($this->folders as $t_folder):
-				$str_t_folder = $this::FOOD_ABSPATH . "/" . $t_folder;
-				if(!is_dir($str_t_folder) && !is_file($str_t_folder)):
-					// Создаём
-					@mkdir($this::FOOD_ABSPATH . "/" . $t_folder, 0755, true);
-					@chmod($this::FOOD_ABSPATH . "/" . $t_folder, 0755);
+			if(isset($_REQUEST["tab"])):
+				if($_REQUEST["tab"] === "plugin-settings"):
+					add_action( 'all_admin_notices', function () {
+						wp_admin_notice( 'Настройки сохранены', array(
+							'type' => 'success',
+							'dismissible' => true,
+						));
+					});
 				endif;
-				// Перезаписываем файл htaccess
-				@file_put_contents($this::FOOD_ABSPATH . "/" . $t_folder . "/.htaccess", $htaccess);
-			endforeach;
-			add_action( 'all_admin_notices', function () {
-				wp_admin_notice( 'Настройки сохранены', array(
-					'type' => 'success',
-					'dismissible' => true,
-				));
-			});
+			else:
+				add_action( 'all_admin_notices', function () {
+					wp_admin_notice( 'Настройки сохранены', array(
+						'type' => 'success',
+						'dismissible' => true,
+					));
+				});
+			endif;
 		endif;
+		// Пробегаемся по директориям
+		// Перезаписываем htaccess
+		foreach($this->folders as $t_folder):
+			$str_t_folder = $this::FOOD_ABSPATH . "/" . $t_folder;
+			if(!is_dir($str_t_folder) && !is_file($str_t_folder)):
+				// Создаём
+				@mkdir($this::FOOD_ABSPATH . "/" . $t_folder, 0755, true);
+				@chmod($this::FOOD_ABSPATH . "/" . $t_folder, 0755);
+			endif;
+			// Перезаписываем файл htaccess
+			@file_put_contents($this::FOOD_ABSPATH . "/" . $t_folder . "/.htaccess", $htaccess);
+		endforeach;
 		return $this;
 	}
 
 	// Поиск файлов в директории
 	private function getFiles() {
 		$files = array();
+		global $all;
 		if($this->dir):
 			// Поиск файлов в директории
 			$files_path = join("/", array(
 				$this->realPath($this::FOOD_ABSPATH),
 				$this->dir
 			));
+			global $all;
+			$all = array();
 			$iterators = new \DirectoryIterator($files_path);
 			foreach ($iterators as $fileinfo):
 				// Если это файл
@@ -265,6 +294,7 @@ class Food {
 								// Удаляем файл
 								$file_absolute =  join("/", array($files_path, $name));
 								@unlink($file_absolute);
+								$all[] = $name;
 							else:
 								// Добавляем файл в отображение
 								$files[] = $name;
@@ -278,6 +308,17 @@ class Food {
 			endforeach;
 			natsort($files);
 			$files = array_reverse($files, false);
+			if(count($all)):
+				add_action( 'all_admin_notices', function () {
+					global $all;
+					$msg = "<b>Автоудаление файлов:</b> " . count($all) . "<br>";
+					$msg .= "<code>" . implode("<br>", $all) . "</code>";
+					wp_admin_notice( $msg, array(
+						'type' => 'success',
+						'dismissible' => true,
+					));
+				});
+			endif;
 		endif;
 		return $files;
 	}
