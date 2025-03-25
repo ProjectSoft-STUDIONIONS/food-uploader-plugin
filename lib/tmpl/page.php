@@ -51,17 +51,17 @@ $versions = array(
 	<hr class="wp-header-end">
 	<?php if($this->dir):?>
 	<div class="clearfix">
-		<form class="text-right" name="upload" method="post" action="" enctype="multipart/form-data">
+		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mode" value="upload">
 			<div id="uploader" class="text-right">
 				<label class="btn btn-primary text-uppercase">
-					<i class="glyphicon glyphicon-floppy-save"></i> <?= __("food-select-btn", $this::FOOD_NAME);?> <input type="file" name="userfiles[]" onchange="uploadFiles(this);" multiple="" accept=".xlsx,.pdf" max="20">
+					<i class="glyphicon glyphicon-floppy-save"></i>&nbsp;<?= __("food-select-btn", $this::FOOD_NAME);?> <input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
 				</label>
 				<p id="p_uploads" class="alert alert-info"></p>
-				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i> <?= __("food-upload-btn", $this::FOOD_NAME);?></button>
+				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;<?= __("food-upload-btn", $this::FOOD_NAME);?></button>
 			</div>
 		</form>
-		<form class="hidden" name="form_mode" method="post" action="" enctype="multipart/form-data">
+		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mode">
 			<input type="hidden" name="file">
 			<input type="hidden" name="new_file">
@@ -116,14 +116,14 @@ $versions = array(
 								$date = $this->toDateFormat($ltime);
 					?>
 					<tr>
-						<td><a href="/<?= $this->dir . "/" . $value;?>" target="_blank"><?= $value;?></td>
+						<td><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
 						<td><?= $perms; ?></td>
 						<td><?= $date;  ?></td>
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-primary glyphicon glyphicon-edit" data-mode="rename" data-file="<?= $value;?>" title="Переименовать «<?= $value;?>»" onclick="modeFile(this);"></i>
-								<i class="btn btn-primary glyphicon glyphicon-trash" data-mode="delete" data-file="<?= $value;?>" title="Удалить «<?= $value;?>»" onclick="modeFile(this);"></i>
+								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="Переименовать «<?= $value;?>»"></i>
+								<i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="Удалить «<?= $value;?>»"></i>
 							</div>
 						</td>
 					</tr>
@@ -164,5 +164,5 @@ $tmp_folders = preg_split('/[\s,;]+/', $tmp_folders);
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>
 <script src="/viewer/fancybox.min.js?<?= $versions["fansybox_js"];?>"></script>
-<script src="/viewer/app.min.js?<?= $versions["app_js"];?>"></script>
+<!--script src="/viewer/app.min.js?<?= $versions["app_js"];?>"></script-->
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/main.min.js?<?= $versions["main_js"];?>"></script>

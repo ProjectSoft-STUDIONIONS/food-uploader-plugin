@@ -36,12 +36,16 @@ msgid "delete-file"
 msgstr "Удалить файл"
 
 #. 
+msgid "deleted-file"
+msgstr "Файл удалён"
+
+#. 
 msgid "disable-file-renaming"
 msgstr "Запрет на переименование файла"
 
 #. 
 msgid "error-only-xlsx-files"
-msgstr "Ошибка: разрешены только файлы XLSX"
+msgstr "Ошибка: формат фвйла не поддерживается"
 
 #. 
 msgid "error-unable-create-directory"

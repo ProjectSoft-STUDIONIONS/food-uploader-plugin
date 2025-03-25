@@ -22,48 +22,48 @@ class Food {
 	private $files = array();
 
 	public function __construct() {
+		load_plugin_textdomain( $this::FOOD_NAME, false, $this::FOOD_NAME . '/languages/' );
+		$this->registerAction();
+		$this->registerFilter();
 		$folders  = get_option('food_folders', '');
 		$folders  = preg_split('/[\s,;]+/', $folders);
 		$food     = array("food");
 		// Получение директорий
 		$this->folders = array_filter(array_unique(array_merge($food, $folders)));
 		sort($this->folders);
-		// Здесь нужно сделать загрузку, переименование, удаление
-		if(isset($_REQUEST['mode'])):
-			$mode = $_REQUEST['mode'];
-			switch ($mode) {
-				case 'upload':
-					// upload...
-					break;
-				case 'rename':
-					// rename...
-					break;
-				case 'delete':
-					// delete...
-					break;
-				default:
-					// Redirect
-					break;
-			}
-		endif;
-		$this->files = array();
-		/** 
-		 * 
-		 */
+		$this->save();
 		// Получение файлов
 		if(isset($_REQUEST["dir"])):
 			$dir = $_REQUEST["dir"];
 			if(in_array($dir, $this->folders)):
 				$this->dir = $dir;
+				// Здесь нужно сделать загрузку, переименование, удаление
+				if(isset($_REQUEST['mode'])):
+					$mode = $_REQUEST['mode'];
+					switch ($mode) {
+						case 'upload':
+							// upload...
+							$this->upload();
+							break;
+						case 'rename':
+							// rename...
+							$this->rename();
+							break;
+						case 'delete':
+							// delete...
+							$this->delete();
+							break;
+						default:
+							break;
+					}
+				endif;
 				$this->files = $this->getFiles();
 			else:
-				// Redirect 404
+				// Redirect 302
 				header( "Location: " . site_url() . '/wp-admin/admin.php?page=' . $this::FOOD_NAME, true, 302);
 				exit;
 			endif;
 		endif;
-		$this->save();
-		$this->registerAction()->registerFilter();
 	}
 
 	// Загрузка языка
@@ -115,7 +115,7 @@ class Food {
 	public function row_meta_link($meta, $plugin_file) {
 		if( false === strpos($plugin_file, $this::FOOD_NAME))
 			return $meta;
-		$meta[] = FOOD_NAME;
+		$meta[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('food-settings', $this::FOOD_NAME) . '</a>';
 		return $meta;
 	}
 
@@ -123,6 +123,7 @@ class Food {
 	public function settings_link($actions, $plugin_file) {
 		if( false === strpos($plugin_file, $this::FOOD_NAME))
 			return $actions;
+		$actions[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('food-settings', $this::FOOD_NAME) . '</a>';
 		return $actions;
 	}
 
@@ -226,7 +227,7 @@ class Food {
 					'type' => 'success',
 					'dismissible' => true,
 				));
-			} );
+			});
 		endif;
 		return $this;
 	}
@@ -279,6 +280,231 @@ class Food {
 			$files = array_reverse($files, false);
 		endif;
 		return $files;
+	}
+
+	// Загрузка файлов
+	private function upload() {
+		if($this->dir):
+			if(isset($_FILES['userfiles'])):
+				global $all;
+				$all = array();
+				$all["success"] = array();
+				$all["error"] = array();
+				$files = $_FILES['userfiles'];
+				foreach($files['name'] as $i => $name):
+					if (empty($files['tmp_name'][$i])) continue;
+					// Преобразуем в нижний регистр
+					$name = strtolower($files['name'][$i]);
+					// Транслит имени файла
+					$name = $this->translitFile($name);
+					// Проверяем тип файла
+					if (!in_array($files['type'][$i], $this::FOOD_TYPES)):
+						// Собираем ошибки
+						$all["error"][] = '<b>' . __("error-only-xlsx-files", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+					else:
+						// Продолжаем
+						$uploaddir = $this::FOOD_ABSPATH . "/" . $this->dir;
+						$extension = pathinfo($name, PATHINFO_EXTENSION);
+						if(is_uploaded_file($files['tmp_name'][$i])):
+							// Удалось загрузить файл
+							// Перемещаем файл
+							if (@move_uploaded_file($files['tmp_name'][$i], $uploaddir . "/" . $name)):
+								// Удалось переместить файл
+								// Меняем аттрибуты файла
+								if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN'):
+									@chmod($uploaddir . "/" . $name, 0644);
+								endif;
+								// Собираем удачную загрузку
+								$all["success"][] = '<b>' . __("file-uploaded", FOOD_NAME) . ':</b> <code>' . $name . '</code>';
+							else:
+								// Не удалось переместить файл
+								$all["error"][] = '<b>' . __("failed-move-file", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+							endif;
+						else:
+							// Не удалось загрузить файл
+							$all["error"][] = '<b>' . __("failed-upload-file", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+						endif;
+					endif;
+				endforeach;
+				if(count($all["error"])):
+					add_action( 'all_admin_notices', function () {
+						global $all;
+						$msg = "<b>Неудачно загруженных файлов:</b> " . count($all["error"]) . "<br>";
+						$msg .= implode("<br>", $all["error"]);
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+				endif;
+				if(count($all["success"])):
+					add_action( 'all_admin_notices', function () {
+						global $all;
+						$msg = "<b>Удачно загруженных файлов:</b> " . count($all["success"]) . "<br>";
+						$msg .= implode("<br>", $all["success"]);
+						wp_admin_notice( $msg, array(
+							'type' => 'success',
+							'dismissible' => true,
+						));
+					});
+				endif;
+			endif;
+		endif;
+	}
+
+	// Переименование файла
+	private function rename() {
+		if($this->dir):
+			if(isset($_REQUEST['file']) && isset($_REQUEST['new_file'])):
+				global $file, $new_file;
+				$file = esc_sql($_REQUEST['file']);
+				$new_file = esc_sql($_REQUEST['new_file']);
+				$startpath = $this::FOOD_ABSPATH . "/" . $this->dir;
+				$msg = '';
+				// Если имена одинаковые - ничего не делаем. Выходим
+				if($file == $new_file):
+					add_action( 'all_admin_notices', function () {
+						global $file, $new_file;
+						$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+					return;
+				endif;
+				// Исходный файл
+				$old_pathinfo = pathinfo($file);
+				$old_pathinfo['extension'] = trim($old_pathinfo['extension']);
+				// Переименование только pdf или xlsx
+				if(!in_array($old_pathinfo['extension'], $this::FOOD_EXTS)):
+					// Запрет на переименование файла
+					add_action( 'all_admin_notices', function () {
+						global $file, $new_file;
+						$msg = "<b>" . __("disable-file-renaming", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+					return;
+				endif;
+				// Транслит имени файла
+				$pthinfo = pathinfo($new_file);
+				$f_name = $pthinfo['filename'];
+
+				$f_name = $this->translitFile($f_name);
+				// Запрещаем переименовывать расширение.
+				// Объединяем новое имя с расширением исходного файла
+				$new_file = $f_name . "." . $old_pathinfo['extension'];
+				// Если имена одинаковые - выходим c ошибкой
+				if($file == $new_file):
+					add_action( 'all_admin_notices', function () {
+						global $file, $new_file;
+						$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+					return;
+				endif;
+				$oFile = $startpath . "/" . $file;
+				$nFile = $startpath . "/" . $new_file;
+				// Существование исходного файла
+				if(is_file($oFile)):
+					// Продолжаем. Есть ли имя переименованного файла.
+					if(!is_file($nFile)):
+						// Переименовываем
+						if(@rename($oFile, $nFile)):
+							// Удачно
+							add_action( 'all_admin_notices', function () {
+								global $file, $new_file;
+								$msg = "<b>" . __("file-renamed", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+								wp_admin_notice( $msg, array(
+									'type' => 'success',
+									'dismissible' => true,
+								));
+							});
+						else:
+							// Не удачно
+							add_action( 'all_admin_notices', function () {
+								global $file, $new_file;
+								$msg = "<b>" . __("failed-rename-file", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+								wp_admin_notice( $msg, array(
+									'type' => 'error',
+									'dismissible' => true,
+								));
+							});
+						endif;
+					else:
+						// Уже есть данный файл
+						add_action( 'all_admin_notices', function () {
+							global $file, $new_file;
+							$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+							wp_admin_notice( $msg, array(
+								'type' => 'error',
+								'dismissible' => true,
+							));
+						});
+					endif;
+				else:
+					// Не существует
+					add_action( 'all_admin_notices', function () {
+						global $file, $new_file;
+						$msg = "<b>" . __("file-not-exist", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+				endif;
+			endif;
+		endif;
+		return;
+	}
+
+	// Удаление файла
+	private function delete() {
+		if($this->dir):
+			if(isset($_REQUEST['file'])):
+				global $file;
+				$file = esc_sql($_REQUEST['file']);
+				$startpath = $this::FOOD_ABSPATH . "/" . $this->dir;
+				$old_file = $startpath . "/" . $file;
+				if(is_file($old_file)):
+					if(@unlink($old_file)):
+						add_action( 'all_admin_notices', function () {
+							global $file;
+							$msg = "<b>" . __("deleted-file", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+							wp_admin_notice( $msg, array(
+								'type' => 'success',
+								'dismissible' => true,
+							));
+						});
+					else:
+						add_action( 'all_admin_notices', function () {
+							global $file;
+							$msg = "<b>" . __("file-not-deleted", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+							wp_admin_notice( $msg, array(
+								'type' => 'error',
+								'dismissible' => true,
+							));
+						});
+					endif;
+				else:
+					add_action( 'all_admin_notices', function () {
+						global $file;
+						$msg = "<b>" . __("file-not-exist", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $msg, array(
+							'type' => 'error',
+							'dismissible' => true,
+						));
+					});
+				endif;
+				return;
+			endif;
+		endif;
 	}
 
 	// Копирование директории

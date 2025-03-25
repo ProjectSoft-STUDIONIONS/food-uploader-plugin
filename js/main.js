@@ -24,7 +24,6 @@
 		return param;
 	});
 	const searchAPI = Object.fromEntries(search_api);
-	window.searchAPI = searchAPI;
 	$(document)
 		.on("input", "#uploader [type=file]", (e) => {
 			let input = document.querySelector("#uploader [type=file]"),
@@ -57,45 +56,48 @@
 			let base = window.location.origin,
 				element = e.target,
 				href = element.href,
-				url = base + href,
 				arr = href.split('.'),
-				ext = arr.at(-1).toLowerCase(),
-				go;
+				ext = arr.at(-1).toLowerCase();
 			//Просмотр
-			if(element.classList.contains("food-view")){
-				if(typeof $.fancybox == 'object') {
-					let options = {
-						afterShow : function( instance, current ) {
-							$(".fancybox-content").css({
-								height: '100% !important',
-								overflow: 'hidden'
-							}).addClass(`${ext}_viewer`);
-						},
-						afterLoad : function( instance, current ) {
-							$(".fancybox-content").css({
-								height: '100% !important',
-								overflow: 'hidden'
-							}).addClass(`${ext}_viewer`);
-						},
-						afterClose: function() {
-							Cookies.remove('pdfjs.history', { path: '' });
-							window.localStorage.removeItem('pdfjs.history');
-						}
-					};
-					go = window.location.origin + '/viewer/pdf_viewer/?file=' + href;
+			if(typeof $.fancybox == 'object') {
 					options = {
-						src: go,
-						opts : options
+						src: window.location.origin + '/viewer/pdf_viewer/?file=' + href,
+						opts : {
+							afterShow : function( instance, current ) {
+								$(".fancybox-content").css({
+									height: '100% !important',
+									overflow: 'hidden'
+								}).addClass(`${ext}_viewer`);
+							},
+							afterLoad : function( instance, current ) {
+								$(".fancybox-content").css({
+									height: '100% !important',
+									overflow: 'hidden'
+								}).addClass(`${ext}_viewer`);
+							},
+							afterClose: function() {
+								Cookies.remove('pdfjs.history', { path: '' });
+								window.localStorage.removeItem('pdfjs.history');
+							}
+						}
 					};
 					$.fancybox.open(options);
 				}else{
 					window.open(href);
-				}
 			}
+			return !1;
+		}).on('click', '.food-rename, .food-delete', function(e) {
+			e.preventDefault();
+			console.log(e);
+			let element = e.target;
 			// Переименование
-			let mode, new_file, old_file, form, submit, file;
+			let form = document.querySelector('form[name=form_mode]'),
+				mode = form.querySelector('input[name=mode]'),
+				new_file = form.querySelector('input[name=new_file]'),
+				old_file = form.querySelector('input[name=file]'),
+				file;
 			if(element.classList.contains("food-rename")){
-				file = href.split("/").pop();
+				file = $(element).data('file');
 				const segments = file.split('.');
 				const fileExtension = segments.pop();
 				let fileName = segments.join('.');
@@ -103,11 +105,10 @@
 				if(!nwfile) {
 					return !1
 				}
-				form = document.querySelector('form[name=modifed]');
-				new_file = form.querySelector('input[name=new_file]');
-				old_file = form.querySelector('input[name=file]');
-				mode = form.querySelector('input[name=mode]');
-				submit = form.querySelector('input[name=mode]');
+				if(nwfile == segments.join('.')){
+					return !1;
+				}
+				console.log(nwfile, segments.join('.'));
 				old_file.value = file;
 				new_file.value = nwfile + `.${fileExtension}`;
 				mode.value = "rename";
@@ -115,16 +116,14 @@
 			}
 			// Удаление
 			if(element.classList.contains("food-delete")){
-				file = href.split("/").pop();
+				file = $(element).data('file');
 				if(!confirm(`Удалить файл ${file}?`)){
 					return !1;
 				}
-				form = document.querySelector('form[name=modifed]');
-				old_file = form.querySelector('input[name=file]');
-				mode = form.querySelector('input[name=mode]');
 				mode.value = "delete";
 				old_file.value = file;
 				$(form).submit();
+				return !1;
 			}
 			return !1;
 		});
