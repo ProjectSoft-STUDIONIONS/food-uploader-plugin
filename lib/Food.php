@@ -3,60 +3,76 @@
 namespace ProjectSoft;
 
 class Food {
-
+	// Имя плагина
 	public const FOOD_NAME = FOOD_NAME;
+	// Абсолютный путь к директории плагина
 	public const FOOD_PATH = FOOD_PATH;
+	// Аьсолютный путь к установленной системе
 	public const FOOD_ABSPATH = FOOD_ABSPATH;
+	// Локализацию задаём здесь.
+	// Файл локализации должен существовать
+	// Например, для локали en_US (Английский США) - food-uploader-plugin-en_US.mo
+	public const FOOD_LOCALE = 'ru_RU';
 
+	// Расширения доступные для загрузки
 	public const FOOD_EXTS = array(
 		"xlsx", // Excel xlsx file
 		"pdf" // PDF File
 	);
+	// Типы файлов разрешённые для загрузки
 	public const FOOD_TYPES = array(
 		'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Excel xlsx file
 		'application/pdf' // PDF File
 	);
 
+	// Обслуживаемая директория
 	private $dir = '';
+	// Обслуживаемые директории
 	private $folders = array();
+	// Список файлов из директории
 	private $files = array();
 
 	public function __construct() {
-		load_plugin_textdomain( $this::FOOD_NAME, false, $this::FOOD_NAME . '/languages/' );
+		// Загрузка перевода
+		load_textdomain( $this::FOOD_NAME, $this::FOOD_PATH . '/languages/' . $this::FOOD_NAME . '-' . $this::FOOD_LOCALE . '.mo');
+		// События, Действия, Фильтры
 		$this->registerAction();
 		$this->registerFilter();
+		// Получение директорий
 		$folders  = get_option('food_folders', '');
 		$folders  = preg_split('/[\s,;]+/', $folders);
 		$food     = array("food");
-		// Получение директорий
 		$this->folders = array_filter(array_unique(array_merge($food, $folders)));
 		sort($this->folders);
+		// Сохранение настроек
 		$this->save();
 		// Получение файлов
 		if(isset($_REQUEST["dir"])):
 			$dir = $_REQUEST["dir"];
 			if(in_array($dir, $this->folders)):
+				// Устанавливаем директорию
 				$this->dir = $dir;
 				// Здесь нужно сделать загрузку, переименование, удаление
 				if(isset($_REQUEST['mode'])):
 					$mode = $_REQUEST['mode'];
 					switch ($mode) {
 						case 'upload':
-							// upload...
+							// Загрузка
 							$this->upload();
 							break;
 						case 'rename':
-							// rename...
+							// Переименование
 							$this->rename();
 							break;
 						case 'delete':
-							// delete...
+							// Удаление
 							$this->delete();
 							break;
 						default:
 							break;
 					}
 				endif;
+				// Получаем список файлов
 				$this->files = $this->getFiles();
 			else:
 				// Redirect 302
@@ -73,14 +89,17 @@ class Food {
 
 	// Регистрация опций
 	public function food_admin_init() {
+		// Дополнительные директории
 		register_setting(
 			'food-group',
 			'food_folders',
 		);
+		// Включение/Отключение автоудаления старых файлов
 		register_setting(
 			'food-group',
 			'food_auto_delete',
 		);
+		// Насколько лет старые файлы удалять
 		register_setting(
 			'food-group',
 			'food_auto_year',
@@ -129,18 +148,30 @@ class Food {
 
 	// Меню к кнопке добавить
 	public function admin_bar_link($wp_admin_bar) {
-		$wp_admin_bar->remove_node('new-media');
-		$wp_admin_bar->remove_node('new-user');
+		/**
+		 * Можно удалить некоторые пункты меню.
+		 * Например:
+		 * удалить пункт Добавить -> Медиафайл
+		 * $wp_admin_bar->remove_node('new-media');
+		 * удалить пункт Добавить -> Пользователя
+		 * $wp_admin_bar->remove_node('new-user');
+		 */
+		// Добавляем пункт меню для перехода на обслуживание директории food (она присутствует всегда внезависимости от настроек)
 		$wp_admin_bar->add_node( array(
+			// ID пункта
 			'id' => 'food-menu-add',
+			// Отображение пункта
 			'title' => mb_strtoupper(__('food-menu-plugin', $this::FOOD_NAME)),
+			// Ссылка на пункте
 			'href' => admin_url('admin.php?page=food-uploader-plugin&dir=food'),
+			// Куда добавляем пункт меню
 			'parent' => 'new-content',
+			// Аттрибуты тега ссылки
 			'meta' => array('class' => 'ab-item')
 		));
 	}
 
-	// Вывод
+	// Подключаем Вывод
 	public function food_page() {
 		include $this->realPath(dirname(__FILE__)) . "/tmpl/page.php";
 	}
@@ -150,12 +181,12 @@ class Food {
 		return print_r(FOOD, true);
 	}
 
-	// Получение path
+	// Получение форматированной директории
 	public function realPath($path) {
 		return rtrim(preg_replace('/\\\\/', '/', $path), '/');
 	}
 
-	// add actions
+	// Действия
 	private function registerAction() {
 		add_action('init',            array($this, 'food_init'));
 		add_action('admin_init',      array($this, 'food_admin_init'));
@@ -165,7 +196,7 @@ class Food {
 		return $this;
 	}
 
-	// add filters
+	// Фильтры
 	private function registerFilter() {
 		add_filter( 'plugin_row_meta',     array($this, 'row_meta_link'), 10, 4 );
 		add_filter( 'plugin_action_links', array($this, 'settings_link'), 10, 2 );
@@ -222,10 +253,15 @@ class Food {
 			$tmp_folders = implode(";", $tarr);
 			$autodelete = intval($_REQUEST["food_auto_delete"]);
 			$autodelete_year = intval($_REQUEST["food_auto_year"]);
+			// Приведём в нужный формат Автоудаление
+			$autodelete = $autodelete ? 1 : 0;
+			// Приведём в нужный формат время лет от 1 до 5
+			$autodelete_year = $autodelete_year > 0 && $autodelete_year < 5 ? $autodelete_year : 5;
+			// Обновляем опции
 			update_option("food_folders", $tmp_folders);
 			update_option("food_auto_delete", $autodelete);
 			update_option("food_auto_year", $autodelete_year);
-			if(isset($_REQUEST["tab"])):
+			/*if(isset($_REQUEST["tab"])):
 				if($_REQUEST["tab"] === "plugin-settings"):
 					add_action( 'all_admin_notices', function () {
 						wp_admin_notice( 'Настройки сохранены', array(
@@ -234,14 +270,14 @@ class Food {
 						));
 					});
 				endif;
-			else:
+			else:*/
 				add_action( 'all_admin_notices', function () {
 					wp_admin_notice( 'Настройки сохранены', array(
 						'type' => 'success',
 						'dismissible' => true,
 					));
 				});
-			endif;
+			/*endif;*/
 		endif;
 		// Пробегаемся по директориям
 		// Перезаписываем htaccess
@@ -294,6 +330,7 @@ class Food {
 								// Удаляем файл
 								$file_absolute =  join("/", array($files_path, $name));
 								@unlink($file_absolute);
+								// Добавляем информацию об удалении файла
 								$all[] = $name;
 							else:
 								// Добавляем файл в отображение
@@ -308,7 +345,9 @@ class Food {
 			endforeach;
 			natsort($files);
 			$files = array_reverse($files, false);
+			// Если информация есть
 			if(count($all)):
+				// Отправляем событие с информацией
 				add_action( 'all_admin_notices', function () {
 					global $all;
 					$msg = "<b>Автоудаление файлов:</b> " . count($all) . "<br>";
@@ -325,7 +364,7 @@ class Food {
 
 	// Загрузка файлов
 	private function upload() {
-		if($this->dir):
+		if($this->dir && in_array($this->dir, $this->folders)):
 			if(isset($_FILES['userfiles'])):
 				global $all;
 				$all = array();

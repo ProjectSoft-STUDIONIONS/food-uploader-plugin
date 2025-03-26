@@ -4037,13 +4037,13 @@ fieldset[disabled] #wpbody .btn-danger.active {
   z-index: 999999;
 }
 
+#TB_window,
+#TB_window.thickbox-loading,
 #TB_window.plugin-food-settings-modal {
-  top: 0px;
   overflow: hidden;
   height: calc(100vh - 70px);
-  margin-top: 33px;
+  margin-top: calc(35px - 50vh);
   visibility: visible;
-  margin-bottom: 33px;
   background-color: #fff;
 }
 
@@ -4054,6 +4054,10 @@ fieldset[disabled] #wpbody .btn-danger.active {
   flex-direction: row;
   -ms-flex-align: center;
   align-items: center;
+}
+
+#TB_iframeContent {
+  height: calc(100% - 30px);
 }
 
 @media screen and (max-width: 767px) {

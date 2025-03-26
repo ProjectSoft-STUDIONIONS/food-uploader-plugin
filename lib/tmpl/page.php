@@ -50,7 +50,7 @@ $versions = array(
 	<div class="display-flex wp-heading-title">
 		<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("food-menu-plugin", $this::FOOD_NAME);?></h1>
 		<span>
-			<a class="dashicons dashicons-admin-generic thickbox open-plugin-details-modal" href="options-general.php?page=food-uploader-plugin%2Foptions.php&tab=plugin-settings&TB_iframe=true&width=772&height=623"></a>
+			<a class="dashicons dashicons-admin-generic thickbox open-plugin-details-modal" href="options-general.php?page=food-uploader-plugin%2Foptions.php&tab=plugin-settings&TB_iframe=true"></a>
 		</span>
 	</div>
 	<hr class="wp-header-end">
@@ -166,10 +166,10 @@ $versions = array(
 			</table>
 		</div>
 	</div>
-<?php
-$tmp_folders = get_option('food_folders', '');
-$tmp_folders = preg_split('/[\s,;]+/', $tmp_folders);
-?>
+	<hr class="wp-header-end">
+	<div class="wp-footer">
+		<p>Если возникнут проблемы или вопросы, то создайте новую проблему (issue), опишите свою проблему или задайте вопрос<br><a class="btn btn-primary" href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/issues/new" target="_blank">New Issue</a></p>
+	</div>
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>
 <script src="/viewer/fancybox.min.js?<?= $versions["fansybox_js"];?>"></script>

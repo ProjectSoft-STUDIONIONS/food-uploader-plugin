@@ -436,13 +436,13 @@
 
 #TB {
 	&_window {
+		&,
+		&.thickbox-loading,
 		&.plugin-food-settings-modal {
-			top: 0px;
 			overflow: hidden;
 			height: ~'calc(100vh - 70px)';
-			margin-top: 33px;
+			margin-top: ~'calc(35px - 50vh)';
 			visibility: visible;
-			margin-bottom: 33px;
 			background-color: #fff;
 		}
 	}
@@ -451,5 +451,7 @@
 		flex-direction: row;
 		align-items: center;
 	}
+	&_iframeContent {
+		height: ~'calc(100% - 30px)';
+	}
 }
-//<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»

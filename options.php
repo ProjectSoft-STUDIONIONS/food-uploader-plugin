@@ -52,9 +52,13 @@ $url = (isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] )) ?
 <?php
 if(IFRAME_REQUEST && isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] ) && isset($_REQUEST['food_folders'])):
 ?>
-let wind;
-if(wind = window.parent.document.querySelector("#TB_closeWindowButton")) {
-	wind.click();
+let btn, wind;
+wind = window.parent;
+if(btn = wind.document.querySelector("#TB_closeWindowButton")) {
+	setTimeout(() => {
+		btn.click();
+		wind.location.reload();
+	}, 300);
 }
 <?php
 endif;
