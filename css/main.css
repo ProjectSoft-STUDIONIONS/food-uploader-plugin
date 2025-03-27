@@ -4145,6 +4145,11 @@ fieldset[disabled] #wpbody .btn-danger.active {
   margin: 0px 0px;
 }
 
+#wpbody input[type=search]::-webkit-search-cancel-button,
+#wpbody input[type=search]::-webkit-search-decoration {
+  appearance: searchfield;
+}
+
 .fancybox-container {
   z-index: 999999;
 }
