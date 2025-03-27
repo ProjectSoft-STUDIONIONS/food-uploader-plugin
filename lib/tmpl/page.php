@@ -90,9 +90,9 @@ $versions = array(
 ?>
 	<div class="food-row hidden">
 		<div class="table-responsive">
-			<table class="table table-bordered table-hover text-nowrap">
+			<table class="table table-bordered table-hover text-nowrap" style="width: 100%;">
 				<thead>
-					<tr>
+					<tr style="width: 100%;">
 <?php
 						if($this->dir):
 ?>
@@ -133,8 +133,7 @@ $versions = array(
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="Переименовать «<?= $value;?>»"></i>
-								<i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="Удалить «<?= $value;?>»"></i>
+								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="Переименовать «<?= $value;?>»"><span>Переименовать</span></i> <i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="Удалить «<?= $value;?>»"><span>Удалить</span></i>
 							</div>
 						</td>
 					</tr>
@@ -166,7 +165,7 @@ $versions = array(
 			</table>
 		</div>
 	</div>
-	<hr class="wp-header-end">
+	<hr>
 	<div class="wp-footer">
 		<p>Если возникнут проблемы или вопросы, то создайте новую проблему (issue), опишите свою проблему или задайте вопрос<br><a class="btn btn-primary" href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/issues/new" target="_blank">New Issue</a></p>
 	</div>

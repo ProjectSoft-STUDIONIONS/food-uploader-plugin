@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 		default: [
 			"clean:all",
 			"concat",
-			"uglify",
+			"uglify:app",
+			"uglify:main",
 			"less",
 			"autoprefixer",
 			"group_css_media_queries",
@@ -44,8 +45,16 @@ module.exports = function(grunt) {
 				src: [
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/js-cookie/src/js.cookie.js',
+					'bower_components/pdfmake/build/pdfmake.js',
+					'bower_components/jszip/dist/jszip.js',
+					'bower_components/pdfmake/build/vfs_fonts.js',
 					'bower_components/datatables.net/js/dataTables.js',
-					'bower_components/datatables.net-bs/js/dataTables.bootstrap.js'
+					'bower_components/datatables.net-buttons/js/dataTables.buttons.js',
+					'bower_components/datatables.net-buttons/js/buttons.html5.js',
+					'bower_components/datatables.net-select/js/dataTables.select.js',
+					'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
+					'bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.js',
+					'bower_components/datatables.net-select-bs/js/select.bootstrap.js'
 
 				],
 				dest: 'js/appjs.js'
@@ -74,7 +83,6 @@ module.exports = function(grunt) {
 						flatten : true,
 						src: [
 							'js/appjs.js',
-							'js/main.js',
 						],
 						dest: 'js',
 						filter: 'isFile',
@@ -84,6 +92,22 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			main: {
+				files: [
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'js/main.js',
+						],
+						dest: 'js',
+						filter: 'isFile',
+						rename: function (dst, src) {
+							return dst + '/' + src.replace('.js', '.min.js');
+						}
+					}
+				]
+			}
 		},
 		less: {
 			css: {
@@ -100,6 +124,7 @@ module.exports = function(grunt) {
 				files : {
 					'css/main.css' : [
 						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
+						'bower_components/datatables.net-select-bs/css/select.bootstrap.css',
 						'src/less/main.less'
 					],
 				}

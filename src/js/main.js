@@ -127,14 +127,25 @@
 			}
 			return !1;
 		});
+	// Если есть dir, значит список файлов
 	if(searchAPI.dir) {
-		let table = $('.table').dataTable({
+		const docDefinition = {
+			info: {
+				title: 'awesome Document',
+				author: 'john doe',
+				subject: 'subject of document',
+				keywords: 'keywords for document',
+			},
+			 content:  'This is an sample PDF printed with pdfMake'
+		};
+		let table = new DataTable('.table', {
+			select: true,
 			columns: [
 				{ name: 'file' },
 				{ name: 'permission' },
 				{ name: 'date' },
 				{ name: 'size' },
-				{ name: '' }
+				{ name: 'actions' }
 			],
 			columnDefs : [
 				{ 
@@ -153,13 +164,96 @@
 			stateLoadCallback: function (settings) {
 				return JSON.parse(localStorage.getItem('DataTables_' + settings.sInstance + '_' + searchAPI.dir));
 			},
+			lengthMenu: [
+				[10, 25, 50, 100, -1],
+				['по 10', 'по 25', 'по 50', 'по 100', 'Все']
+			],
+			layout: {
+				topStart: [
+					'pageLength',
+					'search'
+				],
+				topEnd: {
+					buttons: [
+						{
+							extend: 'excel',
+							text: 'Экспорт в XLSX',
+							customize: function (...args) {
+								console.log(args);
+							},
+							action: function (e, dt, node, config, cb) {
+								DataTable.ext.buttons.excelHtml5.action.call(
+									this,
+									e,
+									dt,
+									node,
+									config,
+									cb
+								);
+							}
+						},
+						{
+							extend: 'pdf',
+							text: 'Экспорт в PDF',
+							/*action: function(...args) {
+								console.log(args);
+							},*/
+							download: '', //'open',
+							customize: function (doc) {
+								console.log(doc);
+								let title = [
+									`Меню ежедневного питания.`,
+									`Директория ${location.origin}/${searchAPI.dir}/`
+								];
+
+								doc.language = 'ru-RU';
+
+								doc.info = {
+									title: title.join(' '),
+									author: location.origin,
+									subject: title.join(' '),
+									keywords: title.join(' '),
+									creator: 'Food Uploader Plugin for WordPress CMS',
+								};
+
+								doc.header = {
+    								columns: [
+    									{
+    										text: `${location.origin}/${searchAPI.dir}/`,
+    										margin: [15, 15, 15, 15],
+    										alignment: 'center'
+    									}
+									]
+								};
+
+								doc.footer = function(currentPage, pageCount) {
+									return [
+										{
+    										text: currentPage.toString() + ' из ' + pageCount,
+    										margin: [15, 15, 15, 15],
+    										alignment: 'center'
+    									}
+									];
+								};
+
+								doc.content[0].text = title.join('\r\n');
+							},
+							action: function (e, dt, node, config, cb) {
+								DataTable.ext.buttons.pdfHtml5.action.call(
+									this,
+									e,
+									dt,
+									node,
+									config,
+									cb
+								);
+							}
+						}
+					]
+				}
+			},
 			language: {
-				info: 'Просмотр страницы: _PAGE_ из _PAGES_',
-				infoEmpty: 'Нет доступных записей',
-				infoFiltered: '(отфильтровано из _MAX_ общего количества записей)',
-				lengthMenu: 'Отображение записей _MENU_ на странице',
-				zeroRecords: 'Ничего не найдено - извините',
-				search: 'Поиск файла:&nbsp;'
+				url: '/wp-content/plugins/food-uploader-plugin/js/ru_RU.json',
 			}
 		});
 	}else{

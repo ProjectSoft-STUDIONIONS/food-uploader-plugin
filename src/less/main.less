@@ -308,6 +308,14 @@
 			}
 		}
 	}
+	.food {
+		&-rename,
+		&-delete {
+			span {
+				display: none;
+			}
+		}
+	}
 
 	#p_uploads {
 		&:empty {
@@ -424,6 +432,19 @@
 					gap: 10px;
 				}
 			}
+			tr {
+				&.selected {
+					td {
+						a {
+							&,
+							&:hover,
+							&:focus {
+								color: #fff;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	.pagination {
@@ -453,5 +474,16 @@
 	}
 	&_iframeContent {
 		height: ~'calc(100% - 30px)';
+	}
+}
+
+.dt-layout-start {
+	.dt-search,
+	.dt-length label {
+		display: inline-flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 5px;
+		flex-direction: row;
 	}
 }
