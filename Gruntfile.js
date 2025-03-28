@@ -21,6 +21,39 @@ module.exports = function(grunt) {
 			"lineending"
 		]
 	};
+
+	const getDateTime = function(timestamp = 0) {
+		let time = new Date(timestamp),
+			date = time.getDate(),
+			month = time.getMonth() + 1,
+			year = time.getFullYear(),
+			hour = time.getHours(),
+			minute = time.getMinutes(),
+			second = time.getSeconds(),
+			arrDate = [
+				String(year),
+				leftPad(month, 2, '0'),
+				leftPad(date,  2, '0')
+			],
+			arrTime = [
+				leftPad(hour,   2, '0'),
+				leftPad(minute, 2, '0'),
+				leftPad(second, 2, '0')
+			];
+		return arrDate.join('-') + ' ' + arrTime.join(':');
+
+	},
+	leftPad = function (str, len, ch) {
+		str = String(str);
+		let i = -1;
+		if (!ch && ch !== 0) ch = ' ';
+		len = len - str.length;
+		while (++i < len) {
+			str = ch + str;
+		}
+		return str;
+	};
+
 	NpmImportPlugin = require("less-plugin-npm-import");
 	require('./src/modules/po2mo.js')(grunt);
 	require('load-grunt-tasks')(grunt);
@@ -51,10 +84,10 @@ module.exports = function(grunt) {
 					'bower_components/datatables.net/js/dataTables.js',
 					'bower_components/datatables.net-buttons/js/dataTables.buttons.js',
 					'bower_components/datatables.net-buttons/js/buttons.html5.js',
-					'bower_components/datatables.net-select/js/dataTables.select.js',
+					//'bower_components/datatables.net-select/js/dataTables.select.js',
 					'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
 					'bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.js',
-					'bower_components/datatables.net-select-bs/js/select.bootstrap.js'
+					//'bower_components/datatables.net-select-bs/js/select.bootstrap.js'
 
 				],
 				dest: 'js/appjs.js'
@@ -124,7 +157,7 @@ module.exports = function(grunt) {
 				files : {
 					'css/main.css' : [
 						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
-						'bower_components/datatables.net-select-bs/css/select.bootstrap.css',
+						//'bower_components/datatables.net-select-bs/css/select.bootstrap.css',
 						'src/less/main.less'
 					],
 				}
@@ -253,6 +286,10 @@ module.exports = function(grunt) {
 							match: /%license_uri%/g,
 							replacement: PACK.license_uri
 						},
+						{
+							match: /%date%/g,
+							replacement: getDateTime((new Date()).getTime())
+						},
 					]
 				},
 				src: "edit-file-plugin.php5",
@@ -265,7 +302,13 @@ module.exports = function(grunt) {
 					eol: 'lf'
 				},
 				files: {
-					'food-uploader-plugin.php': ['food-uploader-plugin.php']
+					'food-uploader-plugin.php': ['food-uploader-plugin.php'],
+					'css/main.css': ['css/main.css'],
+					'css/main.min.css': ['css/main.min.css'],
+					'js/appjs.js': ['js/appjs.js'],
+					'js/appjs.min.js': ['js/appjs.min.js'],
+					'js/main.js': ['js/main.js'],
+					'js/main.min.js': ['js/main.min.js'],
 				}
 			},
 			readme: {

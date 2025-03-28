@@ -14,6 +14,7 @@
 	Text Domain:        %name%
 	Requires at least:  5.7
 	Requires PHP:       7.4
+	Last Update:        %date%
 */
 
 if ( ! defined( 'ABSPATH' ) ) {

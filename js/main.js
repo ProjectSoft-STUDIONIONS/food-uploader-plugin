@@ -1,5 +1,38 @@
 !(function($){
 	$.noConflict();
+
+	const getDateTime = function(timestamp = 0) {
+		let time = new Date(timestamp),
+			date = time.getDate(),
+			month = time.getMonth() + 1,
+			year = time.getFullYear(),
+			hour = time.getHours(),
+			minute = time.getMinutes(),
+			second = time.getSeconds(),
+			arrDate = [
+				leftPad(date,  2, '0'),
+				leftPad(month, 2, '0'),
+				String(year)
+			],
+			arrTime = [
+				leftPad(hour,   2, '0'),
+				leftPad(minute, 2, '0'),
+				leftPad(second, 2, '0')
+			];
+		return arrDate.join('-') + ' ' + arrTime.join(':');
+
+	},
+	leftPad = function (str, len, ch) {
+		str = String(str);
+		let i = -1;
+		if (!ch && ch !== 0) ch = ' ';
+		len = len - str.length;
+		while (++i < len) {
+			str = ch + str;
+		}
+		return str;
+	};
+
 	if('object' == typeof $.fancybox) {
 		$.fancybox.defaults.transitionEffect = "circular";
 		$.fancybox.defaults.transitionDuration = 500;
@@ -139,7 +172,7 @@
 			 content:  'This is an sample PDF printed with pdfMake'
 		};
 		let table = new DataTable('.table', {
-			select: true,
+			//select: true,
 			columns: [
 				{ name: 'file' },
 				{ name: 'permission' },
@@ -221,7 +254,12 @@
     									{
     										text: `${location.origin}/${searchAPI.dir}/`,
     										margin: [15, 15, 15, 15],
-    										alignment: 'center'
+    										alignment: 'left'
+    									},
+    									{
+    										text: getDateTime((new Date()).getTime()),
+    										margin: [15, 15, 15, 15],
+    										alignment: 'right'
     									}
 									]
 								};

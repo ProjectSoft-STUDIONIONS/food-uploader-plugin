@@ -110,8 +110,8 @@ class Food {
 	public function food_admin_menu() {
 		// Пункт меню в общее меню
 		add_menu_page(
-			__("food-menu-plugin", $this::FOOD_NAME),
-			__("food-menu-plugin", $this::FOOD_NAME),
+			__("Меню ежедневного питания", $this::FOOD_NAME),
+			__("Меню ежедневного питания", $this::FOOD_NAME),
 			'manage_options',
 			FOOD_NAME,
 			array($this, 'food_page'),
@@ -121,8 +121,8 @@ class Food {
 		// Пункт меню в меню Настройки
 		add_submenu_page( 
 			'options-general.php', 
-			__('food-settings', $this::FOOD_NAME) . ' «' . __('food-menu-plugin', $this::FOOD_NAME) . '»', 
-			__("food-menu-settings", $this::FOOD_NAME), 
+			__('ПИТАНИЕ', $this::FOOD_NAME) . ' «' . __('Меню ежедневного питания', $this::FOOD_NAME) . '»', 
+			__("Настройки", $this::FOOD_NAME), 
 			'manage_options', 
 			$this::FOOD_NAME . '/options.php',
 			'',
@@ -134,7 +134,7 @@ class Food {
 	public function row_meta_link($meta, $plugin_file) {
 		if( false === strpos($plugin_file, $this::FOOD_NAME))
 			return $meta;
-		$meta[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('food-settings', $this::FOOD_NAME) . '</a>';
+		$meta[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('Настройки', $this::FOOD_NAME) . '</a>';
 		return $meta;
 	}
 
@@ -142,7 +142,8 @@ class Food {
 	public function settings_link($actions, $plugin_file) {
 		if( false === strpos($plugin_file, $this::FOOD_NAME))
 			return $actions;
-		$actions[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('food-settings', $this::FOOD_NAME) . '</a>';
+		$actions[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('Настройки', $this::FOOD_NAME) . '</a>';
+		$actions[] = '<a href="admin.php?page=food-uploader-plugin">' . __('Открыть плагин', $this::FOOD_NAME) . '</a>';
 		return $actions;
 	}
 
@@ -161,7 +162,7 @@ class Food {
 			// ID пункта
 			'id' => 'food-menu-add',
 			// Отображение пункта
-			'title' => mb_strtoupper(__('food-menu-plugin', $this::FOOD_NAME)),
+			'title' => mb_strtoupper(__('Меню ежедневного питания', $this::FOOD_NAME)),
 			// Ссылка на пункте
 			'href' => admin_url('admin.php?page=food-uploader-plugin&dir=food'),
 			// Куда добавляем пункт меню
@@ -261,23 +262,12 @@ class Food {
 			update_option("food_folders", $tmp_folders);
 			update_option("food_auto_delete", $autodelete);
 			update_option("food_auto_year", $autodelete_year);
-			/*if(isset($_REQUEST["tab"])):
-				if($_REQUEST["tab"] === "plugin-settings"):
-					add_action( 'all_admin_notices', function () {
-						wp_admin_notice( 'Настройки сохранены', array(
-							'type' => 'success',
-							'dismissible' => true,
-						));
-					});
-				endif;
-			else:*/
-				add_action( 'all_admin_notices', function () {
-					wp_admin_notice( 'Настройки сохранены', array(
-						'type' => 'success',
-						'dismissible' => true,
-					));
-				});
-			/*endif;*/
+			add_action( 'all_admin_notices', function () {
+				wp_admin_notice( __('Настройки сохранены', $this::FOOD_NAME), array(
+					'type' => 'success',
+					'dismissible' => true,
+				));
+			});
 		endif;
 		// Пробегаемся по директориям
 		// Перезаписываем htaccess
@@ -350,7 +340,7 @@ class Food {
 				// Отправляем событие с информацией
 				add_action( 'all_admin_notices', function () {
 					global $all;
-					$msg = "<b>Автоудаление файлов:</b> " . count($all) . "<br>";
+					$msg = "<b>" . __("Автоудаление файлов:", $this::FOOD_NAME) . "</b> " . count($all) . "<br>";
 					$msg .= "<code>" . implode("<br>", $all) . "</code>";
 					wp_admin_notice( $msg, array(
 						'type' => 'success',
@@ -380,7 +370,7 @@ class Food {
 					// Проверяем тип файла
 					if (!in_array($files['type'][$i], $this::FOOD_TYPES)):
 						// Собираем ошибки
-						$all["error"][] = '<b>' . __("error-only-xlsx-files", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+						$all["error"][] = '<b>' . __("Ошибка: формат фвйла не поддерживается", $this::FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
 					else:
 						// Продолжаем
 						$uploaddir = $this::FOOD_ABSPATH . "/" . $this->dir;
@@ -395,33 +385,33 @@ class Food {
 									@chmod($uploaddir . "/" . $name, 0644);
 								endif;
 								// Собираем удачную загрузку
-								$all["success"][] = '<b>' . __("file-uploaded", FOOD_NAME) . ':</b> <code>' . $name . '</code>';
+								$all["success"][] = '<b>' . __("Файл загружен", $this::FOOD_NAME) . ':</b> <code>' . $name . '</code>';
 							else:
 								// Не удалось переместить файл
-								$all["error"][] = '<b>' . __("failed-move-file", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+								$all["error"][] = '<b>' . __("Не удалось переместить файл", $this::FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
 							endif;
 						else:
 							// Не удалось загрузить файл
-							$all["error"][] = '<b>' . __("failed-upload-file", FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
+							$all["error"][] = '<b>' . __("Не удалось загрузить файл", $this::FOOD_NAME) . ':</b> <code>' . $files['name'][$i] . '</code>';
 						endif;
 					endif;
 				endforeach;
-				if(count($all["error"])):
+				if(@count($all["error"])):
 					add_action( 'all_admin_notices', function () {
 						global $all;
-						$msg = "<b>Неудачно загруженных файлов:</b> " . count($all["error"]) . "<br>";
-						$msg .= implode("<br>", $all["error"]);
+						$msg = "<b>" . __("Неудачно загруженных файлов:", $this::FOOD_NAME) . "</b> " . @count($all["error"]) . "<br>";
+						$msg .= @implode("<br>", $all["error"]);
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
 					});
 				endif;
-				if(count($all["success"])):
+				if(@count($all["success"])):
 					add_action( 'all_admin_notices', function () {
 						global $all;
-						$msg = "<b>Удачно загруженных файлов:</b> " . count($all["success"]) . "<br>";
-						$msg .= implode("<br>", $all["success"]);
+						$msg = "<b>" . __("Удачно загруженных файлов:", $this::FOOD_NAME) . "</b> " . @count($all["success"]) . "<br>";
+						$msg .= @implode("<br>", $all["success"]);
 						wp_admin_notice( $msg, array(
 							'type' => 'success',
 							'dismissible' => true,
@@ -445,7 +435,7 @@ class Food {
 				if($file == $new_file):
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						$msg = "<b>" . __("Файл существует.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
@@ -461,7 +451,7 @@ class Food {
 					// Запрет на переименование файла
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("disable-file-renaming", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						$msg = "<b>" . __("Запрет на переименование файла", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
@@ -481,7 +471,7 @@ class Food {
 				if($file == $new_file):
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						$msg = "<b>" . __("Файл существует.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
@@ -500,7 +490,7 @@ class Food {
 							// Удачно
 							add_action( 'all_admin_notices', function () {
 								global $file, $new_file;
-								$msg = "<b>" . __("file-renamed", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+								$msg = "<b>" . __("Файл переименован.", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
 								wp_admin_notice( $msg, array(
 									'type' => 'success',
 									'dismissible' => true,
@@ -510,7 +500,7 @@ class Food {
 							// Не удачно
 							add_action( 'all_admin_notices', function () {
 								global $file, $new_file;
-								$msg = "<b>" . __("failed-rename-file", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+								$msg = "<b>" . __("Не удалось переименовать файл.", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
 								wp_admin_notice( $msg, array(
 									'type' => 'error',
 									'dismissible' => true,
@@ -521,7 +511,7 @@ class Food {
 						// Уже есть данный файл
 						add_action( 'all_admin_notices', function () {
 							global $file, $new_file;
-							$msg = "<b>" . __("file-exists", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
+							$msg = "<b>" . __("Файл существует.", $this::FOOD_NAME) . "</b><br><code>" . "$file => $new_file" . "</code>";
 							wp_admin_notice( $msg, array(
 								'type' => 'error',
 								'dismissible' => true,
@@ -532,7 +522,7 @@ class Food {
 					// Не существует
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("file-not-exist", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						$msg = "<b>" . __("Файл не существует.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
@@ -556,7 +546,7 @@ class Food {
 					if(@unlink($old_file)):
 						add_action( 'all_admin_notices', function () {
 							global $file;
-							$msg = "<b>" . __("deleted-file", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+							$msg = "<b>" . __("Файл удалён.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 							wp_admin_notice( $msg, array(
 								'type' => 'success',
 								'dismissible' => true,
@@ -565,7 +555,7 @@ class Food {
 					else:
 						add_action( 'all_admin_notices', function () {
 							global $file;
-							$msg = "<b>" . __("file-not-deleted", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+							$msg = "<b>" . __("Файл не был удален.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 							wp_admin_notice( $msg, array(
 								'type' => 'error',
 								'dismissible' => true,
@@ -575,7 +565,7 @@ class Food {
 				else:
 					add_action( 'all_admin_notices', function () {
 						global $file;
-						$msg = "<b>" . __("file-not-exist", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
+						$msg = "<b>" . __("Файл не существует.", $this::FOOD_NAME) . "</b><br><code>" . $file . "</code>";
 						wp_admin_notice( $msg, array(
 							'type' => 'error',
 							'dismissible' => true,
