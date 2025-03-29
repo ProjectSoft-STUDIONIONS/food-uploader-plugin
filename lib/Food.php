@@ -121,8 +121,8 @@ class Food {
 		// Пункт меню в меню Настройки
 		add_submenu_page( 
 			'options-general.php', 
-			__('ПИТАНИЕ', "food-uploader-plugin") . ' «' . __('Меню ежедневного питания', "food-uploader-plugin") . '»', 
-			__("Настройки", "food-uploader-plugin"), 
+			__('Настройки', "food-uploader-plugin") . ' «' . __('Меню ежедневного питания', "food-uploader-plugin") . '»', 
+			__("ПИТАНИЕ", "food-uploader-plugin"), 
 			'manage_options', 
 			$this::FOOD_NAME . '/options.php',
 			'',
@@ -152,8 +152,10 @@ class Food {
 		/**
 		 * Можно удалить некоторые пункты меню.
 		 * Например:
+		 * 
 		 * удалить пункт Добавить -> Медиафайл
 		 * $wp_admin_bar->remove_node('new-media');
+		 * 
 		 * удалить пункт Добавить -> Пользователя
 		 * $wp_admin_bar->remove_node('new-user');
 		 */
