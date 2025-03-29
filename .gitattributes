@@ -6,6 +6,7 @@
 **/*.less text eol=lf
 **/*.php text eol=lf
 **/*.phps text eol=lf
+**/.po text eol=lf
 **/md text eol=lf
 
 /.npmrc export-ignore

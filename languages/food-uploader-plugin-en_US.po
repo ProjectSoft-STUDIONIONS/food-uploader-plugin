@@ -1,0 +1,197 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Food File Uploader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-29 03:22+0000\n"
+"PO-Revision-Date: 2025-03-29 04:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2\n"
+"X-Domain: food-uploader-plugin"
+
+#. Name of the plugin
+msgid "Food File Uploader"
+msgstr "Food File Uploader"
+
+#. Author URI of the plugin
+msgid "https://github.com/ProjectSoft-STUDIONIONS/"
+msgstr "https://github.com/ProjectSoft-STUDIONIONS/"
+
+#. URI of the plugin
+msgid "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin"
+msgstr "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin"
+
+#. Description of the plugin
+msgid ""
+"WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только "
+"администраторам. Плагин актуален для сайтов школ России."
+msgstr ""
+"WordPress Plugin for uploading xlsx files to the /food/ folder, available "
+"only to administrators. The plugin is relevant for Russian school sites."
+
+#: options.php:22
+msgid "Автоудаление старых файлов"
+msgstr "Automatic deletion of old files"
+
+#: options.php:32
+msgid "Автоудаление старых файлов старше"
+msgstr "Automatically delete old files older than"
+
+#: lib/Food.php:343
+msgid "Автоудаление файлов:"
+msgstr "Auto-delete files:"
+
+#: options.php:18
+msgid ""
+"Вводить через пробел, запятую или точку с запятой<br>Директория <code>"
+"food</code> присутствует всегда и независимо от этой настройки"
+msgstr ""
+"Separate with space, comma or semicolon<br>Directory <code>food</code> is "
+"always present regardless of this setting"
+
+#: lib/tmpl/page.php:65
+msgid "Выбрать файлы"
+msgstr "Select files"
+
+#: lib/tmpl/page.php:103
+msgid "Действия"
+msgstr "Actions"
+
+#: lib/tmpl/page.php:107
+msgid "Директории"
+msgstr "Directories"
+
+#: options.php:15
+msgid "Дополнительные директории"
+msgstr "Additional directories"
+
+#: lib/tmpl/page.php:170
+msgid ""
+"Если возникнут проблемы или вопросы, то создайте новую проблему (issue), "
+"опишите свою проблему или задайте вопрос"
+msgstr ""
+"If you have any problems or questions, please create a new issue, describe "
+"your problem or ask a question"
+
+#: lib/tmpl/page.php:68
+msgid "Загрузить"
+msgstr "Upload"
+
+#: lib/Food.php:454
+msgid "Запрет на переименование файла"
+msgstr "Disable file renaming"
+
+#: lib/tmpl/page.php:101
+msgid "Изменён"
+msgstr "Changed"
+
+#: lib/tmpl/page.php:99
+msgid "Имя"
+msgstr "Name"
+
+#: lib/tmpl/page.php:86
+msgid "Корневая директория"
+msgstr "Root directory"
+
+#: lib/Food.php:113 lib/Food.php:114 lib/Food.php:124 lib/Food.php:165
+#: lib/tmpl/page.php:51
+msgid "Меню ежедневного питания"
+msgstr "Daily Meal Menu"
+
+#: lib/tmpl/page.php:79
+msgid "На верхний уровень"
+msgstr "Parent directory"
+
+#: lib/Food.php:125 lib/Food.php:137 lib/Food.php:145
+msgid "Настройки"
+msgstr "Settings"
+
+#: lib/Food.php:266
+msgid "Настройки сохранены"
+msgstr "Settings Save"
+
+#: lib/Food.php:395
+msgid "Не удалось загрузить файл"
+msgstr "Failed to upload file"
+
+#: lib/Food.php:503
+msgid "Не удалось переименовать файл."
+msgstr "Failed to rename file."
+
+#: lib/Food.php:391
+msgid "Не удалось переместить файл"
+msgstr "Failed to move file"
+
+#: lib/tmpl/page.php:145
+msgid "Нет файлов для отображения"
+msgstr "There are no files to display."
+
+#: lib/Food.php:402
+msgid "Неудачно загруженных файлов:"
+msgstr "Failed to upload files:"
+
+#: lib/Food.php:146
+msgid "Открыть плагин"
+msgstr "Open plugin"
+
+#: lib/Food.php:373
+msgid "Ошибка: формат фвйла не поддерживается"
+msgstr "Error: File format not supported"
+
+#: lib/Food.php:124
+msgid "ПИТАНИЕ"
+msgstr "FOOD"
+
+#: lib/tmpl/page.php:136
+msgid "Переименовать"
+msgstr "Rename"
+
+#: lib/tmpl/page.php:100
+msgid "Права"
+msgstr "Rights"
+
+#: lib/tmpl/page.php:102
+msgid "Размер"
+msgstr "Size"
+
+#: lib/tmpl/page.php:136
+msgid "Удалить"
+msgstr "Delete"
+
+#: lib/Food.php:413
+msgid "Удачно загруженных файлов:"
+msgstr "Successfully uploaded files:"
+
+#: lib/Food.php:388
+msgid "Файл загружен"
+msgstr "File uploaded"
+
+#: lib/Food.php:558
+msgid "Файл не был удален."
+msgstr "The file was not deleted."
+
+#: lib/Food.php:525 lib/Food.php:568
+msgid "Файл не существует."
+msgstr "The file does not exist."
+
+#: lib/Food.php:493
+msgid "Файл переименован."
+msgstr "The file has been renamed."
+
+#: lib/Food.php:438 lib/Food.php:474 lib/Food.php:514
+msgid "Файл существует."
+msgstr "The file exists."
+
+#: lib/Food.php:549
+msgid "Файл удалён."
+msgstr "The file has been deleted."
+
+#. Author of the plugin
+msgid "Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>"
+msgstr "Chernyshev Andrey aka ProjectSoft <projectsoft2009@yandex.ru>"

@@ -48,7 +48,7 @@ $versions = array(
 <link rel="stylesheet" href="/wp-content/plugins/<?= $this::FOOD_NAME;?>/css/main.min.css?<?= $versions["main_css"];?>">
 <div class="wrap" id="wp-plugins-food">
 	<div class="display-flex wp-heading-title">
-		<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("Меню ежедневного питания", $this::FOOD_NAME);?></h1>
+		<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("Меню ежедневного питания", "food-uploader-plugin");?></h1>
 		<span>
 			<a class="dashicons dashicons-admin-generic thickbox open-plugin-details-modal" href="options-general.php?page=food-uploader-plugin%2Foptions.php&tab=plugin-settings&TB_iframe=true"></a>
 		</span>
@@ -62,10 +62,10 @@ $versions = array(
 			<input type="hidden" name="mode" value="upload">
 			<div id="uploader" class="text-right">
 				<label class="btn btn-primary text-uppercase">
-					<i class="glyphicon glyphicon-floppy-save"></i>&nbsp;<?= __("Выбрать файлы", $this::FOOD_NAME);?> <input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
+					<i class="glyphicon glyphicon-floppy-save"></i>&nbsp;<?= __("Выбрать файлы", "food-uploader-plugin");?> <input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
 				</label>
 				<p id="p_uploads" class="alert alert-info"></p>
-				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;<?= __("Загрузить", $this::FOOD_NAME);?></button>
+				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;<?= __("Загрузить", "food-uploader-plugin");?></button>
 			</div>
 		</form>
 		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
@@ -76,14 +76,14 @@ $versions = array(
 	</div>
 	<div class="folder-title">
 		<h3>Директория <code>/<?= $this->dir;?>/</code> <a href="/<?= $this->dir;?>/" target="_blank"></a></h3>
-		<p class="food-title-root"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", $this::FOOD_NAME);?></a></p>
+		<p class="food-title-root"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", "food-uploader-plugin");?></a></p>
 	</div>
 <?php
 	else:
 ?>
 	<div class="clearfix"></div>
 	<div class="folder-title">
-		<h3><?= __("Корневая директория", $this::FOOD_NAME);?></h3>
+		<h3><?= __("Корневая директория", "food-uploader-plugin");?></h3>
 	</div>
 <?php
 	endif;
@@ -96,15 +96,15 @@ $versions = array(
 <?php
 						if($this->dir):
 ?>
-						<th data-dt-name="name" class="manage-column column-primary text-nowrap text-left text-upercase"><?= __("Имя", $this::FOOD_NAME);?></th>
-						<th data-dt-name="permissions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Права", $this::FOOD_NAME);?></th>
-						<th data-dt-name="change" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Изменён", $this::FOOD_NAME);?></th>
-						<th data-dt-name="size" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Размер", $this::FOOD_NAME);?></th>
-						<th data-dt-name="actions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Действия", $this::FOOD_NAME);?></th>
+						<th data-dt-name="name" class="manage-column column-primary text-nowrap text-left text-upercase"><?= __("Имя", "food-uploader-plugin");?></th>
+						<th data-dt-name="permissions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Права", "food-uploader-plugin");?></th>
+						<th data-dt-name="change" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Изменён", "food-uploader-plugin");?></th>
+						<th data-dt-name="size" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Размер", "food-uploader-plugin");?></th>
+						<th data-dt-name="actions" class="manage-column text-nowrap text-right text-upercase" width="1%"><?= __("Действия", "food-uploader-plugin");?></th>
 <?php
 						else:
 ?>
-						<th><?= __("Директории", $this::FOOD_NAME);?></th>
+						<th><?= __("Директории", "food-uploader-plugin");?></th>
 						<th style="width: 1%;"></th>
 <?php
 						endif;
@@ -133,7 +133,7 @@ $versions = array(
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", $this::FOOD_NAME);?> «<?= $value;?>»"><span><?= __("Переименовать", $this::FOOD_NAME);?></span></i> <i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", $this::FOOD_NAME);?> «<?= $value;?>»"><span><?= __("Удалить", $this::FOOD_NAME);?></span></i>
+								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span><?= __("Переименовать", "food-uploader-plugin");?></span></i> <i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span><?= __("Удалить", "food-uploader-plugin");?></span></i>
 							</div>
 						</td>
 					</tr>
@@ -142,7 +142,7 @@ $versions = array(
 						else:
 ?>
 					<tr>
-						<td><?= __('Нет файлов для отображения', $this::FOOD_NAME);?></td>
+						<td><?= __('Нет файлов для отображения', "food-uploader-plugin");?></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -167,7 +167,7 @@ $versions = array(
 	</div>
 	<hr>
 	<div class="wp-footer">
-		<p><?= __("Если возникнут проблемы или вопросы, то создайте новую проблему (issue), опишите свою проблему или задайте вопрос", $this::FOOD_NAME); ?><br><a class="btn btn-primary" href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/issues/new" target="_blank">New Issue</a></p>
+		<p><?= __("Если возникнут проблемы или вопросы, то создайте новую проблему (issue), опишите свою проблему или задайте вопрос", "food-uploader-plugin"); ?><br><a class="btn btn-primary" href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/issues/new" target="_blank">New Issue</a></p>
 	</div>
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>

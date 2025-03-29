@@ -14,6 +14,7 @@ test.*
 tests
 temp
 src/temp
+languages/*.php
 
 # SublimeText workspace file
 *.sublime-workspace
