@@ -10,7 +10,7 @@
 		"type": "git",
 		"url": "git+https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin.git"
 	},
-	"license": "MIT",
+	"license": "GPL-2.0",
 	"license_uri": "https://mit-license.org/",
 	"author": "Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>",
 	"main": "Gruntfile.js",

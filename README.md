@@ -26,6 +26,6 @@ WordPress Плагин для загрузки файлов xlsx в папку /
 [comment]: <> ( Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru> )
 [comment]: <> ( Author URI:         https://github.com/ProjectSoft-STUDIONIONS )
 [comment]: <> ( GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
-[comment]: <> ( License:            MIT )
+[comment]: <> ( License:            GPL-2.0 )
 [comment]: <> ( License URI:        https://mit-license.org/ )
 [comment]: <> ( Donate link:        https://projectsoft.ru/donate/ )

@@ -7,14 +7,15 @@
 	Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>
 	Author URI:         https://github.com/ProjectSoft-STUDIONIONS/
 	GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin
-	License:            MIT
+	License:            GPL-2.0
 	License URI:        https://mit-license.org/
 	Donate link:        https://projectsoft.ru/donate/
 	Domain Path:        languages/
 	Text Domain:        food-uploader-plugin
 	Requires at least:  5.7
 	Requires PHP:       7.4
-	Last Update:        2025-03-29 12:56:06
+	Creation Date:      2025-02-06 04:18:00
+	Last Update:        2025-03-29 15:30:16
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
