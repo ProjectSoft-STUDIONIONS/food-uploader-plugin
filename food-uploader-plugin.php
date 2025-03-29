@@ -14,7 +14,7 @@
 	Text Domain:        food-uploader-plugin
 	Requires at least:  5.7
 	Requires PHP:       7.4
-	Last Update:        2025-03-29 09:00:46
+	Last Update:        2025-03-29 12:54:37
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
