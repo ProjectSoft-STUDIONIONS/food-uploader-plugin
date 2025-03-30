@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Food File Uploader\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-06 04:18+0000\n"
-"PO-Revision-Date: 2025-03-29 04:59+0000\n"
+"PO-Revision-Date: 2025-03-30 05:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -29,26 +29,29 @@ msgid "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin"
 msgstr "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin"
 
 #. Description of the plugin
+#| msgid ""
+#| "WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только "
+#| "администраторам. Плагин актуален для сайтов школ России."
 msgid ""
-"WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только "
-"администраторам. Плагин актуален для сайтов школ России."
+"WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен "
+"только администраторам. Плагин актуален для сайтов школ России."
 msgstr ""
-"WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только "
-"администраторам. Плагин актуален для сайтов школ России."
+"WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен "
+"только администраторам. Плагин актуален для сайтов школ России."
 
-#: options.php:22
+#: options.php:23
 msgid "Автоудаление старых файлов"
 msgstr "Автоудаление старых файлов"
 
-#: options.php:32
+#: options.php:33
 msgid "Автоудаление старых файлов старше"
 msgstr "Автоудаление старых файлов старше"
 
-#: lib/Food.php:343
+#: lib/Food.php:354
 msgid "Автоудаление файлов:"
 msgstr "Автоудаление файлов:"
 
-#: options.php:18
+#: options.php:19
 msgid ""
 "Вводить через пробел, запятую или точку с запятой<br>Директория <code>"
 "food</code> присутствует всегда и независимо от этой настройки"
@@ -68,7 +71,7 @@ msgstr "Действия"
 msgid "Директории"
 msgstr "Директории"
 
-#: options.php:15
+#: options.php:16
 msgid "Дополнительные директории"
 msgstr "Дополнительные директории"
 
@@ -84,7 +87,7 @@ msgstr ""
 msgid "Загрузить"
 msgstr "Загрузить"
 
-#: lib/Food.php:454
+#: lib/Food.php:467
 msgid "Запрет на переименование файла"
 msgstr "Запрет на переименование файла"
 
@@ -100,7 +103,7 @@ msgstr "Имя"
 msgid "Корневая директория"
 msgstr "Корневая директория"
 
-#: lib/Food.php:113 lib/Food.php:114 lib/Food.php:124 lib/Food.php:165
+#: lib/Food.php:122 lib/Food.php:123 lib/Food.php:133 lib/Food.php:176
 #: lib/tmpl/page.php:51
 msgid "Меню ежедневного питания"
 msgstr "Меню ежедневного питания"
@@ -109,23 +112,23 @@ msgstr "Меню ежедневного питания"
 msgid "На верхний уровень"
 msgstr "На верхний уровень"
 
-#: lib/Food.php:125 lib/Food.php:137 lib/Food.php:145
+#: lib/Food.php:133 lib/Food.php:146 lib/Food.php:154
 msgid "Настройки"
 msgstr "Настройки"
 
-#: lib/Food.php:266
+#: lib/Food.php:277
 msgid "Настройки сохранены"
 msgstr "Настройки сохранены"
 
-#: lib/Food.php:395
+#: lib/Food.php:407
 msgid "Не удалось загрузить файл"
 msgstr "Не удалось загрузить файл"
 
-#: lib/Food.php:503
+#: lib/Food.php:517
 msgid "Не удалось переименовать файл."
 msgstr "Не удалось переименовать файл."
 
-#: lib/Food.php:391
+#: lib/Food.php:403
 msgid "Не удалось переместить файл"
 msgstr "Не удалось переместить файл"
 
@@ -133,19 +136,19 @@ msgstr "Не удалось переместить файл"
 msgid "Нет файлов для отображения"
 msgstr "Нет файлов для отображения"
 
-#: lib/Food.php:402
+#: lib/Food.php:412
 msgid "Неудачно загруженных файлов:"
 msgstr "Неудачно загруженных файлов:"
 
-#: lib/Food.php:146
+#: lib/Food.php:155
 msgid "Открыть плагин"
 msgstr "Открыть плагин"
 
-#: lib/Food.php:373
+#: lib/Food.php:385
 msgid "Ошибка: формат фвйла не поддерживается"
 msgstr "Ошибка: формат фвйла не поддерживается"
 
-#: lib/Food.php:124
+#: lib/Food.php:134
 msgid "ПИТАНИЕ"
 msgstr "ПИТАНИЕ"
 
@@ -165,31 +168,31 @@ msgstr "Размер"
 msgid "Удалить"
 msgstr "Удалить"
 
-#: lib/Food.php:413
+#: lib/Food.php:423
 msgid "Удачно загруженных файлов:"
 msgstr "Удачно загруженных файлов:"
 
-#: lib/Food.php:388
+#: lib/Food.php:400
 msgid "Файл загружен"
 msgstr "Файл загружен"
 
-#: lib/Food.php:558
+#: lib/Food.php:575
 msgid "Файл не был удален."
 msgstr "Файл не был удален."
 
-#: lib/Food.php:525 lib/Food.php:568
+#: lib/Food.php:541 lib/Food.php:585
 msgid "Файл не существует."
 msgstr "Файл не существует."
 
-#: lib/Food.php:493
+#: lib/Food.php:506
 msgid "Файл переименован."
 msgstr "Файл переименован."
 
-#: lib/Food.php:438 lib/Food.php:474 lib/Food.php:514
+#: lib/Food.php:451 lib/Food.php:487 lib/Food.php:529
 msgid "Файл существует."
 msgstr "Файл существует."
 
-#: lib/Food.php:549
+#: lib/Food.php:566
 msgid "Файл удалён."
 msgstr "Файл удалён."
 
