@@ -1,4 +1,4 @@
-# Food Uploader Plugin
+# Food File Uploader
 
 ![Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
 ![License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
