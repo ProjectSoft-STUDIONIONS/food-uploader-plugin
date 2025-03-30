@@ -32,6 +32,15 @@ class Food {
 	// Список файлов из директории
 	private $files = array();
 
+	// Для сбора данных
+	private $all = array(
+		'success' => array(),
+		'error' => array()
+	);
+
+	// Для сообщений
+	private $msg = '';
+
 	public function __construct() {
 		// Загрузка перевода
 		load_textdomain( $this::FOOD_NAME, $this::FOOD_PATH . '/languages/' . $this::FOOD_NAME . '-' . $this::FOOD_LOCALE . '.mo');
@@ -289,15 +298,16 @@ class Food {
 	// Поиск файлов в директории
 	private function getFiles() {
 		$files = array();
-		global $all;
+		$this->all = array(
+			'success' => array(),
+			'error' => array()
+		);
 		if($this->dir):
 			// Поиск файлов в директории
 			$files_path = join("/", array(
 				$this->realPath($this::FOOD_ABSPATH),
 				$this->dir
 			));
-			global $all;
-			$all = array();
 			$iterators = new \DirectoryIterator($files_path);
 			foreach ($iterators as $fileinfo):
 				// Если это файл
@@ -323,7 +333,7 @@ class Food {
 								$file_absolute =  join("/", array($files_path, $name));
 								@unlink($file_absolute);
 								// Добавляем информацию об удалении файла
-								$all[] = $name;
+								$this->all['success'][] = $name;
 							else:
 								// Добавляем файл в отображение
 								$files[] = $name;
@@ -338,13 +348,12 @@ class Food {
 			natsort($files);
 			$files = array_reverse($files, false);
 			// Если информация есть
-			if(count($all)):
+			if(count($this->all['success'])):
 				// Отправляем событие с информацией
 				add_action( 'all_admin_notices', function () {
-					global $all;
-					$msg = "<b>" . __("Автоудаление файлов:", "food-uploader-plugin") . "</b> " . count($all) . "<br>";
-					$msg .= "<code>" . implode("<br>", $all) . "</code>";
-					wp_admin_notice( $msg, array(
+					$this->msg = "<b>" . __("Автоудаление файлов:", "food-uploader-plugin") . "</b> " . count($this->all['success']) . "<br>";
+					$this->msg .= "<code>" . implode("<br>", $this->all['success']) . "</code>";
+					wp_admin_notice( $this->msg, array(
 						'type' => 'success',
 						'dismissible' => true,
 					));
@@ -356,12 +365,13 @@ class Food {
 
 	// Загрузка файлов
 	private function upload() {
+		$this->msg = '';
 		if($this->dir && in_array($this->dir, $this->folders)):
 			if(isset($_FILES['userfiles'])):
-				global $all;
-				$all = array();
-				$all["success"] = array();
-				$all["error"] = array();
+				$this->all = array(
+					'success' => array(),
+					'error' => array()
+				);
 				$files = $_FILES['userfiles'];
 				foreach($files['name'] as $i => $name):
 					if (empty($files['tmp_name'][$i])) continue;
@@ -372,7 +382,7 @@ class Food {
 					// Проверяем тип файла
 					if (!in_array($files['type'][$i], $this::FOOD_TYPES)):
 						// Собираем ошибки
-						$all["error"][] = '<b>' . __("Ошибка: формат фвйла не поддерживается", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
+						$this->all["error"][] = '<b>' . __("Ошибка: формат фвйла не поддерживается", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
 					else:
 						// Продолжаем
 						$uploaddir = $this::FOOD_ABSPATH . "/" . $this->dir;
@@ -387,38 +397,39 @@ class Food {
 									@chmod($uploaddir . "/" . $name, 0644);
 								endif;
 								// Собираем удачную загрузку
-								$all["success"][] = '<b>' . __("Файл загружен", "food-uploader-plugin") . ':</b> <code>' . $name . '</code>';
+								$this->all["success"][] = '<b>' . __("Файл загружен", "food-uploader-plugin") . ':</b> <code>' . $name . '</code>';
 							else:
 								// Не удалось переместить файл
-								$all["error"][] = '<b>' . __("Не удалось переместить файл", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
+								$this->all["error"][] = '<b>' . __("Не удалось переместить файл", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
 							endif;
 						else:
 							// Не удалось загрузить файл
-							$all["error"][] = '<b>' . __("Не удалось загрузить файл", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
+							$this->all["error"][] = '<b>' . __("Не удалось загрузить файл", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
 						endif;
 					endif;
 				endforeach;
-				if(@count($all["error"])):
+				if(count($this->all["error"]) > 0):
+					$this->msg = "<b>" . __("Неудачно загруженных файлов:", "food-uploader-plugin") . "</b> " . count($this->all["error"]) . "<br>";
+					$this->msg .= implode("<br>", $this->all["error"]);
 					add_action( 'all_admin_notices', function () {
-						global $all;
-						$msg = "<b>" . __("Неудачно загруженных файлов:", "food-uploader-plugin") . "</b> " . @count($all["error"]) . "<br>";
-						$msg .= @implode("<br>", $all["error"]);
-						wp_admin_notice( $msg, array(
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
 					});
+					return;
 				endif;
-				if(@count($all["success"])):
+				if(count($this->all["success"]) > 0):
+					$this->msg = "<b>" . __("Удачно загруженных файлов:", "food-uploader-plugin") . "</b> " . count($this->all["success"]) . "<br>";
+					$this->msg .= implode("<br>", $this->all["success"]);
 					add_action( 'all_admin_notices', function () {
-						global $all;
-						$msg = "<b>" . __("Удачно загруженных файлов:", "food-uploader-plugin") . "</b> " . @count($all["success"]) . "<br>";
-						$msg .= @implode("<br>", $all["success"]);
-						wp_admin_notice( $msg, array(
+						//implode("<br>", $this->all["success"]);
+						wp_admin_notice( $this->msg, array(
 							'type' => 'success',
 							'dismissible' => true,
 						));
 					});
+					return;
 				endif;
 			endif;
 		endif;
@@ -432,13 +443,13 @@ class Food {
 				$file = esc_sql($_REQUEST['file']);
 				$new_file = esc_sql($_REQUEST['new_file']);
 				$startpath = $this::FOOD_ABSPATH . "/" . $this->dir;
-				$msg = '';
+				$this->msg = '';
 				// Если имена одинаковые - ничего не делаем. Выходим
 				if($file == $new_file):
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-						wp_admin_notice( $msg, array(
+						$this->msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
@@ -453,8 +464,8 @@ class Food {
 					// Запрет на переименование файла
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("Запрет на переименование файла", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-						wp_admin_notice( $msg, array(
+						$this->msg = "<b>" . __("Запрет на переименование файла", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
@@ -473,8 +484,8 @@ class Food {
 				if($file == $new_file):
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-						wp_admin_notice( $msg, array(
+						$this->msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
@@ -492,44 +503,48 @@ class Food {
 							// Удачно
 							add_action( 'all_admin_notices', function () {
 								global $file, $new_file;
-								$msg = "<b>" . __("Файл переименован.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
-								wp_admin_notice( $msg, array(
+								$this->msg = "<b>" . __("Файл переименован.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
+								wp_admin_notice( $this->msg, array(
 									'type' => 'success',
 									'dismissible' => true,
 								));
 							});
+							return;
 						else:
 							// Не удачно
 							add_action( 'all_admin_notices', function () {
 								global $file, $new_file;
-								$msg = "<b>" . __("Не удалось переименовать файл.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
-								wp_admin_notice( $msg, array(
+								$this->msg = "<b>" . __("Не удалось переименовать файл.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
+								wp_admin_notice( $this->msg, array(
 									'type' => 'error',
 									'dismissible' => true,
 								));
 							});
+							return;
 						endif;
 					else:
 						// Уже есть данный файл
 						add_action( 'all_admin_notices', function () {
 							global $file, $new_file;
-							$msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
-							wp_admin_notice( $msg, array(
+							$this->msg = "<b>" . __("Файл существует.", "food-uploader-plugin") . "</b><br><code>" . "$file => $new_file" . "</code>";
+							wp_admin_notice( $this->msg, array(
 								'type' => 'error',
 								'dismissible' => true,
 							));
 						});
+						return;
 					endif;
 				else:
 					// Не существует
 					add_action( 'all_admin_notices', function () {
 						global $file, $new_file;
-						$msg = "<b>" . __("Файл не существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-						wp_admin_notice( $msg, array(
+						$this->msg = "<b>" . __("Файл не существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));
 					});
+					return;
 				endif;
 			endif;
 		endif;
@@ -548,8 +563,8 @@ class Food {
 					if(@unlink($old_file)):
 						add_action( 'all_admin_notices', function () {
 							global $file;
-							$msg = "<b>" . __("Файл удалён.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-							wp_admin_notice( $msg, array(
+							$this->msg = "<b>" . __("Файл удалён.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+							wp_admin_notice( $this->msg, array(
 								'type' => 'success',
 								'dismissible' => true,
 							));
@@ -557,8 +572,8 @@ class Food {
 					else:
 						add_action( 'all_admin_notices', function () {
 							global $file;
-							$msg = "<b>" . __("Файл не был удален.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-							wp_admin_notice( $msg, array(
+							$this->msg = "<b>" . __("Файл не был удален.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+							wp_admin_notice( $this->msg, array(
 								'type' => 'error',
 								'dismissible' => true,
 							));
@@ -567,8 +582,8 @@ class Food {
 				else:
 					add_action( 'all_admin_notices', function () {
 						global $file;
-						$msg = "<b>" . __("Файл не существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
-						wp_admin_notice( $msg, array(
+						$this->msg = "<b>" . __("Файл не существует.", "food-uploader-plugin") . "</b><br><code>" . $file . "</code>";
+						wp_admin_notice( $this->msg, array(
 							'type' => 'error',
 							'dismissible' => true,
 						));

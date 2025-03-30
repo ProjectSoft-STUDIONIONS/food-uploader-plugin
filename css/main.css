@@ -3378,6 +3378,14 @@ button#wpbody .close {
   border-bottom-right-radius: 3px;
 }
 
+#wpbody .glyphicon-chevron-before::before {
+  content: "\e079\e079";
+}
+
+#wpbody .glyphicon-chevron-after::before {
+  content: "\e080\e080";
+}
+
 #wpbody *,
 #wpbody *::before,
 #wpbody *::after {
@@ -4047,6 +4055,15 @@ fieldset[disabled] #wpbody .btn-danger.active {
 #wpbody input[type=search]::-webkit-search-cancel-button,
 #wpbody input[type=search]::-webkit-search-decoration {
   appearance: searchfield;
+}
+
+#wpbody .pagination > .disabled > a,
+#wpbody .pagination > .disabled > span,
+#wpbody .pagination > .disabled > a:focus,
+#wpbody .pagination > .disabled > span:focus,
+#wpbody .pagination > .disabled > a:hover,
+#wpbody .pagination > .disabled > span:hover {
+  color: #ddd;
 }
 
 .fancybox-container {

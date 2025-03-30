@@ -1,5 +1,6 @@
 <?php if (!defined('ABSPATH')) die(); ?>
 <h1><i class="dashicons dashicons-admin-generic"></i>&nbsp;<?= esc_html(get_admin_page_title());?></h1>
+<hr class="wp-header-end">
 <div class="wrap">
 <?php
 $url = (isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] )) ? 

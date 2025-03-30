@@ -5,7 +5,7 @@
 ![Size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
 ![Uploads](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
 
-WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
+WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 
 Для установки плагина на сайт скачивать только из реализов - [food-uploader-plugin.zip](../../releases/latest/download/food-uploader-plugin.zip).
 
@@ -21,7 +21,7 @@ WordPress Плагин для загрузки файлов xlsx в папку /
 
 [comment]: <> ( Plugin Name:        Food File Uploader )
 [comment]: <> ( Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
-[comment]: <> ( Description:        WordPress Плагин для загрузки файлов xlsx в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России. )
+[comment]: <> ( Description:        WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России. )
 [comment]: <> ( Version:            2.1.0 )
 [comment]: <> ( Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru> )
 [comment]: <> ( Author URI:         https://github.com/ProjectSoft-STUDIONIONS )

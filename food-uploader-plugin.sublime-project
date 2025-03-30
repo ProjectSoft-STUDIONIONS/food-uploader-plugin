@@ -11,7 +11,7 @@
 			"file_exclude_patterns": [
 				//"*.php",
 				"*.zip",
-				"*.md",
+				//"*.md",
 				//"LICENSE"
 			]
 		}

@@ -14,6 +14,20 @@
 	@import "../../bower_components/bootstrap/less/utilities.less";
 	@import "../../bower_components/bootstrap/less/pagination.less";
 
+
+	.glyphicon-chevron {
+		&-before {
+			&::before {
+				content: "\e079\e079";
+			}
+		}
+		&-after {
+			&::before {
+				content: "\e080\e080";
+			}
+		}
+	}
+
 	*, *::before, *::after {
 		box-sizing: border-box;
 	}
@@ -453,6 +467,18 @@
 	input[type=search]::-webkit-search-cancel-button,
 	input[type=search]::-webkit-search-decoration {
 		appearance: searchfield;
+	}
+	.pagination {
+		> .disabled {
+			> a,
+			> span {
+				&,
+				&:focus,
+				&:hover {
+					color: #ddd;
+				}
+			}
+		}
 	}
 }
 .fancybox-container {
