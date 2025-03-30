@@ -25,7 +25,7 @@ src/temp
 *.ini
 *.inf
 *.ico
-*.zip
+# *.zip
 *.db
 
 !.gitignore
