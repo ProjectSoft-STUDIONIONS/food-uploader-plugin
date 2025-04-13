@@ -1,5 +1,5 @@
 				</div><!--#config timefmt="%Y" -->
-				<p style="width:100%;font-size:1em;text-align:center;">
+				<p class="developer">
 					<a href="https://github.com/ProjectSoft-STUDIONIONS/food" target="_blank">https://github.com/ProjectSoft-STUDIONIONS/food</a><br>&copy; 2016 - <!--#echo var="DATE_LOCAL"--><br>Разработчик: <a href="https://vk.com/projectsoft" target="_blank">ProjectSoft</a><br><span id="time"><!--#config timefmt="%Y-%m-%dT%H:%M:%S" --><!--#echo var="DATE_LOCAL"--></span>
 				</p>
 			</div>

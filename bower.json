@@ -22,7 +22,7 @@
     "datatables.net-buttons-bs": "3.2.2",
     "pdfmake": "^0.2.18",
     "jszip": "^3.10.1",
-    "datatables.net-select-bs": "^3.0.0"
-  },
-  "devDependencies": {}
+    "datatables.net-select-bs": "^3.0.0",
+    "food": "https://github.com/ProjectSoft-STUDIONIONS/food.git#^1.1.0"
+  }
 }

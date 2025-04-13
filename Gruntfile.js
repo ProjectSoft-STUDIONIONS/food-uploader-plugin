@@ -340,6 +340,22 @@ module.exports = function(grunt) {
 				],
 				dest: 'fonts/',
 			},
+			icons_full: {
+				expand: true,
+				cwd: 'bower_components/food/icons-full',
+				src: [
+					'**'
+				],
+				dest: 'lib/icons-full',
+			},
+			viewer: {
+				expand: true,
+				cwd: 'bower_components/food/viewer',
+				src: [
+					'**'
+				],
+				dest: 'lib/viewer',
+			},
 		},
 		po2mo: {
 			main: {

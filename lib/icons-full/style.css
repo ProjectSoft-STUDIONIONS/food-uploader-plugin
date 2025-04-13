@@ -369,3 +369,15 @@ hr {
 .text-center {
   text-align: center;
 }
+
+.developer {
+  width: 100%;
+  font-size: 0.7em;
+  text-align: center;
+  padding: 1em;
+  margin: unset;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 0 2px 0px #000;
+}
