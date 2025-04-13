@@ -16,9 +16,9 @@ module.exports = function(grunt) {
 			"replace",
 			"cssmin",
 			"copy",
-			"compress",
 			"po2mo",
-			"lineending"
+			"lineending",
+			"compress"
 		]
 	};
 

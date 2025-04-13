@@ -1,28 +1,28 @@
 {
-  "name": "food-uploader-plugin",
-  "description": "WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам.",
-  "main": "Gruntfile.js",
-  "authors": [
-    "Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "3.4.1",
-    "jquery": "^3.6.0",
-    "js-cookie": "^2.2.1",
-    "datatables.net-bs": "^2.2.2",
-    "datatables.net-buttons-bs": "3.2.2",
-    "pdfmake": "^0.2.18",
-    "jszip": "^3.10.1",
-    "datatables.net-select-bs": "^3.0.0",
-    "food": "https://github.com/ProjectSoft-STUDIONIONS/food.git#^1.1.0"
-  }
+	"name": "food-uploader-plugin",
+	"description": "WordPress Плагин для загрузки файлов (XLSX) в папку /food/, доступен только администраторам.",
+	"main": "Gruntfile.js",
+	"authors": [
+		"Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru>"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"bootstrap": "3.4.1",
+		"jquery": "^3.6.0",
+		"js-cookie": "^2.2.1",
+		"datatables.net-bs": "^2.2.2",
+		"datatables.net-buttons-bs": "3.2.2",
+		"pdfmake": "^0.2.18",
+		"jszip": "^3.10.1",
+		"datatables.net-select-bs": "^3.0.0",
+		"food": "https://github.com/ProjectSoft-STUDIONIONS/food.git#^1.1.0"
+	}
 }
