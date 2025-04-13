@@ -7,6 +7,7 @@ module.exports = function(grunt) {
 		fontvers: `${PACK.version}`,
 		default: [
 			"clean:all",
+			"replace_htaccess",
 			"concat",
 			"uglify:app",
 			"uglify:main",
@@ -56,6 +57,7 @@ module.exports = function(grunt) {
 
 	NpmImportPlugin = require("less-plugin-npm-import");
 	require('./src/modules/po2mo.js')(grunt);
+	require('./src/modules/replace_htaccess.js')(grunt);
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
 	grunt.initConfig({
@@ -184,6 +186,13 @@ module.exports = function(grunt) {
 					'css/main.css': ['css/main.css'],
 				}
 			},
+		},
+		replace_htaccess: {
+			food: {
+				files: {
+					'lib/tmpl/htaccess.php': 'bower_components/food/food/.htaccess'
+				}
+			}
 		},
 		replace: {
 			css: {

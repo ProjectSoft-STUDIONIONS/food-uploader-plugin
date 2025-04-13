@@ -15,6 +15,9 @@ tests
 temp
 src/temp
 
+lib/icons-full
+lib/viewer
+
 # SublimeText workspace file
 *.sublime-workspace
 

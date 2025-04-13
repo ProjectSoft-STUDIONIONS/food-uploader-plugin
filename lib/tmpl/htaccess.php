@@ -1,7 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 $htaccess = 'AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -18,9 +15,6 @@ Options +Indexes +ExecCGI +Includes
 	# Сброс IndexIgnore
 	IndexIgnoreReset ON
 
-	# Запрещаем индексировать определённые файлы
-	IndexIgnore .htaccess *.shtml *.php *.cgi *.html *.js *.css *.ico
-
 	# Устанавливаем описания
 	# AddDescription "Microsoft Office Excel" .xls .xlsx
 
@@ -34,8 +28,7 @@ Options +Indexes +ExecCGI +Includes
 	AddAlt "DIRECTORY" ^^DIRECTORY^^
 	
 	AddIcon /icons-full/folder.png ..
-	AddAlt "На верхний уровень" ..
-	AddDescription "На верхний уровень" ..
+	AddAlt "Родительская дирректория" ..
 	
 	AddIcon /icons-full/aac.png .aac
 	AddIcon /icons-full/ai.png .ai
@@ -70,14 +63,6 @@ Options +Indexes +ExecCGI +Includes
 
 	AddOutputFilter INCLUDES .shtml
 
-	# Назначаем свои параметры установки файлов для шапки и подвала.
-	HeaderName /icons-full/dirlist_header.shtml
-	ReadmeName /icons-full/dirlist_footer.shtml
-	
-	# Подключаем Стили к шапке
-	# Возможность. Но в нашем случае не нужно.
-	# IndexStyleSheet /icons-full/normalize.css
-	
 	# Установить опции индексирования.
 	IndexOptions IgnoreCase
 	IndexOptions FancyIndexing
@@ -91,8 +76,18 @@ Options +Indexes +ExecCGI +Includes
 	IndexOptions SuppressLastModified
 	IndexOptions IconHeight=32
 	IndexOptions IconWidth=32
-		
+	
 	# Установить опции Сортировки по-умолчанию.
 	IndexOrderDefault Descending Name
-</IfModule>
-';
+
+	# Назначаем свои параметры установки файлов для шапки и подвала.
+	HeaderName /icons-full/dirlist_header.shtml
+	ReadmeName /icons-full/dirlist_footer.shtml
+	
+	# Подключаем Стили к шапке
+	# Возможность. Но в нашем случае не нужно.
+	# IndexStyleSheet /icons-full/normalize.css
+	
+	# Запрещаем индексировать определённые файлы
+	IndexIgnore .htaccess *.shtml *.php *.cgi *.html *.js *.css *.ico
+</IfModule>';
