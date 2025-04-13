@@ -14,8 +14,7 @@ module.exports = function(grunt) {
 			grunt.verbose.writeln('Src : ' + src);
 			grunt.verbose.writeln('Dest: ' + dest);
 			let fileDump = fs.readFileSync(src).toString();
-			let htaccess = `<?php
-$htaccess = '${fileDump}';`
+			let htaccess = `<?php\n\n$htaccess = '${fileDump}\n';\n`
 			fs.writeFileSync(dest, htaccess, {
 				encoding: 'utf8'
 			});

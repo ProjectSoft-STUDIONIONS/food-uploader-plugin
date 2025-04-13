@@ -1,4 +1,5 @@
 <?php
+
 $htaccess = 'AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -90,4 +91,5 @@ Options +Indexes +ExecCGI +Includes
 	
 	# Запрещаем индексировать определённые файлы
 	IndexIgnore .htaccess *.shtml *.php *.cgi *.html *.js *.css *.ico
-</IfModule>';
+</IfModule>
+';
