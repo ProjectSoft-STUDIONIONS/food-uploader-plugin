@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Food File Uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-05 17:06+0400\n"
-"PO-Revision-Date: 2025-09-05 17:06+0400\n"
+"POT-Creation-Date: 2025-09-05 16:55+0400\n"
+"PO-Revision-Date: 2025-09-05 15:11+0400\n"
 "Last-Translator: ProjectSoft <projectsoft2009@yandex.ru>\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -17,8 +17,8 @@ msgstr ""
 "X-Loco-Version: 2.7.1; wp-6.7.2\n"
 "X-Domain: food-uploader-plugin\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: food-uploader-plugin.php\n"
 "X-Poedit-SearchPath-1: lib/Food.php\n"
 "X-Poedit-SearchPath-2: lib/tmpl/page.php\n"
@@ -26,132 +26,132 @@ msgstr ""
 #: lib/Food.php:122 lib/Food.php:123 lib/Food.php:133 lib/Food.php:176
 #: lib/tmpl/page.php:51
 msgid "Меню ежедневного питания"
-msgstr "Меню ежедневного питания"
+msgstr ""
 
 #: lib/Food.php:133 lib/Food.php:146 lib/Food.php:154
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: lib/Food.php:134
 msgid "ПИТАНИЕ"
-msgstr "ПИТАНИЕ"
+msgstr ""
 
 #: lib/Food.php:155
 msgid "Открыть плагин"
-msgstr "Открыть плагин"
+msgstr ""
 
 #: lib/Food.php:277
 msgid "Настройки сохранены"
-msgstr "Настройки сохранены"
+msgstr ""
 
 #: lib/Food.php:354
 msgid "Автоудаление файлов:"
-msgstr "Автоудаление файлов:"
+msgstr ""
 
 #: lib/Food.php:385
 msgid "Ошибка: формат файла не поддерживается"
-msgstr "Ошибка: формат файла не поддерживается"
+msgstr ""
 
 #: lib/Food.php:400
 msgid "Файл загружен"
-msgstr "Файл загружен"
+msgstr ""
 
 #: lib/Food.php:403
 msgid "Не удалось переместить файл"
-msgstr "Не удалось переместить файл"
+msgstr ""
 
 #: lib/Food.php:407
 msgid "Не удалось загрузить файл"
-msgstr "Не удалось загрузить файл"
+msgstr ""
 
 #: lib/Food.php:412
 msgid "Неудачно загруженных файлов:"
-msgstr "Неудачно загруженных файлов:"
+msgstr ""
 
 #: lib/Food.php:423
 msgid "Удачно загруженных файлов:"
-msgstr "Удачно загруженных файлов:"
+msgstr ""
 
 #: lib/Food.php:451 lib/Food.php:487 lib/Food.php:529
 msgid "Файл существует."
-msgstr "Файл существует."
+msgstr ""
 
 #: lib/Food.php:467
 msgid "Запрет на переименование файла"
-msgstr "Запрет на переименование файла"
+msgstr ""
 
 #: lib/Food.php:506
 msgid "Файл переименован."
-msgstr "Файл переименован."
+msgstr ""
 
 #: lib/Food.php:517
 msgid "Не удалось переименовать файл."
-msgstr "Не удалось переименовать файл."
+msgstr ""
 
 #: lib/Food.php:541 lib/Food.php:585
 msgid "Файл не существует."
-msgstr "Файл не существует."
+msgstr ""
 
 #: lib/Food.php:566
 msgid "Файл удалён."
-msgstr "Файл удалён."
+msgstr ""
 
 #: lib/Food.php:575
 msgid "Файл не был удален."
-msgstr "Файл не был удален."
+msgstr ""
 
 #: lib/tmpl/page.php:65
 msgid "Выбрать файлы"
-msgstr "Выбрать файлы"
+msgstr ""
 
 #: lib/tmpl/page.php:68
 msgid "Загрузить"
-msgstr "Загрузить"
+msgstr ""
 
 #: lib/tmpl/page.php:79
 msgid "На верхний уровень"
-msgstr "На верхний уровень"
+msgstr ""
 
 #: lib/tmpl/page.php:86
 msgid "Корневая директория"
-msgstr "Корневая директория"
+msgstr ""
 
 #: lib/tmpl/page.php:99
 msgid "Имя"
-msgstr "Имя"
+msgstr ""
 
 #: lib/tmpl/page.php:100
 msgid "Права"
-msgstr "Права"
+msgstr ""
 
 #: lib/tmpl/page.php:101
 msgid "Изменён"
-msgstr "Изменён"
+msgstr ""
 
 #: lib/tmpl/page.php:102
 msgid "Размер"
-msgstr "Размер"
+msgstr ""
 
 #: lib/tmpl/page.php:103
 msgid "Действия"
-msgstr "Действия"
+msgstr ""
 
 #: lib/tmpl/page.php:107
 msgid "Директории"
-msgstr "Директории"
+msgstr ""
 
 #: lib/tmpl/page.php:136
 msgid "Переименовать"
-msgstr "Переименовать"
+msgstr ""
 
 #: lib/tmpl/page.php:136
 msgid "Удалить"
-msgstr "Удалить"
+msgstr ""
 
 #: lib/tmpl/page.php:145
 msgid "Нет файлов для отображения"
-msgstr "Нет файлов для отображения"
+msgstr ""
 
 #: lib/tmpl/page.php:170
 msgid "Если возникнут проблемы или вопросы, то задайте вопрос в Telegram"
-msgstr "Если возникнут проблемы или вопросы, то задайте вопрос в Telegram"
+msgstr ""

@@ -141,13 +141,13 @@ $versions = array(
 							endforeach;
 						else:
 ?>
-					<tr>
+					<!--tr>
 						<td><?= __('Нет файлов для отображения', "food-uploader-plugin");?></td>
 						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
-					</tr>
+					</tr-->
 <?php
 						endif;
 					else:
@@ -167,7 +167,7 @@ $versions = array(
 	</div>
 	<hr>
 	<div class="wp-footer">
-		<p><?= __("Если возникнут проблемы или вопросы, то создайте новую проблему (issue), опишите свою проблему или задайте вопрос", "food-uploader-plugin"); ?><br><a class="btn btn-primary" href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/issues/new" target="_blank">New Issue</a></p>
+		<p><?= __("Если возникнут проблемы или вопросы, то задайте вопрос в Telegram", "food-uploader-plugin"); ?> <a href="https://t.me/ProjectSoft" target="_blank">ProjectSoft</a></p>
 	</div>
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>

@@ -123,7 +123,6 @@
 			return !1;
 		}).on('click', '.food-rename, .food-delete', function(e) {
 			e.preventDefault();
-			console.log(e);
 			let element = e.target;
 			// Переименование
 			let form = document.querySelector('form[name=form_mode]'),
@@ -143,7 +142,6 @@
 				if(nwfile == segments.join('.')){
 					return !1;
 				}
-				console.log(nwfile, segments.join('.'));
 				old_file.value = file;
 				new_file.value = nwfile + `.${fileExtension}`;
 				mode.value = "rename";
@@ -344,27 +342,27 @@
 								// Колонтитулы
 								// Верхний
 								doc.header = {
-	   								columns: [
-	   									{
-	   										text: `${url}`,
-	   										margin: [15, 15, 15, 15],
-	   										alignment: 'left'
-	    								},
-	    								{
-	    									text: getDateTime((new Date()).getTime()),
-	    									margin: [15, 15, 15, 15],
-	   										alignment: 'right'
-	   									}
+									columns: [
+										{
+											text: `${url}`,
+											margin: [15, 15, 15, 15],
+											alignment: 'left'
+										},
+										{
+											text: getDateTime((new Date()).getTime()),
+											margin: [15, 15, 15, 15],
+											alignment: 'right'
+										}
 									]
 								};
 								// Нижний
 								doc.footer = function(currentPage, pageCount) {
 									return [
 										{
-	    									text: currentPage.toString() + ' из ' + pageCount,
-	    									margin: [15, 15, 15, 15],
-	    									alignment: 'center'
-	   									}
+											text: currentPage.toString() + ' из ' + pageCount,
+											margin: [15, 15, 15, 15],
+											alignment: 'center'
+										}
 									];
 								};
 								// Текст контента.

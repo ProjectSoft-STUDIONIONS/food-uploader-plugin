@@ -382,7 +382,7 @@ class Food {
 					// Проверяем тип файла
 					if (!in_array($files['type'][$i], $this::FOOD_TYPES)):
 						// Собираем ошибки
-						$this->all["error"][] = '<b>' . __("Ошибка: формат фвйла не поддерживается", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
+						$this->all["error"][] = '<b>' . __("Ошибка: формат файла не поддерживается", "food-uploader-plugin") . ':</b> <code>' . $files['name'][$i] . '</code>';
 					else:
 						// Продолжаем
 						$uploaddir = $this::FOOD_ABSPATH . "/" . $this->dir;
