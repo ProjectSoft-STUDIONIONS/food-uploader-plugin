@@ -1,5 +1,4 @@
 @charset "UTF-8";
-#wpbody {
 	// Bootstrap styles
 	@import "../../bower_components/bootstrap/less/variables.less";
 	@import "../../bower_components/bootstrap/less/mixins.less";
@@ -13,7 +12,10 @@
 	@import "../../bower_components/bootstrap/less/close.less";
 	@import "../../bower_components/bootstrap/less/utilities.less";
 	@import "../../bower_components/bootstrap/less/pagination.less";
+	@import (inline) "../../bower_components/datatables.net-bs/css/dataTables.bootstrap.css";
+	@import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
 
+#wpbody {
 
 	.glyphicon-chevron {
 		&-before {
@@ -45,6 +47,7 @@
 	.btn-default,
 	.btn-primary,
 	.btn-success,
+	.btn-secondary,
 	.btn-info,
 	.btn-warning,
 	.btn-danger {
@@ -107,11 +110,13 @@
 		border-color: #ccc;
 	}
 
-	.btn-primary { .btn-styles(@btn-primary-bg); }
-	.btn-success { .btn-styles(@btn-success-bg); }
-	.btn-info    { .btn-styles(@btn-info-bg); }
-	.btn-warning { .btn-styles(@btn-warning-bg); }
-	.btn-danger  { .btn-styles(@btn-danger-bg); }
+	.btn-default   { .btn-styles(@btn-default-bg); }
+	.btn-primary   { .btn-styles(@btn-primary-bg); }
+	.btn-success   { .btn-styles(@btn-success-bg); }
+	.btn-info      { .btn-styles(@btn-info-bg);    }
+	.btn-warning   { .btn-styles(@btn-warning-bg); }
+	.btn-danger    { .btn-styles(@btn-danger-bg);  }
+	.btn-secondary { .btn-styles(@btn-default-bg); }
 
 	// Table
 	.table {
@@ -480,6 +485,164 @@
 			}
 		}
 	}
+	div.dt-container {
+		div.dt-layout-row {
+			flex: 1 0 auto;
+			margin-top: 1em !important;
+			margin-bottom: 1em !important;
+			margin-left: -15px;
+			margin-right: -15px;
+			min-width: 100%;
+			max-width: ~'calc(100% + 30px)';
+		}
+		.form-inline {
+			flex-direction: column;
+		}
+	}
+	div.dt-buttons span.dt-button-spacer {
+		&:empty {
+			display: none;
+		}
+	}
+	div.dt-container div.dt-search,
+	div.dt-container div.dt-length {
+		label {
+			align-items: center;
+			justify-content: flex-end;
+			padding-right: 0.3em;
+		}
+		input,
+		select {
+			flex: 1;
+			margin-left: unset;
+			margin-right: unset;
+		}
+	}
+	div.dt {
+		&-container {
+			div.dt {
+				&-layout {
+					&-row {
+						margin-top: 0em !important;
+						margin-bottom: 0em !important;
+						&:first-child {
+							display: flex !important;
+							width: 100% !important;
+							flex: 1 0 auto;
+						}
+						&.dt-layout-table {
+							margin-top: .9em !important;
+							margin-bottom: .9em !important;
+						}
+					}
+				}
+			}
+		}
+	}
+	.dt {
+		&-container {
+			margin-top: 1em;
+		}
+		&-layout {
+			&-row {
+				&:first-child {
+					align-items: self-end !important;
+					@media (max-width: 991px) {
+						gap: 0.6em;
+					}
+					.dt {
+						&-layout {
+							&-start,
+							&-end {
+								flex-direction: column !important;
+								justify-content: center;
+								display: flex !important;
+								flex-wrap: wrap !important;
+								gap: 0.6em !important;
+								> * {
+									margin: unset !important;
+									flex: 1;
+									width: 100%;
+								}
+								.dt-buttons {
+									justify-content: flex-start;
+									align-items: flex-start;
+									gap: .4em;
+								}
+								.dt-button {
+									margin: unset !important;
+									flex-grow: 0;
+									display: inline-flex;
+									flex-direction: row;
+									gap: 1em;
+								}
+								@media screen and (max-width: 767px) {
+									margin-bottom: unset;
+								}
+							}
+							&-end {
+								.btn-group.dt-buttons {
+									display: flex;
+									flex-direction: row;
+									flex-wrap: wrap;
+									justify-content: end !important;
+								}
+							}
+						}
+					}
+				}
+			}
+			&-start {
+				.dt {
+					&-length,
+					&-search {
+						display: flex;
+					}
+				}
+			}
+		}
+		&-paging {
+			&-button {
+				&, * {
+					font-weight: 700;
+				}
+			}
+			.page {
+				&-item {
+					.page {
+						&-link {
+							width: 3rem;
+							text-align: center;
+						}
+					}
+				}
+			}
+		}
+		&-buttons {
+			.btn {
+				&, &:last-child, &:not(:first-child) {
+					margin-left: 10px;
+				}
+			}
+		}
+		&-button {
+			&-collection {
+				padding: 1em;
+				[role="menu"] {
+					display: flex;
+					flex-direction: column;
+					gap: 1em;
+				}
+			}
+		}
+
+	}
+
+	div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
+		max-width: 100%;
+		overflow: auto;
+	}
+
 }
 .fancybox-container {
 	z-index: 999999;

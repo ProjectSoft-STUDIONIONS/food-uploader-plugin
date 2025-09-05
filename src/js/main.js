@@ -162,6 +162,15 @@
 		});
 	// Если есть dir, значит список файлов
 	if(searchAPI.dir) {
+		DataTable.Buttons.defaults.dom.button.liner.tag = '';
+		DataTable.Buttons.defaults.dom.container.className = DataTable.Buttons.defaults.dom.container.className + ' btn-group';
+		// Изменим PDF Классы
+		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + ' btn btn-secondary';
+		// Изменим Excel Классы
+		DataTable.ext.buttons.excelHtml5.className = DataTable.ext.buttons.excelHtml5.className + ' btn btn-secondary';
+		// Изменим layout Классы
+		DataTable.ext.classes.layout.start = 'dt-layout-start col-lg-6';
+		DataTable.ext.classes.layout.end = 'dt-layout-end col-lg-6';
 		const url = `${location.origin}/${searchAPI.dir}/`;
 		let table = new DataTable('.table', {
 			// Колонки
@@ -205,20 +214,66 @@
 				['по 10', 'по 25', 'по 50', 'по 100', 'Все']
 			],
 			layout: {
-				topStart: [
-					'pageLength',
-					'search'
-				],
+				topStart: {
+					buttons: [
+						{
+							extend: 'colvis',
+							className: 'button-colvis btn btn-primary',
+							text: `<i class="glyphicon glyphicon-tasks"></i>Видимость столбцов`,
+							attr: {
+								title: `Видимость столбцов`
+							},
+							columns: [1,2,3,4],
+							select: true,
+							//postfixButtons: ['colvisRestore']
+						},
+						{
+							extend: 'print',
+							className: 'button-print btn btn-success',
+							text: `<i class="glyphicon glyphicon-print"></i>Печать`,
+							attr: {
+								title: `Печать`
+							},
+							exportOptions: {
+								columns: [':visible']
+							},
+							header: true,
+							footer: true,
+							title: ``,
+							messageTop: false,
+							messageBottom: false,
+							autoPrint: true,
+						},
+					],
+					'pageLength': 'pageLength',
+					'search': 'search',
+				},
 				topEnd: {
 					buttons: [
+						// Выбор файлов к загрузке
+						{
+							text: '<i class="glyphicon glyphicon-floppy-save"></i>Выберите файлы для загрузки',
+							className: 'button-upload btn btn-success',
+							action: function (e, dt, node, config) {
+								let uploader, input;
+								if( uploader = document.querySelector('#uploader')){
+									if(input = uploader.querySelector('[type=file]')) {
+										input.click();
+									}
+								}
+							}
+						},
 						// Кнопка экспорта XLSX
 						{
 							extend: 'excel',
-							text: 'Экспорт в XLSX',
+							text: '<i class="glyphicon glyphicon-save-file"></i>Экспорт в XLSX',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в XLSX`,
 							title: `Директория ${url}`,
 							sheetName: `${searchAPI.dir}`,
+							exportOptions: {
+								columns: [':visible']
+							},
 							customize: function (xlsx) {
 								let date = new Date();
 								let dateISO = date.toISOString();
@@ -315,10 +370,13 @@
 						// Кнопка экспорта PDF
 						{
 							extend: 'pdf',
-							text: 'Экспорт в PDF',
+							text: '<i class="glyphicon glyphicon-save-file"></i>Экспорт в PDF',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в PDF`,
 							title: `Директория ${url}`,
+							exportOptions: {
+								columns: [':visible']
+							},
 							// Кастомизируем вывод
 							customize: function (doc) {
 								let date = new Date();

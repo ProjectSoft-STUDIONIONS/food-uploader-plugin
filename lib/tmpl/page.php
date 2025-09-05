@@ -61,8 +61,8 @@ $versions = array(
 		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mode" value="upload">
 			<div id="uploader" class="text-right">
-				<label class="btn btn-primary text-uppercase">
-					<i class="glyphicon glyphicon-floppy-save"></i>&nbsp;<?= __("Выбрать файлы", "food-uploader-plugin");?> <input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
+				<label class="btn btn-primary text-uppercase hidden">
+					<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
 				</label>
 				<p id="p_uploads" class="alert alert-info"></p>
 				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;<?= __("Загрузить", "food-uploader-plugin");?></button>
@@ -151,14 +151,17 @@ $versions = array(
 <?php
 						endif;
 					else:
-						foreach ($this->folders as $key => $value):
+						if(count($this->folders)):
+							foreach ($this->folders as $key => $value):
 ?>
 					<tr>
 						<td><a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $value;?>"><?= $value;?></a></td>
 						<th style="width: 1%;"><a href="/<?= $value;?>/" target="_blank" class="glyphicon glyphicon-new-window"></a></th>
 					</tr>
 <?php
-						endforeach;
+							endforeach;
+						else:
+						endif;
 					endif;
 ?>
 				</tbody>
@@ -167,7 +170,7 @@ $versions = array(
 	</div>
 	<hr>
 	<div class="wp-footer">
-		<p><?= __("Если возникнут проблемы или вопросы, то задайте вопрос в Telegram", "food-uploader-plugin"); ?> <a href="https://t.me/ProjectSoft" target="_blank">ProjectSoft</a></p>
+		<p><?= __("Если возникнут проблемы или вопросы, то обращайтесь в Telegram к", "food-uploader-plugin"); ?> <a href="https://t.me/ProjectSoft" target="_blank">ProjectSoft</a></p>
 	</div>
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>

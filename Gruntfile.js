@@ -30,8 +30,9 @@ module.exports = function(grunt) {
 			'bower_components/datatables.net/js/dataTables.js',
 			'bower_components/datatables.net-buttons/js/dataTables.buttons.js',
 			'bower_components/datatables.net-buttons/js/buttons.html5.js',
+			'bower_components/datatables.net-buttons/js/buttons.print.js',
+			'bower_components/datatables.net-buttons/js/buttons.colVis.js',
 			'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
-			'bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.js',
 		]
 	};
 
@@ -165,7 +166,6 @@ module.exports = function(grunt) {
 				},
 				files : {
 					'css/main.css' : [
-						'bower_components/datatables.net-bs/css/dataTables.bootstrap.css',
 						'src/less/main.less'
 					],
 				}
