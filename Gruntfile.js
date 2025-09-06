@@ -99,6 +99,12 @@ module.exports = function(grunt) {
 				],
 				dest: 'js/main.js'
 			},
+			print: {
+				src: [
+					'src/js/print.js'
+				],
+				dest: 'js/print.js'
+			},
 		},
 		uglify: {
 			app: {
@@ -142,6 +148,7 @@ module.exports = function(grunt) {
 						flatten : true,
 						src: [
 							'js/main.js',
+							'js/print.js',
 						],
 						dest: 'js',
 						filter: 'isFile',

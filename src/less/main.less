@@ -1,19 +1,71 @@
 @charset "UTF-8";
-	// Bootstrap styles
-	@import "../../bower_components/bootstrap/less/variables.less";
-	@import "../../bower_components/bootstrap/less/mixins.less";
-	@import "../../bower_components/bootstrap/less/normalize.less";
-	@import "../../bower_components/bootstrap/less/glyphicons.less";
-	@import "../../bower_components/bootstrap/less/type.less";
-	@import "../../bower_components/bootstrap/less/code.less";
-	@import "../../bower_components/bootstrap/less/tables.less";
-	@import "../../bower_components/bootstrap/less/buttons.less";
-	@import "../../bower_components/bootstrap/less/alerts.less";
-	@import "../../bower_components/bootstrap/less/close.less";
-	@import "../../bower_components/bootstrap/less/utilities.less";
-	@import "../../bower_components/bootstrap/less/pagination.less";
-	@import (inline) "../../bower_components/datatables.net-bs/css/dataTables.bootstrap.css";
-	@import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
+// Bootstrap styles
+//@import "../../bower_components/bootstrap/less/variables.less";
+//@import "../../bower_components/bootstrap/less/mixins.less";
+//@import "../../bower_components/bootstrap/less/normalize.less";
+//@import "../../bower_components/bootstrap/less/glyphicons.less";
+//@import "../../bower_components/bootstrap/less/type.less";
+//@import "../../bower_components/bootstrap/less/code.less";
+//@import "../../bower_components/bootstrap/less/tables.less";
+//@import "../../bower_components/bootstrap/less/buttons.less";
+//@import "../../bower_components/bootstrap/less/alerts.less";
+//@import "../../bower_components/bootstrap/less/close.less";
+//@import "../../bower_components/bootstrap/less/utilities.less";
+//@import "../../bower_components/bootstrap/less/pagination.less";
+.col-lg-1,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-sm-1,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
+	width: 100%;
+}
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+@import "../../bower_components/bootstrap/less/theme.less";
+@import (inline) "../../bower_components/datatables.net-bs/css/dataTables.bootstrap.css";
+@import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
 
 #wpbody {
 
@@ -422,8 +474,8 @@
 		}
 	}
 	.food-row {
-		margin-left: -15px;
-		margin-right: -15px;
+		//margin-left: -15px;
+		//margin-right: -15px;
 		&.row-disabled {
 			margin-left: auto;
 			margin-right: auto;
@@ -485,6 +537,8 @@
 			}
 		}
 	}
+
+
 	div.dt-container {
 		div.dt-layout-row {
 			flex: 1 0 auto;
@@ -516,8 +570,11 @@
 			flex: 1;
 			margin-left: unset;
 			margin-right: unset;
+			max-width: 100%;
+			width: 100%;
 		}
 	}
+
 	div.dt {
 		&-container {
 			div.dt {
@@ -527,7 +584,7 @@
 						margin-bottom: 0em !important;
 						&:first-child {
 							display: flex !important;
-							width: 100% !important;
+							//width: 100% !important;
 							flex: 1 0 auto;
 						}
 						&.dt-layout-table {
@@ -545,6 +602,14 @@
 		}
 		&-layout {
 			&-row {
+				flex-wrap: wrap;
+				.btn {
+					&-group {
+						display: flex;
+						flex: 1 0 auto;
+						gap: .4em;
+					}
+				}
 				&:first-child {
 					align-items: self-end !important;
 					@media (max-width: 991px) {
@@ -567,14 +632,20 @@
 								.dt-buttons {
 									justify-content: flex-start;
 									align-items: flex-start;
-									gap: .4em;
+									gap: .6em;
 								}
 								.dt-button {
 									margin: unset !important;
-									flex-grow: 0;
-									display: inline-flex;
-									flex-direction: row;
-									gap: 1em;
+									overflow: hidden;
+									white-space: nowrap;
+									display: block;
+									text-overflow: ellipsis;
+									.dt-button-down-arrow {
+										margin-left: .5em;
+									}
+									.glyphicon {
+										margin-right: .5em;
+									}
 								}
 								@media screen and (max-width: 767px) {
 									margin-bottom: unset;
@@ -611,7 +682,7 @@
 				&-item {
 					.page {
 						&-link {
-							width: 3rem;
+							min-width: 3em;
 							text-align: center;
 						}
 					}
@@ -641,6 +712,21 @@
 	div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
 		max-width: 100%;
 		overflow: auto;
+	}
+	div.dt-button-collection .dt-button {
+		position: relative;
+	}
+	@media (max-width: 1199px) {
+		div.dt-container > div.dt-layout-row {
+			flex-wrap: wrap;
+			gap: .6em;
+		}
+	}
+	@media(max-width: 1128px) {
+		div.dt-container > div.dt-layout-row {
+			flex-wrap: wrap;
+			gap: .6em;
+		}
 	}
 
 }

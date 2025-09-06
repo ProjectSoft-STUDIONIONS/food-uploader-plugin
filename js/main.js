@@ -1,5 +1,5 @@
 !(function($){
-	$.noConflict();
+	//$.noConflict();
 
 	const getDateTime = function(timestamp = 0) {
 		let time = new Date(timestamp),
@@ -35,11 +35,11 @@
 	componentName = `Плагин питания для WordPress CMS`,
 	userName = `ProjectSoft`;
 
-	if('object' == typeof $.fancybox) {
-		$.fancybox.defaults.transitionEffect = "circular";
-		$.fancybox.defaults.transitionDuration = 500;
-		$.fancybox.defaults.lang = "ru";
-		$.fancybox.defaults.i18n.ru = {
+	if('object' == typeof jQuery.fancybox) {
+		jQuery.fancybox.defaults.transitionEffect = "circular";
+		jQuery.fancybox.defaults.transitionDuration = 500;
+		jQuery.fancybox.defaults.lang = "ru";
+		jQuery.fancybox.defaults.i18n.ru = {
 			CLOSE: "Закрыть",
 			NEXT: "Следующий",
 			PREV: "Предыдущий",
@@ -59,10 +59,10 @@
 		return param;
 	});
 	const searchAPI = Object.fromEntries(search_api);
-	$(document)
+	jQuery(document)
 		.on("input", "#uploader [type=file]", (e) => {
 			let input = document.querySelector("#uploader [type=file]"),
-				info = $("#p_uploads"),
+				info = jQuery("#p_uploads"),
 				max = parseInt(input.getAttribute('data-max')),
 				out = [], str = "";
 			if([...input.files].length > max) {
@@ -94,18 +94,18 @@
 				arr = href.split('.'),
 				ext = arr.at(-1).toLowerCase();
 			//Просмотр
-			if(typeof $.fancybox == 'object') {
+			if(typeof jQuery.fancybox == 'object') {
 					options = {
 						src: window.location.origin + '/viewer/pdf_viewer/?file=' + href,
 						opts : {
 							afterShow : function( instance, current ) {
-								$(".fancybox-content").css({
+								jQuery(".fancybox-content").css({
 									height: '100% !important',
 									overflow: 'hidden'
 								}).addClass(`${ext}_viewer`);
 							},
 							afterLoad : function( instance, current ) {
-								$(".fancybox-content").css({
+								jQuery(".fancybox-content").css({
 									height: '100% !important',
 									overflow: 'hidden'
 								}).addClass(`${ext}_viewer`);
@@ -116,7 +116,7 @@
 							}
 						}
 					};
-					$.fancybox.open(options);
+					jQuery.fancybox.open(options);
 				}else{
 					window.open(href);
 			}
@@ -131,7 +131,7 @@
 				old_file = form.querySelector('input[name=file]'),
 				file;
 			if(element.classList.contains("food-rename")){
-				file = $(element).data('file');
+				file = jQuery(element).data('file');
 				const segments = file.split('.');
 				const fileExtension = segments.pop();
 				let fileName = segments.join('.');
@@ -145,17 +145,17 @@
 				old_file.value = file;
 				new_file.value = nwfile + `.${fileExtension}`;
 				mode.value = "rename";
-				$(form).submit();
+				jQuery(form).submit();
 			}
 			// Удаление
 			if(element.classList.contains("food-delete")){
-				file = $(element).data('file');
+				file = jQuery(element).data('file');
 				if(!confirm(`Удалить файл ${file}?`)){
 					return !1;
 				}
 				mode.value = "delete";
 				old_file.value = file;
-				$(form).submit();
+				jQuery(form).submit();
 				return !1;
 			}
 			return !1;
@@ -163,6 +163,7 @@
 	// Если есть dir, значит список файлов
 	if(searchAPI.dir) {
 		DataTable.Buttons.defaults.dom.button.liner.tag = '';
+		DataTable.Buttons.defaults.dom.button.className = 'dt-button btn btn-default';
 		DataTable.Buttons.defaults.dom.container.className = DataTable.Buttons.defaults.dom.container.className + ' btn-group';
 		// Изменим PDF Классы
 		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + ' btn btn-secondary';
@@ -172,7 +173,7 @@
 		DataTable.ext.classes.layout.start = 'dt-layout-start col-lg-6';
 		DataTable.ext.classes.layout.end = 'dt-layout-end col-lg-6';
 		const url = `${location.origin}/${searchAPI.dir}/`;
-		let table = new DataTable('.table', {
+		let table = jQuery('.table').DataTable({
 			// Колонки
 			columns: [
 				{ name: 'file' },
@@ -221,7 +222,7 @@
 							className: 'button-colvis btn btn-primary',
 							text: `<i class="glyphicon glyphicon-tasks"></i>Видимость столбцов`,
 							attr: {
-								title: `Видимость столбцов`
+								title: `Видимость столбцов\r\nВлияет на Печать`
 							},
 							columns: [1,2,3,4],
 							select: true,
@@ -232,16 +233,16 @@
 							className: 'button-print btn btn-success',
 							text: `<i class="glyphicon glyphicon-print"></i>Печать`,
 							attr: {
-								title: `Печать`
+								title: `Вывести данные на Печать`
 							},
 							exportOptions: {
 								columns: [':visible']
 							},
+							messageTop: document.title,
+							messageBottom: false,
 							header: true,
 							footer: true,
 							title: ``,
-							messageTop: false,
-							messageBottom: false,
 							autoPrint: true,
 						},
 					],
@@ -264,13 +265,16 @@
 							}
 						},
 						// Кнопка экспорта XLSX
-						{
+						/*{
 							extend: 'excel',
 							text: '<i class="glyphicon glyphicon-save-file"></i>Экспорт в XLSX',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в XLSX`,
 							title: `Директория ${url}`,
 							sheetName: `${searchAPI.dir}`,
+							attr: {
+								title: `Сохранить данные в файл XLSX`
+							},
 							exportOptions: {
 								columns: [':visible']
 							},
@@ -279,14 +283,14 @@
 								let dateISO = date.toISOString();
 								// Создаём xml файлы для свойств документа (метатеги)
 								xlsx["_rels"] = {};
-								xlsx["_rels"][".rels"] = $.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
+								xlsx["_rels"][".rels"] = jQuery.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">` +
 										`<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>` +
 										`<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>` +
 										`<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>` +
 									`</Relationships>`);
 								xlsx["docProps"] = {};
-								xlsx["docProps"]["core.xml"] = $.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
+								xlsx["docProps"]["core.xml"] = jQuery.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">` +
 										// Заголовок
 										`<dc:title>Директория ${url}</dc:title>` +
@@ -307,7 +311,7 @@
 										// Категория
 										`<cp:category>${searchAPI.dir}</cp:category>` +
 									`</cp:coreProperties>`);
-								xlsx["docProps"]["app.xml"] = $.parseXML(
+								xlsx["docProps"]["app.xml"] = jQuery.parseXML(
 									`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">` +
 										`<Application>Microsoft Excel</Application>` +
@@ -377,6 +381,9 @@
 							exportOptions: {
 								columns: [':visible']
 							},
+							attr: {
+								title: `Сохранить данные в файл PDF`
+							},
 							// Кастомизируем вывод
 							customize: function (doc) {
 								let date = new Date();
@@ -436,7 +443,7 @@
 									cb
 								);
 							}
-						}
+						}*/
 					]
 				}
 			},
@@ -445,23 +452,23 @@
 			}
 		});
 	}else{
-		$('.food-row').addClass('row-disabled');
+		jQuery('.food-row').addClass('row-disabled');
 	}
-	$('.food-row').removeClass('hidden');
+	jQuery('.food-row').removeClass('hidden');
 
-	$('body').on('thickbox:removed', function() {
+	jQuery('body').on('thickbox:removed', function() {
 		//window.location.reload();
 	});
 
 
 	window.tb_position = function () {
-		var wid = $(window).width(),
-			height = $(window).height() - 70,
+		var wid = jQuery(window).width(),
+			height = jQuery(window).height() - 70,
 			width = 792 < wid ? 772 : wid - 60;
-		let frm = $("#TB_window");
+		let frm = jQuery("#TB_window");
 		if(frm.length) {
 			frm.width(width);//.height(height);
-			$("#TB_iframeContent").width(width).css({
+			jQuery("#TB_iframeContent").width(width).css({
 				"position": "relative",
 				"height"  : "calc(100% - 30px)"
 			})
@@ -474,30 +481,30 @@
 				//"top"           : "0"
 			});
 		}
-		$("a.thickbox").each(function () {
-			var t = $(this).attr("href");
-			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), $(this).attr("href", t + "&width=" + width + "&height=" + height));
+		jQuery("a.thickbox").each(function () {
+			var t = jQuery(this).attr("href");
+			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), jQuery(this).attr("href", t + "&width=" + width + "&height=" + height));
 		});
 	}
 
 	window.tb_position();
 
-	/*$(document).on('thickbox:iframe:loaded', '#TB_window', function() {
+	/*jQuery(document).on('thickbox:iframe:loaded', '#TB_window', function() {
 		
 	})*/
-	$(document).on('thickbox:iframe:loaded', function(e) {
-		$(window).trigger('resize');
+	jQuery(document).on('thickbox:iframe:loaded', function(e) {
+		jQuery(window).trigger('resize');
 		let title = "Настройки «Меню ежедневного питания»";
-		$("#TB_window")
+		jQuery("#TB_window")
 			.addClass( 'plugin-food-settings-modal' )
 			.attr({
 				'role': 'dialog',
 				'aria-label': title
 			});
 		// Set title attribute on the iframe.
-		$("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
-		$(window).trigger('resize');
+		jQuery("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
+		jQuery(window).trigger('resize');
 	});
-	$(window).on('resize', window.tb_position).trigger('resize');
+	jQuery(window).on('resize', window.tb_position).trigger('resize');
 
 }(jQuery));

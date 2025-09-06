@@ -89,7 +89,7 @@ $versions = array(
 	endif;
 ?>
 	<div class="food-row hidden">
-		<div class="table-responsive">
+		<div class="">
 			<table class="table table-bordered table-hover text-nowrap" style="width: 100%;">
 				<thead>
 					<tr style="width: 100%;">
