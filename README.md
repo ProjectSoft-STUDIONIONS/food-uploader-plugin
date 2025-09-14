@@ -1,9 +1,5 @@
 # Food File Uploader
-
-![Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
-![License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
-![Size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
-![Uploads](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
+<span><a href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge" alt=""></a></span> <span><a href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge" alt=""></a></span> <span><a href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin" target="_blank"><img src="https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge" alt=""></a></span> <span><a href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest" target="_blank"><img src="https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge" alt=""></a></span>
 
 WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 
@@ -22,7 +18,7 @@ WordPress Плагин для загрузки файлов xlsx или pdf в �
 [comment]: <> ( Plugin Name:        Food File Uploader )
 [comment]: <> ( Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
 [comment]: <> ( Description:        WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России. )
-[comment]: <> ( Version:            2.3.0 )
+[comment]: <> ( Version:            2.1.1 )
 [comment]: <> ( Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru> )
 [comment]: <> ( Author URI:         https://github.com/ProjectSoft-STUDIONIONS )
 [comment]: <> ( GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
