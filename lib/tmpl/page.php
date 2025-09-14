@@ -57,23 +57,6 @@ $versions = array(
 <?php
 	if($this->dir):
 ?>
-	<div class="clearfix">
-		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mode" value="upload">
-			<div id="uploader" class="text-right">
-				<label class="btn btn-primary text-uppercase hidden">
-					<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20">
-				</label>
-				<p id="p_uploads" class="alert alert-info"></p>
-				<button class="btn btn-primary text-uppercase" type="button" onclick="document.upload.submit()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;<?= __("Загрузить", "food-uploader-plugin");?></button>
-			</div>
-		</form>
-		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mode">
-			<input type="hidden" name="file">
-			<input type="hidden" name="new_file">
-		</form>
-	</div>
 	<div class="folder-title">
 		<h3>Директория <code>/<?= $this->dir;?>/</code> <a href="/<?= $this->dir;?>/" target="_blank"></a></h3>
 		<p class="food-title-root"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", "food-uploader-plugin");?></a></p>
@@ -88,6 +71,18 @@ $versions = array(
 <?php
 	endif;
 ?>
+	<div class="clearfix">
+		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mode" value="upload">
+			<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20" onchange="uploadFiles(this)">
+			<p id="p_uploads" class="alert alert-info"></p>
+		</form>
+		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mode">
+			<input type="hidden" name="file">
+			<input type="hidden" name="new_file">
+		</form>
+	</div>
 	<div class="food-row hidden">
 		<div class="">
 			<table class="table table-bordered table-hover text-nowrap" style="width: 100%;">
@@ -133,22 +128,12 @@ $versions = array(
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span>-</span></i> <i class="btn btn-primary glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span></span></i>
+								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span>-</span></i> <i class="btn btn-danger glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span></span></i>
 							</div>
 						</td>
 					</tr>
 <?php
 							endforeach;
-						else:
-?>
-					<!--tr>
-						<td><?= __('Нет файлов для отображения', "food-uploader-plugin");?></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr-->
-<?php
 						endif;
 					else:
 						if(count($this->folders)):
@@ -160,7 +145,6 @@ $versions = array(
 					</tr>
 <?php
 							endforeach;
-						else:
 						endif;
 					endif;
 ?>

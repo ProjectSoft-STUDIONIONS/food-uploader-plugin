@@ -8153,6 +8153,18 @@ div.dt-button-background {
   z-index: 999;
 }
 
+#wpbody [class^="glyphicon-"]:before,
+#wpbody [class*=" glyphicon-"]:before {
+  position: relative;
+  display: inline;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #wpbody .glyphicon-chevron-before::before {
   content: "\e079\e079";
 }
@@ -8169,11 +8181,40 @@ div.dt-button-background {
 
 #wpbody .btn {
   outline: unset !important;
+  gap: 0.4em;
+  display: -ms-flexbox;
+  display: flex;
+  background-image: none !important;
+  position: relative;
+  float: none;
+  margin: unset;
+  text-shadow: 1px 1px 2px #ffffff;
 }
 
+#wpbody .btn:hover,
+#wpbody .btn:focus,
 #wpbody .btn:active,
 #wpbody .btn.active {
-  background-image: none;
+  background-image: none !important;
+}
+
+#wpbody .btn.dt-dragdrop-block {
+  min-height: 5.1em;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+#wpbody .btn.dt-dragdrop-block::before,
+#wpbody .btn.dt-dragdrop-block::after {
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+#wpbody .btn.dt-dragdrop-block::before {
+  content: attr(data-title-before);
+  text-align: center;
 }
 
 #wpbody .btn-default,
@@ -8780,8 +8821,8 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   display: flex;
   -ms-flex-pack: end;
   justify-content: flex-end;
-  float: right;
   text-align: right;
+  width: 100%;
 }
 
 #wpbody form[name=upload]:before,
@@ -8808,23 +8849,15 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   display: none;
 }
 
-#wpbody form[name=upload] .btn {
-  display: inline-block;
-  max-width: 200px;
-  width: 100%;
-  font-weight: 700;
-  text-align: center;
-}
-
 #wpbody form[name=upload] #p_uploads {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 0;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
-#wpbody form[name=upload] #p_uploads:empty {
-  display: none;
-}
-
+#wpbody form[name=upload] #p_uploads:empty,
+#wpbody form[name=upload] #p_uploads:empty ~ p,
 #wpbody form[name=upload] #p_uploads:empty + .btn {
   display: none;
 }
@@ -8842,22 +8875,6 @@ fieldset[disabled] #wpbody .btn-secondary.active {
 
 #wpbody form[name=modifed] input[type=submit] {
   display: block;
-  width: 1px;
-  height: 1px;
-  font-size: 0px;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-  border: transparent;
-  outline: unset !important;
-  background-image: unset;
-}
-
-#wpbody #uploader label {
-  padding-bottom: 4px;
-}
-
-#wpbody #uploader label [type=file] {
   width: 1px;
   height: 1px;
   font-size: 0px;
@@ -8981,6 +8998,33 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   margin-bottom: 0.9em !important;
 }
 
+#wpbody .btn-group-vertical > .btn,
+#wpbody .btn-group > .btn {
+  float: none;
+}
+
+#wpbody .btn-group-vertical > .btn.buttons-collection,
+#wpbody .btn-group > .btn.buttons-collection {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+#wpbody .btn-group-vertical > .btn.buttons-collection::after,
+#wpbody .btn-group > .btn.buttons-collection::after {
+  content: "▼";
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  text-align: right;
+}
+
 #wpbody .dt-container {
   margin-top: 1em;
 }
@@ -9031,6 +9075,8 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   -ms-flex-align: start;
   align-items: flex-start;
   gap: 0.6em;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 #wpbody .dt-layout-row:first-child .dt-layout-start .dt-button,
@@ -9077,12 +9123,6 @@ fieldset[disabled] #wpbody .btn-secondary.active {
 #wpbody .dt-paging .page-item .page-link {
   min-width: 3em;
   text-align: center;
-}
-
-#wpbody .dt-buttons .btn,
-#wpbody .dt-buttons .btn:last-child,
-#wpbody .dt-buttons .btn:not(:first-child) {
-  margin-left: 10px;
 }
 
 #wpbody .dt-button-collection {

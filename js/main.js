@@ -1,4 +1,4 @@
-!(function($){
+!(function(jq){
 	//$.noConflict();
 
 	const getDateTime = function(timestamp = 0) {
@@ -35,11 +35,11 @@
 	componentName = `Плагин питания для WordPress CMS`,
 	userName = `ProjectSoft`;
 
-	if('object' == typeof jQuery.fancybox) {
-		jQuery.fancybox.defaults.transitionEffect = "circular";
-		jQuery.fancybox.defaults.transitionDuration = 500;
-		jQuery.fancybox.defaults.lang = "ru";
-		jQuery.fancybox.defaults.i18n.ru = {
+	if('object' == typeof jq.fancybox) {
+		jq.fancybox.defaults.transitionEffect = "circular";
+		jq.fancybox.defaults.transitionDuration = 500;
+		jq.fancybox.defaults.lang = "ru";
+		jq.fancybox.defaults.i18n.ru = {
 			CLOSE: "Закрыть",
 			NEXT: "Следующий",
 			PREV: "Предыдущий",
@@ -59,17 +59,85 @@
 		return param;
 	});
 	const searchAPI = Object.fromEntries(search_api);
-	jQuery(document)
-		.on("input", "#uploader [type=file]", (e) => {
-			let input = document.querySelector("#uploader [type=file]"),
-				info = jQuery("#p_uploads"),
-				max = parseInt(input.getAttribute('data-max')),
+
+	// Загрузка файлов
+	window.uploadFiles = function(el) {
+		const maxCountFile = el.getAttribute('max');
+		let p = jq("#p_uploads"),
+			files = [...el.files],
+			out = [], str = "",
+			btn = document.querySelector('.button-upload'),
+			btnDrag = document.querySelector('.dt-dragdrop-block');
+
+		if(files.length > maxCountFile) {
+			btn && (btn.innerHTML = `Ззагрузить`);
+			btnDrag && btnDrag.setAttribute('data-length', "0");
+			alert(`Вы не можете загружать больше ${maxCountFile} файл(a/ов).` );
+			document.upload.reset();
+			return !1;
+		}
+		for (let a of files){
+			const regex = /[^.]+$/;
+			let m;
+			if ((m = regex.exec(a.name)) !== null) {
+				let ex = m[0].toLowerCase();
+				if(ex == "xlsx" || ex == "pdf"){
+					out.push(`<code>${a.name}</code>`);
+				}else{
+					p.html("");
+					btnDrag && (
+						btnDrag.setAttribute('data-title-after', "")
+					);
+					// Выбор файлов
+					btn && (
+						btn.innerHTML = `Выберите файлы для загрузки`,
+						btn.classList.remove('glyphicon-open'),
+						btn.classList.add('glyphicon-floppy-open')
+					);
+					console.log(a);
+					alert(`Нельзя загрузить данный тип файла!\n${a.name} - ${a.type}`);
+					document.upload.reset();
+					return !1;
+				}
+			}
+		}
+		if(out.length){
+			// Загрузка
+			let afterSufix = out.length == 1 ? `файл` : ((out.length > 1 && out.length < 5) ? `файла` : `файлов`),
+				afterPrefix = `Выбрано:`;
+			btn && (
+				btn.innerHTML = `Загрузить`,
+				btn.classList.add('glyphicon-open'),
+				btn.classList.remove('glyphicon-floppy-open')
+			);
+			btnDrag && btnDrag.setAttribute('data-title-after', `${afterPrefix} ${out.length} ${afterSufix}`);
+		}else{
+			// Выбор файлов
+			btn && (
+				btn.innerHTML = `Выберите файлы для загрузки`,
+				btn.classList.add('glyphicon-file-add'),
+				btn.classList.remove('glyphicon-open')
+			);
+			btnDrag && btnDrag.removeAttribute('data-title-after');
+		}
+		p.html(out.join(""));
+		return !1;
+	}
+	jq(document)
+		/*.on("change", "#uploader [type=file]", (e) => {
+			let el = e.target;
+			let //input = document.querySelector("#uploader [type=file]"),
+				info = jq("#p_uploads"),
+				max = parseInt(el.getAttribute('data-max')),
+				files = [...el.files],
+				btn = document.querySelector('.button-upload'),
+				btnDrag = document.querySelector('.dt-dragdrop-block'),
 				out = [], str = "";
-			if([...input.files].length > max) {
+			if(files.length > max) {
 				alert(`Вы не можете загружать больше ${max} файл(a/ов).`);
 				document.upload_food.reset();
 			}
-			for (let a of [...input.files]){
+			for (let a of files){
 				const regex = /[^.]+$/;
 				let m;
 				if ((m = regex.exec(a.name)) !== null) {
@@ -78,14 +146,42 @@
 						out.push(a.name);
 					}else{
 						info.html("");
+						btnDrag && (
+							btnDrag.setAttribute('data-title-after', "")
+						);
+						// Выбор файлов
+						btn && (
+							btn.innerHTML = `Выберите файлы для загрузки`,
+							btn.classList.remove('glyphicon-open'),
+							btn.classList.add('glyphicon-floppy-open')
+						);
 						alert("Нельзя загрузить данный тип файла!\n\n" + a.type + "\n\n");
 						document.upload_food.reset();
 						return !1;
 					}
 				}
 			}
+			if(out.length){
+				// Загрузка
+				let afterSufix = out.length == 1 ? `файл` : ((out.length > 1 && out.length < 5) ? `файла` : `файлов`),
+					afterPrefix = `Выбрано:`;
+				btn && (
+					btn.innerHTML = `Загрузить`,
+					btn.classList.add('glyphicon-open'),
+					btn.classList.remove('glyphicon-floppy-open')
+				);
+				btnDrag && btnDrag.setAttribute('data-title-after', `${afterPrefix} ${out.length} ${afterSufix}`);
+			}else{
+				// Выбор файлов
+				btn && (
+					btn.innerHTML = `Выберите файлы для загрузки`,
+					btn.classList.add('glyphicon-file-add'),
+					btn.classList.remove('glyphicon-open')
+				);
+				btnDrag && btnDrag.removeAttribute('data-title-after');
+			}
 			info.html(out.join("<br>"));
-		})
+		})*/
 		.on('click', "a.food-link", (e) => {
 			e.preventDefault();
 			let base = window.location.origin,
@@ -94,18 +190,18 @@
 				arr = href.split('.'),
 				ext = arr.at(-1).toLowerCase();
 			//Просмотр
-			if(typeof jQuery.fancybox == 'object') {
+			if(typeof jq.fancybox == 'object') {
 					options = {
 						src: window.location.origin + '/viewer/pdf_viewer/?file=' + href,
 						opts : {
 							afterShow : function( instance, current ) {
-								jQuery(".fancybox-content").css({
+								jq(".fancybox-content").css({
 									height: '100% !important',
 									overflow: 'hidden'
 								}).addClass(`${ext}_viewer`);
 							},
 							afterLoad : function( instance, current ) {
-								jQuery(".fancybox-content").css({
+								jq(".fancybox-content").css({
 									height: '100% !important',
 									overflow: 'hidden'
 								}).addClass(`${ext}_viewer`);
@@ -116,7 +212,7 @@
 							}
 						}
 					};
-					jQuery.fancybox.open(options);
+					jq.fancybox.open(options);
 				}else{
 					window.open(href);
 			}
@@ -131,7 +227,7 @@
 				old_file = form.querySelector('input[name=file]'),
 				file;
 			if(element.classList.contains("food-rename")){
-				file = jQuery(element).data('file');
+				file = jq(element).data('file');
 				const segments = file.split('.');
 				const fileExtension = segments.pop();
 				let fileName = segments.join('.');
@@ -145,17 +241,17 @@
 				old_file.value = file;
 				new_file.value = nwfile + `.${fileExtension}`;
 				mode.value = "rename";
-				jQuery(form).submit();
+				jq(form).submit();
 			}
 			// Удаление
 			if(element.classList.contains("food-delete")){
-				file = jQuery(element).data('file');
+				file = jq(element).data('file');
 				if(!confirm(`Удалить файл ${file}?`)){
 					return !1;
 				}
 				mode.value = "delete";
 				old_file.value = file;
-				jQuery(form).submit();
+				jq(form).submit();
 				return !1;
 			}
 			return !1;
@@ -163,24 +259,59 @@
 	// Если есть dir, значит список файлов
 	if(searchAPI.dir) {
 		DataTable.Buttons.defaults.dom.button.liner.tag = '';
-		DataTable.Buttons.defaults.dom.button.className = 'dt-button btn btn-default';
-		DataTable.Buttons.defaults.dom.container.className = DataTable.Buttons.defaults.dom.container.className + ' btn-group';
+		DataTable.Buttons.defaults.dom.container.className = 'btn-group';
 		// Изменим PDF Классы
-		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + ' btn btn-secondary';
+		DataTable.ext.buttons.pdfHtml5.className = DataTable.ext.buttons.pdfHtml5.className + ' btn';
 		// Изменим Excel Классы
-		DataTable.ext.buttons.excelHtml5.className = DataTable.ext.buttons.excelHtml5.className + ' btn btn-secondary';
+		DataTable.ext.buttons.excelHtml5.className = DataTable.ext.buttons.excelHtml5.className + ' btn';
 		// Изменим layout Классы
 		DataTable.ext.classes.layout.start = 'dt-layout-start col-lg-6';
 		DataTable.ext.classes.layout.end = 'dt-layout-end col-lg-6';
-		const url = `${location.origin}/${searchAPI.dir}/`;
-		let table = jQuery('.table').DataTable({
+		// Drag and Drop Block
+		DataTable.ext.buttons.dragdrop = {
+			className: 'dt-dragdrop-block btn-default btn-block',
+			text: '',
+			attr: {
+				title: `Перетащите сюда файлы *.xlsx или *.pdf для загрузки\nИли выберите их с помощю диалога`,
+				"data-title-before":`Перетащите сюда файлы (*.xlsx или *.pdf)\nИли выберите их с помощю диалога`
+			},
+			tag: "button",
+			action: function (e, dt, node, config) {
+				let uploader, input;
+				if( uploader = document.querySelector('[name="upload"]')){
+					if(input = uploader.querySelector('[type=file]')) {
+						input.click();
+					}
+				}
+			}
+		};
+
+		const url = `${location.origin}/${searchAPI.dir}/`,
+			dateString = () => {
+				let date = (new Date()).getTime();
+				return `${date}`;
+			};
+
+		jq.extend(true, DataTable.Buttons.defaults, {
+			dom: {
+				container: {
+					className: 'dt-buttons btn-group flex-wrap'
+				},
+				button: {
+					className: 'btn text-uppercase'
+				}
+			}
+		});
+		let dateFile = new Date();
+		let table = jq('.table').DataTable({
+			responsive: false,
 			// Колонки
 			columns: [
-				{ name: 'file' },
+				{ name: 'file'       },
 				{ name: 'permission' },
-				{ name: 'date' },
-				{ name: 'size' },
-				{ name: 'actions' }
+				{ name: 'date'       },
+				{ name: 'size'       },
+				{ name: 'actions'    }
 			],
 			// Настройки по колонкам
 			columnDefs : [
@@ -196,42 +327,61 @@
 					'targets'       : [1,2,3,4],
 					'orderable'     : !1
 				},
+				// Видимость
+				{
+					'targets': [1,4],
+					'visible': false
+				}
 			],
 			// Разрешена сортировка
 			ordering: !0,
+			// Фиксируем сортировку (по умолчанию)
+			order: {
+				name: "file",
+				dir: ""
+			},
 			// Разрешаем запоминание всех свойств
 			stateSave: !0,
+			// Сохранение свойств определённой таблицы директории
 			stateSaveCallback: function (settings, data) {
+				// Данные о состоянии данной таблице
+				// DataTables_com_food
 				localStorage.setItem(
-					'DataTables_' + settings.sInstance + '_' + searchAPI.dir,
+					'DataTables_com_food',
 					JSON.stringify(data)
 				);
 			},
+			// Загружаем свойства для определённой таблицы
 			stateLoadCallback: function (settings) {
-				return JSON.parse(localStorage.getItem('DataTables_' + settings.sInstance + '_' + searchAPI.dir));
+				return JSON.parse(localStorage.getItem('DataTables_com_food'));
 			},
+			// Меню вывода кол-ва файлов
 			lengthMenu: [
 				[10, 25, 50, 100, -1],
 				['по 10', 'по 25', 'по 50', 'по 100', 'Все']
 			],
+			// Контейнеры
 			layout: {
+				// Контейнер слева: Меню вывода кол-ва файлов
 				topStart: {
 					buttons: [
+						// Видимость столбцов
 						{
 							extend: 'colvis',
-							className: 'button-colvis btn btn-primary',
-							text: `<i class="glyphicon glyphicon-tasks"></i>Видимость столбцов`,
+							className: 'button-colvis btn-default glyphicon-tasks',
+							text: `Видимость столбцов`,
 							attr: {
 								title: `Видимость столбцов\r\nВлияет на Печать`
 							},
 							columns: [1,2,3,4],
 							select: true,
+							dropIcon: false,
 							//postfixButtons: ['colvisRestore']
 						},
 						{
 							extend: 'print',
-							className: 'button-print btn btn-success',
-							text: `<i class="glyphicon glyphicon-print"></i>Печать`,
+							className: 'button-print btn btn-success glyphicon-print',
+							text: `Печать`,
 							attr: {
 								title: `Вывести данные на Печать`
 							},
@@ -245,29 +395,45 @@
 							title: ``,
 							autoPrint: true,
 						},
+						{
+							extend: 'pageLength',
+							className: 'button-page-length dt-button-page-length btn-default btn-block glyphicon-list',
+							dropIcon: false,
+							attr: {
+								style: "width: 100%"
+							}
+						},
 					],
-					'pageLength': 'pageLength',
 					'search': 'search',
 				},
 				topEnd: {
 					buttons: [
-						// Выбор файлов к загрузке
+						// Кнопка/блок приёма файлов
 						{
-							text: '<i class="glyphicon glyphicon-floppy-save"></i>Выберите файлы для загрузки',
-							className: 'button-upload btn btn-success',
+							extend: 'dragdrop',
+						},
+						// Кнопка выбора файлов
+						{
+							text: 'Выберите файлы для загрузки',
+							className: 'button-upload btn-success glyphicon-floppy-open',
 							action: function (e, dt, node, config) {
 								let uploader, input;
-								if( uploader = document.querySelector('#uploader')){
+								if( uploader = document.querySelector('[name="upload"]')){
 									if(input = uploader.querySelector('[type=file]')) {
-										input.click();
+										if(input.files.length){
+											uploader.submit();
+										}else{
+											input.click();
+										}
 									}
 								}
 							}
 						},
 						// Кнопка экспорта XLSX
-						/*{
+						{
 							extend: 'excel',
-							text: '<i class="glyphicon glyphicon-save-file"></i>Экспорт в XLSX',
+							className: 'btn-default glyphicon-download-alt',
+							text: 'Экспорт в XLSX',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в XLSX`,
 							title: `Директория ${url}`,
@@ -283,14 +449,14 @@
 								let dateISO = date.toISOString();
 								// Создаём xml файлы для свойств документа (метатеги)
 								xlsx["_rels"] = {};
-								xlsx["_rels"][".rels"] = jQuery.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
+								xlsx["_rels"][".rels"] = jq.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">` +
 										`<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>` +
 										`<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>` +
 										`<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>` +
 									`</Relationships>`);
 								xlsx["docProps"] = {};
-								xlsx["docProps"]["core.xml"] = jQuery.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
+								xlsx["docProps"]["core.xml"] = jq.parseXML(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">` +
 										// Заголовок
 										`<dc:title>Директория ${url}</dc:title>` +
@@ -311,7 +477,7 @@
 										// Категория
 										`<cp:category>${searchAPI.dir}</cp:category>` +
 									`</cp:coreProperties>`);
-								xlsx["docProps"]["app.xml"] = jQuery.parseXML(
+								xlsx["docProps"]["app.xml"] = jq.parseXML(
 									`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>` +
 									`<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">` +
 										`<Application>Microsoft Excel</Application>` +
@@ -359,22 +525,12 @@
 								xlsx["[Content_Types].xml"] = contentType;
 								//console.log(contentType);
 							},
-							action: function (e, dt, node, config, cb) {
-								//console.log(e, dt, node, config, cb);
-								DataTable.ext.buttons.excelHtml5.action.call(
-									this,
-									e,
-									dt,
-									node,
-									config,
-									cb
-								);
-							}
 						},
 						// Кнопка экспорта PDF
 						{
 							extend: 'pdf',
-							text: '<i class="glyphicon glyphicon-save-file"></i>Экспорт в PDF',
+							className: 'btn-default glyphicon-download-alt',
+							text: 'Экспорт в PDF',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в PDF`,
 							title: `Директория ${url}`,
@@ -433,42 +589,70 @@
 								// Текст контента.
 								doc.content[0].text = title.join('\r\n');
 							},
-							action: function (e, dt, node, config, cb) {
-								DataTable.ext.buttons.pdfHtml5.action.call(
-									this,
-									e,
-									dt,
-									node,
-									config,
-									cb
-								);
-							}
-						}*/
+						}
 					]
-				}
+				},
+				bottomStart: [],
+				bottomEnd: [
+					"info",
+					"paging"
+				]
 			},
 			language: {
-				url: '/wp-content/plugins/food-uploader-plugin/js/ru_RU.json',
+				url: '/wp-content/plugins/food-uploader-plugin/js/ru_RU.json?date=' +dateString(),
 			}
 		});
-	}else{
-		jQuery('.food-row').addClass('row-disabled');
-	}
-	jQuery('.food-row').removeClass('hidden');
+		setTimeout(() => {
+			const dropArea = document.querySelector('.dt-dragdrop-block'),
+				inputFile = document.querySelector('input[type="file"]'),
+				preventDefaults = function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+				},
+				handleDrop = function(e) {
+					inputFile && (inputFile.files = e.dataTransfer.files);
+					inputFile && inputFile.dispatchEvent(new Event('change'));
+				},
+				highlight = function(e) {
+					dropArea && dropArea.classList.add('drophandle');
+				},
+				unhighlight = function(e) {
+					dropArea && dropArea.classList.remove('drophandle');
+				};
+			['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+				dropArea && dropArea.addEventListener(eventName, preventDefaults, false)
+				document.body.addEventListener(eventName, preventDefaults, false)
+			});
 
-	jQuery('body').on('thickbox:removed', function() {
+			['dragenter', 'dragover'].forEach(eventName => {
+				dropArea && dropArea.addEventListener(eventName, highlight, false);
+			});
+
+			['dragleave', 'drop'].forEach(eventName => {
+				dropArea && dropArea.addEventListener(eventName, unhighlight, false);
+			});
+
+			// Handle dropped files
+			dropArea && dropArea.addEventListener('drop', handleDrop, false);
+		}, 1000);
+	}else{
+		jq('.food-row').addClass('row-disabled');
+	}
+	jq('.food-row').removeClass('hidden');
+
+	jq('body').on('thickbox:removed', function() {
 		//window.location.reload();
 	});
 
 
 	window.tb_position = function () {
-		var wid = jQuery(window).width(),
-			height = jQuery(window).height() - 70,
+		var wid = jq(window).width(),
+			height = jq(window).height() - 70,
 			width = 792 < wid ? 772 : wid - 60;
-		let frm = jQuery("#TB_window");
+		let frm = jq("#TB_window");
 		if(frm.length) {
 			frm.width(width);//.height(height);
-			jQuery("#TB_iframeContent").width(width).css({
+			jq("#TB_iframeContent").width(width).css({
 				"position": "relative",
 				"height"  : "calc(100% - 30px)"
 			})
@@ -481,30 +665,30 @@
 				//"top"           : "0"
 			});
 		}
-		jQuery("a.thickbox").each(function () {
-			var t = jQuery(this).attr("href");
-			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), jQuery(this).attr("href", t + "&width=" + width + "&height=" + height));
+		jq("a.thickbox").each(function () {
+			var t = jq(this).attr("href");
+			t && ((t = (t = t.replace(/&width=[0-9]+/g, "")).replace(/&height=[0-9]+/g, "")), jq(this).attr("href", t + "&width=" + width + "&height=" + height));
 		});
 	}
 
 	window.tb_position();
 
-	/*jQuery(document).on('thickbox:iframe:loaded', '#TB_window', function() {
+	/*jq(document).on('thickbox:iframe:loaded', '#TB_window', function() {
 		
 	})*/
-	jQuery(document).on('thickbox:iframe:loaded', function(e) {
-		jQuery(window).trigger('resize');
+	jq(document).on('thickbox:iframe:loaded', function(e) {
+		jq(window).trigger('resize');
 		let title = "Настройки «Меню ежедневного питания»";
-		jQuery("#TB_window")
+		jq("#TB_window")
 			.addClass( 'plugin-food-settings-modal' )
 			.attr({
 				'role': 'dialog',
 				'aria-label': title
 			});
 		// Set title attribute on the iframe.
-		jQuery("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
-		jQuery(window).trigger('resize');
+		jq("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
+		jq(window).trigger('resize');
 	});
-	jQuery(window).on('resize', window.tb_position).trigger('resize');
+	jq(window).on('resize', window.tb_position).trigger('resize');
 
 }(jQuery));
