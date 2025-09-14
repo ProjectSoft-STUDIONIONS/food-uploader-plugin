@@ -635,6 +635,11 @@
 			// Handle dropped files
 			dropArea && dropArea.addEventListener('drop', handleDrop, false);
 		}, 1000);
+		setTimeout(() => {
+			[...document.querySelectorAll('.notice .notice-dismiss')].forEach((el)=>{
+				el.click();
+			});
+		}, 5000);
 	}else{
 		jq('.food-row').addClass('row-disabled');
 	}

@@ -8154,7 +8154,9 @@ div.dt-button-background {
 }
 
 #wpbody [class^="glyphicon-"]:before,
-#wpbody [class*=" glyphicon-"]:before {
+#wpbody [class*=" glyphicon-"]:before,
+#wpbody [class^="glyphicon-"]:after,
+#wpbody [class*=" glyphicon-"]:after {
   position: relative;
   display: inline;
   font-family: "Glyphicons Halflings";
@@ -8165,12 +8167,25 @@ div.dt-button-background {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wpbody .glyphicon-chevron-before::before {
-  content: "\e079\e079";
+#wpbody [class^="glyphicon-"]:after,
+#wpbody [class*=" glyphicon-"]:after {
+  margin-left: -0.5em;
 }
 
-#wpbody .glyphicon-chevron-after::before {
-  content: "\e080\e080";
+#wpbody .glyphicon-menu-left-before::before {
+  content: "\e257";
+}
+
+#wpbody .glyphicon-menu-left-before::after {
+  content: "\e257";
+}
+
+#wpbody .glyphicon-menu-right-after::before {
+  content: "\e258";
+}
+
+#wpbody .glyphicon-menu-right-after::after {
+  content: "\e258";
 }
 
 #wpbody *,
@@ -8215,6 +8230,10 @@ div.dt-button-background {
 #wpbody .btn.dt-dragdrop-block::before {
   content: attr(data-title-before);
   text-align: center;
+}
+
+#wpbody div.dt-buttons .btn.processing:after {
+  position: absolute !important;
 }
 
 #wpbody .btn-default,
@@ -8601,6 +8620,10 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   background-image: none;
 }
 
+#wpbody .btn-default {
+  border-color: #8c8f94;
+}
+
 #wpbody .table-hover > thead > tr {
   background-color: #ffffff;
 }
@@ -8867,6 +8890,8 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   color: #112a4a;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   background-color: transparent;
+  padding: unset;
+  margin: unset;
 }
 
 #wpbody form[name=modifed] * {
@@ -8938,6 +8963,18 @@ fieldset[disabled] #wpbody .btn-secondary.active {
 #wpbody .pagination > .disabled > a:hover,
 #wpbody .pagination > .disabled > span:hover {
   color: #ddd;
+}
+
+#wpbody .pagination > .disabled > a,
+#wpbody .pagination > .disabled > span,
+#wpbody .pagination > .disabled > a:focus,
+#wpbody .pagination > .disabled > span:focus,
+#wpbody .pagination > .disabled > a:hover,
+#wpbody .pagination > .disabled > span:hover,
+#wpbody .pagination > .disabled > a:active,
+#wpbody .pagination > .disabled > span:active {
+  outline: unset;
+  outline-offset: unset;
 }
 
 #wpbody div.dt-container div.dt-layout-row {
@@ -9129,14 +9166,6 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   padding: 1em;
 }
 
-#wpbody .dt-button-collection [role="menu"] {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 1em;
-}
-
 #wpbody div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   max-width: 100%;
   overflow: auto;
@@ -9144,6 +9173,27 @@ fieldset[disabled] #wpbody .btn-secondary.active {
 
 #wpbody div.dt-button-collection .dt-button {
   position: relative;
+}
+
+#wpbody div[role="menu"] {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+}
+
+#wpbody div[role="menu"] .btn {
+  background-color: transparent;
+  box-shadow: unset !important;
+  border-radius: unset;
+  text-transform: none;
+  margin-left: -1em;
+  margin-right: -1em;
+}
+
+#wpbody div[role="menu"] .btn:hover {
+  background-color: #e3e3e3;
 }
 
 .fancybox-container {

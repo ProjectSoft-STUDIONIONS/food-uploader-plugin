@@ -68,26 +68,38 @@
 @import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
 
 #wpbody {
-	[class^="glyphicon-"]:before,
-	[class*=" glyphicon-"]:before {
-		position: relative;
-		display: inline;
-		font-family: "Glyphicons Halflings";
-		font-style: normal;
-		font-weight: 400;
-		line-height: 1.5;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+	[class^="glyphicon-"],
+	[class*=" glyphicon-"] {
+		&:before,
+		&:after {
+			position: relative;
+			display: inline;
+			font-family: "Glyphicons Halflings";
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+		&:after {
+			margin-left: -0.5em;
+		}
 	}
-	.glyphicon-chevron {
-		&-before {
+	.glyphicon {
+		&-menu-left-before {
 			&::before {
-				content: "\e079\e079";
+				content: "\e257";
+			}
+			&::after {
+				content: "\e257";
 			}
 		}
-		&-after {
+		&-menu-right-after {
 			&::before {
-				content: "\e080\e080";
+				content: "\e258";
+			}
+			&::after {
+				content: "\e258";
 			}
 		}
 	}
@@ -125,6 +137,9 @@
 				text-align: center;
 			}
 		}
+	}
+	div.dt-buttons .btn.processing:after {
+		position: absolute !important;
 	}
 
 	// Theme bootstarap styles
@@ -202,7 +217,11 @@
 	.btn-warning   { .btn-styles(@btn-warning-bg); }
 	.btn-danger    { .btn-styles(@btn-danger-bg);  }
 	.btn-secondary { .btn-styles(@btn-default-bg); }
-
+	.btn {
+		&-default {
+			border-color: #8c8f94;
+		}
+	}
 	// Table
 	.table {
 		&-hover {
@@ -462,6 +481,8 @@
 					color: #112a4a;
 					font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 					background-color: transparent;
+					padding: unset;
+					margin: unset;
 				}
 			}
 		}
@@ -544,6 +565,13 @@
 				&:focus,
 				&:hover {
 					color: #ddd;
+				}
+				&,
+				&:focus,
+				&:hover,
+				&:active {
+					outline: unset;
+					outline-offset: unset;
 				}
 			}
 		}
@@ -729,11 +757,6 @@
 		&-button {
 			&-collection {
 				padding: 1em;
-				[role="menu"] {
-					display: flex;
-					flex-direction: column;
-					gap: 1em;
-				}
 			}
 		}
 
@@ -745,6 +768,22 @@
 	}
 	div.dt-button-collection .dt-button {
 		position: relative;
+	}
+	div[role="menu"] {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		.btn {
+			background-color: transparent;
+			box-shadow: unset !important;
+			border-radius: unset;
+			text-transform: none;
+			margin-left: -1em;
+			margin-right: -1em;
+			&:hover {
+				background-color: #e3e3e3;
+			}
+		}
 	}
 	@media (max-width: 1199px) {
 		div.dt-container > div.dt-layout-row {
@@ -758,6 +797,7 @@
 			gap: .6em;
 		}
 	}
+
 
 }
 .fancybox-container {
