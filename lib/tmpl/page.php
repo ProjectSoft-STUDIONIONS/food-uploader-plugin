@@ -154,7 +154,7 @@ $versions = array(
 	</div>
 	<hr>
 	<div class="wp-footer">
-		<p><?= __("Если возникнут проблемы или вопросы, то обращайтесь в Telegram к", "food-uploader-plugin"); ?> <a href="https://t.me/ProjectSoft" target="_blank">ProjectSoft</a></p>
+		<p><?= __("Если возникнут проблемы или вопросы, то обращайтесь в Telegram к", "food-uploader-plugin"); ?> <a href="https://t.me/ProjectSoft" target="_blank">ProjectSoft</a> (Чернышёв Андрей)</p>
 	</div>
 </div>
 <script src="/wp-content/plugins/<?= $this::FOOD_NAME;?>/js/appjs.min.js?<?= $versions["jquery_js"];?>"></script>
