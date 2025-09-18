@@ -128,7 +128,7 @@ $versions = array(
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-primary glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span>-</span></i> <i class="btn btn-danger glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span></span></i>
+								<i class="btn btn-default glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span>-</span></i> <i class="btn btn-danger glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span></span></i>
 							</div>
 						</td>
 					</tr>
