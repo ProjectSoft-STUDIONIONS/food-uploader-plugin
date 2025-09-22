@@ -122,7 +122,7 @@ $versions = array(
 								$date = $this->toDateFormat($ltime);
 ?>
 					<tr>
-						<td><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
+						<td><i class="glyphicon glyphicon-file"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
 						<td><?= $perms; ?></td>
 						<td><?= $date;  ?></td>
 						<td><?= $size;  ?></td>

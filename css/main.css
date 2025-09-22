@@ -8153,6 +8153,11 @@ div.dt-button-background {
   z-index: 999;
 }
 
+:root {
+  --link-select-color: #efefef;
+  --link-select-color-hover: #ffffff;
+}
+
 #wpbody [class^="glyphicon-"]:before,
 #wpbody [class*=" glyphicon-"]:before,
 #wpbody [class^="glyphicon-"]:after,
@@ -8931,6 +8936,10 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   font-family: -apple-system, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
+#wpbody table.dataTable tbody td {
+  vertical-align: middle;
+}
+
 #wpbody table.dataTable tbody td .flex {
   display: -ms-flexbox;
   display: flex;
@@ -8941,10 +8950,17 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   gap: 10px;
 }
 
-#wpbody table.dataTable tbody tr.selected td a,
+#wpbody table.dataTable tbody td:first-child .glyphicon {
+  margin-right: 0.6em;
+}
+
+#wpbody table.dataTable tbody tr.selected td a {
+  color: var(--link-select-color, #efefef);
+}
+
 #wpbody table.dataTable tbody tr.selected td a:hover,
 #wpbody table.dataTable tbody tr.selected td a:focus {
-  color: #fff;
+  color: var(--link-select-color-hover, #ffffff);
 }
 
 #wpbody .pagination {
@@ -9234,6 +9250,18 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   gap: 5px;
   -ms-flex-direction: row;
   flex-direction: row;
+}
+
+.dt-info .select-info {
+  display: none !important;
+}
+
+.dt-info .select-info .select-item {
+  display: none;
+}
+
+.dt-info .select-info .select-item:first-child {
+  display: block;
 }
 
 @media print {

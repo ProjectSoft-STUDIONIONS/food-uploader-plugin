@@ -67,6 +67,11 @@
 @import (inline) "../../bower_components/datatables.net-bs/css/dataTables.bootstrap.css";
 @import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
 
+:root {
+	--link-select-color: #efefef;
+	--link-select-color-hover: #ffffff;
+}
+
 #wpbody {
 	[class^="glyphicon-"],
 	[class*=" glyphicon-"] {
@@ -528,21 +533,28 @@
 		}
 		tbody {
 			td {
+				vertical-align: middle;
 				.flex {
 					display: flex;
 					flex-direction: row;
 					flex-wrap: nowrap;
 					gap: 10px;
 				}
+				&:first-child {
+					.glyphicon {
+						margin-right: .6em;
+					}
+				}
+				
 			}
 			tr {
 				&.selected {
 					td {
 						a {
-							&,
+							color: var(--link-select-color, #efefef);
 							&:hover,
 							&:focus {
-								color: #fff;
+								color: var(--link-select-color-hover, #ffffff);
 							}
 						}
 					}
@@ -834,5 +846,17 @@
 		align-items: center;
 		gap: 5px;
 		flex-direction: row;
+	}
+}
+
+.dt-info {
+	.select-info {
+		display: none !important;
+		.select-item {
+			display: none;
+			&:first-child {
+				display: block;
+			}
+		}
 	}
 }

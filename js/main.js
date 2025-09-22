@@ -124,64 +124,6 @@
 		return !1;
 	}
 	jq(document)
-		/*.on("change", "#uploader [type=file]", (e) => {
-			let el = e.target;
-			let //input = document.querySelector("#uploader [type=file]"),
-				info = jq("#p_uploads"),
-				max = parseInt(el.getAttribute('data-max')),
-				files = [...el.files],
-				btn = document.querySelector('.button-upload'),
-				btnDrag = document.querySelector('.dt-dragdrop-block'),
-				out = [], str = "";
-			if(files.length > max) {
-				alert(`Вы не можете загружать больше ${max} файл(a/ов).`);
-				document.upload_food.reset();
-			}
-			for (let a of files){
-				const regex = /[^.]+$/;
-				let m;
-				if ((m = regex.exec(a.name)) !== null) {
-					let ex = m[0].toLowerCase();
-					if(ex == "xlsx" || ex == "pdf"){
-						out.push(a.name);
-					}else{
-						info.html("");
-						btnDrag && (
-							btnDrag.setAttribute('data-title-after', "")
-						);
-						// Выбор файлов
-						btn && (
-							btn.innerHTML = `Выберите файлы для загрузки`,
-							btn.classList.remove('glyphicon-open'),
-							btn.classList.add('glyphicon-floppy-open')
-						);
-						alert("Нельзя загрузить данный тип файла!\n\n" + a.type + "\n\n");
-						document.upload_food.reset();
-						return !1;
-					}
-				}
-			}
-			if(out.length){
-				// Загрузка
-				let afterSufix = out.length == 1 ? `файл` : ((out.length > 1 && out.length < 5) ? `файла` : `файлов`),
-					afterPrefix = `Выбрано:`;
-				btn && (
-					btn.innerHTML = `Загрузить`,
-					btn.classList.add('glyphicon-open'),
-					btn.classList.remove('glyphicon-floppy-open')
-				);
-				btnDrag && btnDrag.setAttribute('data-title-after', `${afterPrefix} ${out.length} ${afterSufix}`);
-			}else{
-				// Выбор файлов
-				btn && (
-					btn.innerHTML = `Выберите файлы для загрузки`,
-					btn.classList.add('glyphicon-file-add'),
-					btn.classList.remove('glyphicon-open')
-				);
-				btnDrag && btnDrag.removeAttribute('data-title-after');
-			}
-			info.html(out.join("<br>"));
-		})*/
 		.on('click', "a.food-link", (e) => {
 			e.preventDefault();
 			let base = window.location.origin,
@@ -304,6 +246,7 @@
 		});
 		let dateFile = new Date();
 		let table = jq('.table').DataTable({
+			select: 'single',
 			responsive: false,
 			// Колонки
 			columns: [

@@ -32,6 +32,7 @@ module.exports = function(grunt) {
 			'bower_components/datatables.net-buttons/js/buttons.html5.js',
 			'bower_components/datatables.net-buttons/js/buttons.print.js',
 			'bower_components/datatables.net-buttons/js/buttons.colVis.js',
+			'bower_components/datatables.net-select/js/dataTables.select.js',
 			'bower_components/datatables.net-bs/js/dataTables.bootstrap.js',
 		]
 	};

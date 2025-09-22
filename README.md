@@ -1,15 +1,9 @@
 # Food File Uploader
 
-[![Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)](https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases)
-[![License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)](https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/blob/main/LICENSE)
-[![Size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)](https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin)
-[![Uploads](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)](https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest/download/food-uploader-plugin.zip)
-
------------------------
-
-Если у вас возникли проблемы с компонентом или вы **хотите обновить вашу версию WordPress CMS**, чтобы избавиться от предупреждений, то, по вашему желанию, вы можете обратиться ко мне для последующего обсуждения действий - [@ProjectSoft](https://t.me/ProjectSoft)
-
------------------------
+![Release](https://img.shields.io/github/v/release/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
+![License](https://img.shields.io/github/license/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
+![Size](https://img.shields.io/github/repo-size/ProjectSoft-STUDIONIONS/food-uploader-plugin?style=for-the-badge)
+![Uploads](https://img.shields.io/github/downloads/ProjectSoft-STUDIONIONS/food-uploader-plugin/total?style=for-the-badge)
 
 WordPress Плагин для загрузки файлов xlsx или pdf в папку /food/, доступен только администраторам. Плагин актуален для сайтов школ России.
 
