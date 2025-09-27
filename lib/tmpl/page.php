@@ -48,7 +48,7 @@ $versions = array(
 <link rel="stylesheet" href="/wp-content/plugins/<?= $this::FOOD_NAME;?>/css/main.min.css?<?= $versions["main_css"];?>">
 <div class="wrap" id="wp-plugins-food">
 	<div class="display-flex wp-heading-title">
-		<h1 class="wp-heading-inline"><i class="dashicons dashicons-open-folder"></i>&nbsp;<?= __("Меню ежедневного питания", "food-uploader-plugin");?></h1>
+		<h1 class="wp-heading-inline"><i class="food-icon food-icon-folder-open"></i>&nbsp;<?= __("Меню ежедневного питания", "food-uploader-plugin");?></h1>
 		<span>
 			<a class="dashicons dashicons-admin-generic thickbox open-plugin-details-modal" href="options-general.php?page=food-uploader-plugin%2Foptions.php&tab=plugin-settings&TB_iframe=true"></a>
 		</span>
@@ -58,8 +58,8 @@ $versions = array(
 	if($this->dir):
 ?>
 	<div class="folder-title">
-		<h3>Директория <code>/<?= $this->dir;?>/</code> <a href="/<?= $this->dir;?>/" target="_blank"></a></h3>
-		<p class="food-title-root"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", "food-uploader-plugin");?></a></p>
+		<h3>Директория <code>/<?= $this->dir;?>/</code> <a class="food-icon food-icon-new-window" href="/<?= $this->dir;?>/" target="_blank" title="<?= __("Открыть в новой вкладке для просмотра директории", "food-uploader-plugin");?>"></a></h3>
+		<p class="food-title-root"><i class="food-icon food-icon-folder-open-o"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", "food-uploader-plugin");?></a> / <a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>"><?= $this->dir;?></a></p>
 	</div>
 <?php
 	else:
@@ -71,18 +71,16 @@ $versions = array(
 <?php
 	endif;
 ?>
-	<div class="clearfix">
-		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mode" value="upload">
-			<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20" onchange="uploadFiles(this)">
-			<p id="p_uploads" class="alert alert-info"></p>
-		</form>
-		<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="mode">
-			<input type="hidden" name="file">
-			<input type="hidden" name="new_file">
-		</form>
-	</div>
+	<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mode" value="upload">
+		<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20" onchange="uploadFiles(this)">
+		<p id="p_uploads" class="alert alert-info"></p>
+	</form>
+	<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="hidden" name="form_mode" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mode">
+		<input type="hidden" name="file">
+		<input type="hidden" name="new_file">
+	</form>
 	<div class="food-row hidden">
 		<div class="">
 			<table class="table table-bordered table-hover text-nowrap" style="width: 100%;">
@@ -122,13 +120,13 @@ $versions = array(
 								$date = $this->toDateFormat($ltime);
 ?>
 					<tr>
-						<td><i class="glyphicon glyphicon-file"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
+						<td><i class="food-icon food-icon-file"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
 						<td><?= $perms; ?></td>
 						<td><?= $date;  ?></td>
 						<td><?= $size;  ?></td>
 						<td>
 							<div class="flex">
-								<i class="btn btn-default glyphicon glyphicon-edit food-rename" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"><span>-</span></i> <i class="btn btn-danger glyphicon glyphicon-trash food-delete" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"><span></span></i>
+								<button class="btn btn-default food-icon food-icon-edit" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"></button><button class="btn btn-danger food-icon food-icon-trash" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"></button>
 							</div>
 						</td>
 					</tr>
@@ -140,8 +138,8 @@ $versions = array(
 							foreach ($this->folders as $key => $value):
 ?>
 					<tr>
-						<td><a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $value;?>"><?= $value;?></a></td>
-						<th style="width: 1%;"><a href="/<?= $value;?>/" target="_blank" class="glyphicon glyphicon-new-window"></a></th>
+						<td><i class="food-icon food-icon-folder-open-o"></i><a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $value;?>"><?= $value;?></a></td>
+						<th style="width: 1%;"><a href="/<?= $value;?>/" target="_blank" class="food-icon food-icon-new-window" title="<?= __("Открыть в новой вкладке для просмотра директории", "food-uploader-plugin");?>"></a></th>
 					</tr>
 <?php
 							endforeach;

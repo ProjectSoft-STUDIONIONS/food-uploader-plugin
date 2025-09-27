@@ -174,6 +174,7 @@ module.exports = function(grunt) {
 				},
 				files : {
 					'css/main.css' : [
+						'bower_components/webfont-food/dest/css/foodIcon.css',
 						'src/less/main.less'
 					],
 				}
@@ -355,9 +356,19 @@ module.exports = function(grunt) {
 			},
 		},
 		copy: {
+			/*
 			fonts: {
 				expand: true,
 				cwd: 'bower_components/bootstrap/dist/fonts',
+				src: [
+					'**'
+				],
+				dest: 'fonts/',
+			},
+			*/
+			fontsFood: {
+				expand: true,
+				cwd: 'bower_components/webfont-food/dest/fonts',
 				src: [
 					'**'
 				],

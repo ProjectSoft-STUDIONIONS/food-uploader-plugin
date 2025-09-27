@@ -18,7 +18,7 @@ Options +Indexes +ExecCGI +Includes
 
 	# Устанавливаем описания
 	# AddDescription "Microsoft Office Excel" .xls .xlsx
-
+	
 	# Устанавливаем иконки
 	DefaultIcon /icons-full/unknown.png
 	
@@ -56,8 +56,9 @@ Options +Indexes +ExecCGI +Includes
 	AddAlt "Звуковой медиафайл" .wav
 	
 	AddIcon /icons-full/xls.png .xls .xlsx
-	AddAlt "Файл электронной таблицы" .xls .xlsx
 	AddDescription "Microsoft Office Excel" .xls .xlsx
+	
+	AddAltByType "Файл электронной таблицы Microsoft Office Excel" application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 	
 	AddIcon /icons-full/zip.png .zip .rar .tar
 	AddAlt "Сжатый файл" .zip .rar .tar

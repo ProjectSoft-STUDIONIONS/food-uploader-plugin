@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Food File Uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-05 17:09+0400\n"
-"PO-Revision-Date: 2025-09-05 17:09+0400\n"
+"POT-Creation-Date: 2025-09-27 17:29+0400\n"
+"PO-Revision-Date: 2025-09-27 17:29+0400\n"
 "Last-Translator: ProjectSoft <projectsoft2009@yandex.ru>\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -100,58 +100,59 @@ msgstr "Файл удалён."
 msgid "Файл не был удален."
 msgstr "Файл не был удален."
 
-#: lib/tmpl/page.php:65
-msgid "Выбрать файлы"
-msgstr "Выбрать файлы"
+#: lib/tmpl/page.php:61 lib/tmpl/page.php:142
+msgid "Открыть в новой вкладке для просмотра директории"
+msgstr "Открыть в новой вкладке для просмотра директории"
 
-#: lib/tmpl/page.php:68
-msgid "Загрузить"
-msgstr "Загрузить"
-
-#: lib/tmpl/page.php:79
+#: lib/tmpl/page.php:62
 msgid "На верхний уровень"
 msgstr "На верхний уровень"
 
-#: lib/tmpl/page.php:86
+#: lib/tmpl/page.php:69
 msgid "Корневая директория"
 msgstr "Корневая директория"
 
-#: lib/tmpl/page.php:99
+#: lib/tmpl/page.php:92
 msgid "Имя"
 msgstr "Имя"
 
-#: lib/tmpl/page.php:100
+#: lib/tmpl/page.php:93
 msgid "Права"
 msgstr "Права"
 
-#: lib/tmpl/page.php:101
+#: lib/tmpl/page.php:94
 msgid "Изменён"
 msgstr "Изменён"
 
-#: lib/tmpl/page.php:102
+#: lib/tmpl/page.php:95
 msgid "Размер"
 msgstr "Размер"
 
-#: lib/tmpl/page.php:103
+#: lib/tmpl/page.php:96
 msgid "Действия"
 msgstr "Действия"
 
-#: lib/tmpl/page.php:107
+#: lib/tmpl/page.php:100
 msgid "Директории"
 msgstr "Директории"
 
-#: lib/tmpl/page.php:136
+#: lib/tmpl/page.php:129
 msgid "Переименовать"
 msgstr "Переименовать"
 
-#: lib/tmpl/page.php:136
+#: lib/tmpl/page.php:129
 msgid "Удалить"
 msgstr "Удалить"
 
-#: lib/tmpl/page.php:145
-msgid "Нет файлов для отображения"
-msgstr "Нет файлов для отображения"
-
-#: lib/tmpl/page.php:170
+#: lib/tmpl/page.php:155
 msgid "Если возникнут проблемы или вопросы, то обращайтесь в Telegram к"
 msgstr "Если возникнут проблемы или вопросы, то обращайтесь в Telegram к"
+
+#~ msgid "Выбрать файлы"
+#~ msgstr "Выбрать файлы"
+
+#~ msgid "Загрузить"
+#~ msgstr "Загрузить"
+
+#~ msgid "Нет файлов для отображения"
+#~ msgstr "Нет файлов для отображения"

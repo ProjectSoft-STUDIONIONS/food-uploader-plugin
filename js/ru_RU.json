@@ -9,10 +9,10 @@
     "zeroRecords": "Записи отсутствуют.",
     "emptyTable": "В таблице отсутствуют данные",
     "paginate": {
-        "first": "<i class=\"glyphicon-menu-left-before\"></i>",
-        "previous": "<i class=\"glyphicon-menu-left\"></i>",
-        "next": "<i class=\"glyphicon-menu-right\"></i>",
-        "last": "<i class=\"glyphicon-menu-right-after\"></i>"
+        "first": "<i class=\"food-icon food-icon-first\"></i>",
+        "previous": "<i class=\"food-icon food-icon-prev\"></i>",
+        "next": "<i class=\"food-icon food-icon-next\"></i>",
+        "last": "<i class=\"food-icon food-icon-last\"></i>"
     },
     "aria": {
         "sortAscending": ": активировать для сортировки столбца по возрастанию",

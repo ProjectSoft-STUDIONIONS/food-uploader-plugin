@@ -90,27 +90,21 @@
 			margin-left: -0.5em;
 		}
 	}
-	.glyphicon {
-		&-menu-left-before {
-			&::before {
-				content: "\e257";
-			}
-			&::after {
-				content: "\e257";
-			}
-		}
-		&-menu-right-after {
-			&::before {
-				content: "\e258";
-			}
-			&::after {
-				content: "\e258";
-			}
-		}
-	}
 
 	*, *::before, *::after {
 		box-sizing: border-box;
+	}
+
+	table {
+		tbody {
+			tr {
+				td {
+					i.food-icon {
+						margin-right: .5em;
+					}
+				}
+			}
+		}
 	}
 
 	.btn {
@@ -122,6 +116,7 @@
 		float: none;
 		margin: unset;
 		text-shadow: 1px 1px 2px #ffffff;
+		align-items: center;
 		&:hover,
 		&:focus,
 		&:active,
@@ -490,6 +485,9 @@
 					margin: unset;
 				}
 			}
+			&:has( > p:empty ) {
+				display: none;
+			}
 		}
 		&[name=modifed] {
 			* {
@@ -750,6 +748,15 @@
 			}
 			.page {
 				&-item {
+					&,
+					* {
+						line-height: 1;
+						display: inline-flex;
+						flex-direction: row;
+						align-items: center;
+						justify-content: center;
+						text-align: center;
+					}
 					.page {
 						&-link {
 							min-width: 3em;
@@ -761,8 +768,8 @@
 		}
 		&-buttons {
 			.btn {
-				&, &:last-child, &:not(:first-child) {
-					//margin-left: 10px;
+				&.food-icon {
+					line-height: 1;
 				}
 			}
 		}
@@ -856,6 +863,18 @@
 			display: none;
 			&:first-child {
 				display: block;
+			}
+		}
+	}
+}
+
+div.dt-container {
+	div.dt-layout-row {
+		div.dt-layout-cell {
+			&.dt-layout-end {
+				flex-direction: column;
+				align-items: flex-end;
+				gap: .6em;
 			}
 		}
 	}

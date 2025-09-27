@@ -90,9 +90,7 @@
 					);
 					// Выбор файлов
 					btn && (
-						btn.innerHTML = `Выберите файлы для загрузки`,
-						btn.classList.remove('glyphicon-open'),
-						btn.classList.add('glyphicon-floppy-open')
+						btn.innerHTML = `Выберите файлы для загрузки`
 					);
 					console.log(a);
 					alert(`Нельзя загрузить данный тип файла!\n${a.name} - ${a.type}`);
@@ -106,17 +104,13 @@
 			let afterSufix = out.length == 1 ? `файл` : ((out.length > 1 && out.length < 5) ? `файла` : `файлов`),
 				afterPrefix = `Выбрано:`;
 			btn && (
-				btn.innerHTML = `Загрузить`,
-				btn.classList.add('glyphicon-open'),
-				btn.classList.remove('glyphicon-floppy-open')
+				btn.innerHTML = `Загрузить`
 			);
 			btnDrag && btnDrag.setAttribute('data-title-after', `${afterPrefix} ${out.length} ${afterSufix}`);
 		}else{
 			// Выбор файлов
 			btn && (
-				btn.innerHTML = `Выберите файлы для загрузки`,
-				btn.classList.add('glyphicon-file-add'),
-				btn.classList.remove('glyphicon-open')
+				btn.innerHTML = `Выберите файлы для загрузки`
 			);
 			btnDrag && btnDrag.removeAttribute('data-title-after');
 		}
@@ -133,68 +127,77 @@
 				ext = arr.at(-1).toLowerCase();
 			//Просмотр
 			if(typeof jq.fancybox == 'object') {
-					options = {
-						src: window.location.origin + '/viewer/pdf_viewer/?file=' + href,
-						opts : {
-							afterShow : function( instance, current ) {
-								jq(".fancybox-content").css({
-									height: '100% !important',
-									overflow: 'hidden'
-								}).addClass(`${ext}_viewer`);
-							},
-							afterLoad : function( instance, current ) {
-								jq(".fancybox-content").css({
-									height: '100% !important',
-									overflow: 'hidden'
-								}).addClass(`${ext}_viewer`);
-							},
-							afterClose: function() {
-								Cookies.remove('pdfjs.history', { path: '' });
-								window.localStorage.removeItem('pdfjs.history');
-							}
-						}
-					};
-					jq.fancybox.open(options);
-				}else{
-					window.open(href);
+					switch(ext) {
+						case "pdf":
+						case "xlsx":
+							options = {
+								src: `${window.location.origin}/viewer/${ext}_viewer/?file=${href}`,
+								opts : {
+									afterShow : function( instance, current ) {
+										jq(".fancybox-content").css({
+											height: '100% !important',
+											overflow: 'hidden'
+										}).addClass(`${ext}_viewer`);
+									},
+									afterLoad : function( instance, current ) {
+										jq(".fancybox-content").css({
+											height: '100% !important',
+											overflow: 'hidden'
+										}).addClass(`${ext}_viewer`);
+									},
+									afterClose: function() {
+										Cookies.remove('pdfjs.history', { path: '' });
+										window.localStorage.removeItem('pdfjs.history');
+									}
+								}
+							};
+							jq.fancybox.open(options);
+							break;
+						default:
+							window.open(href);
+							break;
+					}
+					/**/
+			}else{
+				window.open(href);
 			}
 			return !1;
-		}).on('click', '.food-rename, .food-delete', function(e) {
+		}).on('click', '[data-mode]', function(e) {
 			e.preventDefault();
 			let element = e.target;
-			// Переименование
 			let form = document.querySelector('form[name=form_mode]'),
 				mode = form.querySelector('input[name=mode]'),
 				new_file = form.querySelector('input[name=new_file]'),
 				old_file = form.querySelector('input[name=file]'),
-				file;
-			if(element.classList.contains("food-rename")){
+				ext = jq(element).data('mode'),
 				file = jq(element).data('file');
-				const segments = file.split('.');
-				const fileExtension = segments.pop();
-				let fileName = segments.join('.');
-				let nwfile = prompt("Укажите новое имя для файла:", fileName);
-				if(!nwfile) {
-					return !1
-				}
-				if(nwfile == segments.join('.')){
+			switch(ext) {
+				case "rename":
+					const segments = file.split('.');
+					const fileExtension = segments.pop();
+					let fileName = segments.join('.');
+					let nwfile = prompt("Укажите новое имя для файла:", fileName);
+					if(!nwfile) {
+						return !1
+					}
+					if(nwfile == segments.join('.')){
+						return !1;
+					}
+					old_file.value = file;
+					new_file.value = nwfile + `.${fileExtension}`;
+					mode.value = "rename";
+					jq(form).submit();
 					return !1;
-				}
-				old_file.value = file;
-				new_file.value = nwfile + `.${fileExtension}`;
-				mode.value = "rename";
-				jq(form).submit();
-			}
-			// Удаление
-			if(element.classList.contains("food-delete")){
-				file = jq(element).data('file');
-				if(!confirm(`Удалить файл ${file}?`)){
+					break;
+				case "delete":
+					if(!confirm(`Удалить файл ${file}?`)){
+						return !1;
+					}
+					mode.value = "delete";
+					old_file.value = file;
+					jq(form).submit();
 					return !1;
-				}
-				mode.value = "delete";
-				old_file.value = file;
-				jq(form).submit();
-				return !1;
+					break;
 			}
 			return !1;
 		});
@@ -311,7 +314,7 @@
 						// Видимость столбцов
 						{
 							extend: 'colvis',
-							className: 'button-colvis btn-default glyphicon-tasks',
+							className: 'button-colvis btn-default food-icon food-icon-tasks',
 							text: `Видимость столбцов`,
 							attr: {
 								title: `Видимость столбцов\r\nВлияет на Печать`
@@ -323,7 +326,7 @@
 						},
 						{
 							extend: 'print',
-							className: 'button-print btn btn-success glyphicon-print',
+							className: 'button-print btn btn-success food-icon food-icon-print',
 							text: `Печать`,
 							attr: {
 								title: `Вывести данные на Печать`
@@ -340,7 +343,7 @@
 						},
 						{
 							extend: 'pageLength',
-							className: 'button-page-length dt-button-page-length btn-default btn-block glyphicon-list',
+							className: 'button-page-length dt-button-page-length btn-default btn-block food-icon food-icon-lists',
 							dropIcon: false,
 							attr: {
 								style: "width: 100%"
@@ -358,7 +361,7 @@
 						// Кнопка выбора файлов
 						{
 							text: 'Выберите файлы для загрузки',
-							className: 'button-upload btn-success glyphicon-floppy-open',
+							className: 'button-upload btn-success food-icon food-icon-flopy-save',
 							action: function (e, dt, node, config) {
 								let uploader, input;
 								if( uploader = document.querySelector('[name="upload"]')){
@@ -375,7 +378,7 @@
 						// Кнопка экспорта XLSX
 						{
 							extend: 'excel',
-							className: 'btn-default glyphicon-download-alt',
+							className: 'btn-default food-icon food-icon-download',
 							text: 'Экспорт в XLSX',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в XLSX`,
@@ -472,7 +475,7 @@
 						// Кнопка экспорта PDF
 						{
 							extend: 'pdf',
-							className: 'btn-default glyphicon-download-alt',
+							className: 'btn-default food-icon food-icon-download',
 							text: 'Экспорт в PDF',
 							download: '',
 							filename: `Экспорт ${searchAPI.dir} в PDF`,

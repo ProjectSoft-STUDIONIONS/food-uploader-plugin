@@ -23,6 +23,7 @@
 		"pdfmake": "^0.2.18",
 		"jszip": "^3.10.1",
 		"datatables.net-select-bs": "^3.0.0",
-		"food": "https://github.com/ProjectSoft-STUDIONIONS/food.git#^1.1.0"
+		"food": "https://github.com/ProjectSoft-STUDIONIONS/food.git#*",
+		"webfont-food": "https://github.com/ProjectSoft-STUDIONIONS/webfont-food.git#*"
 	}
 }

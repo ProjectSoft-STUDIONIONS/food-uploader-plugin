@@ -1,3 +1,84 @@
+@font-face {
+  font-family: 'FoodIcon';
+  src: url("../fonts/FoodIcon.ttf?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("truetype"), url("../fonts/FoodIcon.woff2?1bfa6de1db0b9c51ac22a0b7e6a91faa") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="food-icon"]::before,
+[class*=" food-icon"]::before {
+  font-family: 'FoodIcon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.food-icon-folder-open::before {
+  content: "\e900";
+}
+
+.food-icon-folder-open-o::before {
+  content: "\e901";
+}
+
+.food-icon-tasks::before {
+  content: "\e902";
+}
+
+.food-icon-lists::before {
+  content: "\e903";
+}
+
+.food-icon-print::before {
+  content: "\e904";
+}
+
+.food-icon-flopy-save::before {
+  content: "\e905";
+}
+
+.food-icon-download::before {
+  content: "\e906";
+}
+
+.food-icon-prev::before {
+  content: "\e907";
+}
+
+.food-icon-next::before {
+  content: "\e908";
+}
+
+.food-icon-first::before {
+  content: "\e909";
+}
+
+.food-icon-last::before {
+  content: "\e90a";
+}
+
+.food-icon-file:before {
+  content: "\e90b";
+}
+
+.food-icon-edit:before {
+  content: "\e90c";
+}
+
+.food-icon-trash:before {
+  content: "\e90d";
+}
+
+.food-icon-new-window:before {
+  content: "\e90e";
+}
+
 @charset "UTF-8";
 
 .col-lg-1,
@@ -8177,26 +8258,14 @@ div.dt-button-background {
   margin-left: -0.5em;
 }
 
-#wpbody .glyphicon-menu-left-before::before {
-  content: "\e257";
-}
-
-#wpbody .glyphicon-menu-left-before::after {
-  content: "\e257";
-}
-
-#wpbody .glyphicon-menu-right-after::before {
-  content: "\e258";
-}
-
-#wpbody .glyphicon-menu-right-after::after {
-  content: "\e258";
-}
-
 #wpbody *,
 #wpbody *::before,
 #wpbody *::after {
   box-sizing: border-box;
+}
+
+#wpbody table tbody tr td i.food-icon {
+  margin-right: 0.5em;
 }
 
 #wpbody .btn {
@@ -8209,6 +8278,8 @@ div.dt-button-background {
   float: none;
   margin: unset;
   text-shadow: 1px 1px 2px #ffffff;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 #wpbody .btn:hover,
@@ -8899,6 +8970,10 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   margin: unset;
 }
 
+#wpbody form[name=upload]:has( > p:empty ) {
+  display: none;
+}
+
 #wpbody form[name=modifed] * {
   display: none;
 }
@@ -9173,9 +9248,27 @@ fieldset[disabled] #wpbody .btn-secondary.active {
   font-weight: 700;
 }
 
+#wpbody .dt-paging .page-item,
+#wpbody .dt-paging .page-item * {
+  line-height: 1;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
 #wpbody .dt-paging .page-item .page-link {
   min-width: 3em;
   text-align: center;
+}
+
+#wpbody .dt-buttons .btn.food-icon {
+  line-height: 1;
 }
 
 #wpbody .dt-button-collection {
@@ -9262,6 +9355,14 @@ fieldset[disabled] #wpbody .btn-secondary.active {
 
 .dt-info .select-info .select-item:first-child {
   display: block;
+}
+
+div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  gap: 0.6em;
 }
 
 @media print {
