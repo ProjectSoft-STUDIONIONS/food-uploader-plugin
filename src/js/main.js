@@ -556,8 +556,10 @@
 					e.stopPropagation();
 				},
 				handleDrop = function(e) {
+					preventDefaults(e);
 					inputFile && (inputFile.files = e.dataTransfer.files);
 					inputFile && inputFile.dispatchEvent(new Event('change'));
+					return !1;
 				},
 				highlight = function(e) {
 					dropArea && dropArea.classList.add('drophandle');
@@ -565,6 +567,7 @@
 				unhighlight = function(e) {
 					dropArea && dropArea.classList.remove('drophandle');
 				};
+
 			['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
 				dropArea && dropArea.addEventListener(eventName, preventDefaults, false)
 				document.body.addEventListener(eventName, preventDefaults, false)
