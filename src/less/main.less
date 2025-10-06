@@ -678,7 +678,7 @@
 					}
 				}
 				&:first-child {
-					align-items: self-end !important;
+					align-items: self-start !important;
 					@media (max-width: 991px) {
 						gap: 0.6em;
 					}
@@ -799,6 +799,18 @@
 			text-transform: none;
 			margin-left: -1em;
 			margin-right: -1em;
+			border: unset;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-start;
+			align-items: center;
+			flex-grow: 1;
+			&.buttons-collection::after {
+				content: "▼";
+				-ms-flex: 1 0 auto;
+				flex: 1 0 auto;
+				text-align: right;
+			}
 			&:hover {
 				background-color: #e3e3e3;
 			}
