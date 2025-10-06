@@ -249,7 +249,6 @@
 		});
 		let dateFile = new Date();
 		let table = jq('.table').DataTable({
-			select: 'single',
 			responsive: false,
 			// Колонки
 			columns: [
