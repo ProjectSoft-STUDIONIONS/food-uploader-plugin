@@ -32,6 +32,11 @@
 		}
 		return str;
 	},
+	getExtFile = function (filename) {
+		let baseName = filename.split('/').pop();  // извлекаем имя файла
+		if(baseName.indexOf('.') === -1 || baseName.startsWith('.')) return '';  // если расширения нет, возвращаем пустую строку
+		return baseName.slice(baseName.lastIndexOf('.') + 1); // расширение файла
+	},
 	componentName = `Плагин питания для WordPress CMS`,
 	userName = `ProjectSoft`;
 
@@ -563,7 +568,8 @@
 			}
 		});
 		setTimeout(() => {
-			const dropArea = document.querySelector('.dt-dragdrop-block'),
+
+			const dropArea = document.querySelector('#wp-plugins-food'),
 				inputFile = document.querySelector('input[type="file"]'),
 				preventDefaults = function(e) {
 					e.preventDefault();
@@ -571,8 +577,28 @@
 				},
 				handleDrop = function(e) {
 					preventDefaults(e);
-					inputFile && (inputFile.files = e.dataTransfer.files);
-					inputFile && inputFile.dispatchEvent(new Event('change'));
+					if(inputFile) {
+						const maxCountFile = inputFile.getAttribute('max');
+						let dataTransfer = new DataTransfer();
+						// Пробежимся по переданным файлам
+						for(let file of e.dataTransfer.files) {
+							let ext = getExtFile(file.name).toLowerCase();
+							switch(ext){
+								case "pdf":
+								case "xlsx":
+									if(dataTransfer.files.length < maxCountFile) {
+										dataTransfer.items.add(file);
+									}else{
+										console.log(`%cFile ${file.name} not upload!\nThe maximum number of files has been exceeded`, "background: green; color: white");
+									}
+									break;
+								default:
+									console.log(`%cFile ${file.name} not suported!`, "background: red; color: white");
+							}
+						}
+						inputFile.files = dataTransfer.files;
+						inputFile.dispatchEvent(new Event('change'));
+					}
 					return !1;
 				},
 				highlight = function(e) {
@@ -597,6 +623,7 @@
 
 			// Handle dropped files
 			dropArea && dropArea.addEventListener('drop', handleDrop, false);
+
 		}, 1000);
 		setTimeout(() => {
 			[...document.querySelectorAll('.notice .notice-dismiss')].forEach((el)=>{

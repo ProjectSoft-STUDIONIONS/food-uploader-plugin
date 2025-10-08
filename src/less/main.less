@@ -954,3 +954,34 @@ div.dt-container {
 		}
 	}
 }
+
+#wp-plugins-food {
+	position: relative;
+	&::before {
+		background-color: rgba(0, 0, 0, .3);
+		border-radius: 15px;
+		content: "Drag and Drop files";
+		color: rgba(255, 255, 255, .4);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		opacity: 0;
+		outline: rgba(255, 255, 255, .5) dashed 2px;
+		outline-offset: -10px;
+		position: absolute;
+		transition: all .3s ease;
+		z-index: -200;
+		bottom: -0.1em;
+		left: -0.1em;
+		right: -0.1em;
+		top: -0.1em;
+		font-size: 6em;
+	}
+	&.drophandle {
+		&::before {
+			opacity: 1;
+			z-index: 1000;
+		}
+	}
+}

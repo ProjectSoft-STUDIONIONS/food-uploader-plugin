@@ -4193,6 +4193,41 @@ div.dt-container div.dt-layout-row div.dt-layout-cell.dt-layout-end {
   gap: 0.6em;
 }
 
+#wp-plugins-food {
+  position: relative;
+}
+
+#wp-plugins-food::before {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  content: "Drag and Drop files";
+  color: rgba(255, 255, 255, 0.4);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  opacity: 0;
+  outline: rgba(255, 255, 255, 0.5) dashed 2px;
+  outline-offset: -10px;
+  position: absolute;
+  transition: all 0.3s ease;
+  z-index: -200;
+  bottom: -0.1em;
+  left: -0.1em;
+  right: -0.1em;
+  top: -0.1em;
+  font-size: 6em;
+}
+
+#wp-plugins-food.drophandle::before {
+  opacity: 1;
+  z-index: 1000;
+}
+
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
