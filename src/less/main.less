@@ -12,6 +12,21 @@
 //@import "../../bower_components/bootstrap/less/close.less";
 //@import "../../bower_components/bootstrap/less/utilities.less";
 //@import "../../bower_components/bootstrap/less/pagination.less";
+
+// Core variables and mixins
+@import "../../bower_components/bootstrap/less/variables.less";
+@import "../../bower_components/bootstrap/less/mixins.less";
+
+// Reset and dependencies
+//@import "normalize.less";
+//@import "print.less";
+//@import "glyphicons.less";
+@import  (inline) '../../bower_components/webfont-food/dest/css/foodIcon.css';
+// Core CSS
+@import "../../bower_components/bootstrap/less/scaffolding.less";
+@import "../../bower_components/bootstrap/less/type.less";
+@import "../../bower_components/bootstrap/less/code.less";
+
 .col-lg-1,
 .col-lg-2,
 .col-lg-3,
@@ -62,8 +77,47 @@
 .col-xs-12 {
 	width: 100%;
 }
-@import "../../bower_components/bootstrap/less/bootstrap.less";
-@import "../../bower_components/bootstrap/less/theme.less";
+
+@import "../../bower_components/bootstrap/less/grid.less";
+@import "../../bower_components/bootstrap/less/tables.less";
+//@import "../../bower_components/bootstrap/less/forms.less";
+@import "../../bower_components/bootstrap/less/buttons.less";
+
+// Components
+//@import "component-animations.less";
+//@import "dropdowns.less";
+//@import "button-groups.less";
+//@import "input-groups.less";
+//@import "navs.less";
+//@import "navbar.less";
+//@import "breadcrumbs.less";
+@import "../../bower_components/bootstrap/less/pagination.less";
+//@import "pager.less";
+//@import "labels.less";
+//@import "badges.less";
+//@import "jumbotron.less";
+//@import "thumbnails.less";
+//@import "alerts.less";
+//@import "progress-bars.less";
+//@import "media.less";
+//@import "list-group.less";
+//@import "panels.less";
+//@import "responsive-embed.less";
+//@import "wells.less";
+//@import "close.less";
+
+// Components w/ JavaScript
+//@import "modals.less";
+//@import "tooltip.less";
+//@import "popovers.less";
+//@import "carousel.less";
+
+// Utility classes
+//@import "utilities.less";
+//@import "../../bower_components/bootstrap/less/responsive-utilities.less";
+
+//@import "../../bower_components/bootstrap/less/bootstrap.less";
+//@import "../../bower_components/bootstrap/less/theme.less";
 @import (inline) "../../bower_components/datatables.net-bs/css/dataTables.bootstrap.css";
 @import (inline) "../../bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.css";
 
@@ -72,30 +126,18 @@
 	--link-select-color-hover: #ffffff;
 }
 
+table {
+	border-collapse: collapse;
+}
+
 #wpbody {
-	[class^="glyphicon-"],
-	[class*=" glyphicon-"] {
-		&:before,
-		&:after {
-			position: relative;
-			display: inline;
-			font-family: "Glyphicons Halflings";
-			font-style: normal;
-			font-weight: 400;
-			line-height: 1.5;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-		}
-		&:after {
-			margin-left: -0.5em;
-		}
-	}
 
 	*, *::before, *::after {
 		box-sizing: border-box;
 	}
 
 	table {
+		border-collapse: collapse;
 		tbody {
 			tr {
 				td {
@@ -127,6 +169,9 @@
 			min-height: 5.1em;
 			align-items: center;
 			justify-content: center;
+			flex-direction: column;
+			gap: 0px;
+			padding: 0em 1em;
 			&::before,
 			&::after {
 				text-align: center;
@@ -134,6 +179,11 @@
 			}
 			&::before {
 				content: attr(data-title-before);
+				text-align: center;
+			}
+			&::after {
+				content: attr(data-title-after);
+				color: @btn-success-bg;
 				text-align: center;
 			}
 		}
@@ -220,6 +270,13 @@
 	.btn {
 		&-default {
 			border-color: #8c8f94;
+			&:focus,
+			&:hover,
+			&.active,
+			&:active {
+				background-color: #ffffff;
+				border-color: #8c8f94;
+			}
 		}
 	}
 	// Table
@@ -337,13 +394,6 @@
 			}
 			p {
 				font-size: 16px;
-				&#p_uploads {
-					font-size: 14px;
-					font-family: monospace;
-					white-space: pre;
-					text-align: right;
-					margin-bottom: 14px;
-				}
 			}
 			dl {
 				margin-bottom: 15px;
@@ -441,7 +491,20 @@
 	}
 
 	#p_uploads {
+		font-size: 14px;
+		font-family: monospace;
+		white-space: pre;
+		text-align: right;
+		margin-bottom: 14px;
+		padding: 15px;
+		&::before {
+			font-weight: 700;
+			content: "Выбрано";
+		}
 		&:empty {
+			&::before {
+				display: none;
+			}
 			&,
 			~ p {
 				display: none;

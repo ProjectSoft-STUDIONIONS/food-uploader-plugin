@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Food File Uploader\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-27 17:27+0400\n"
+"POT-Creation-Date: 2025-10-08 01:02+0400\n"
 "PO-Revision-Date: 2025-09-05 15:11+0400\n"
 "Last-Translator: ProjectSoft <projectsoft2009@yandex.ru>\n"
 "Language-Team: Русский\n"
@@ -22,128 +22,282 @@ msgstr ""
 "X-Poedit-SearchPath-0: food-uploader-plugin.php\n"
 "X-Poedit-SearchPath-1: lib/Food.php\n"
 "X-Poedit-SearchPath-2: lib/tmpl/page.php\n"
+"X-Poedit-SearchPath-3: options.php\n"
 
-#: lib/Food.php:122 lib/Food.php:123 lib/Food.php:133 lib/Food.php:176
-#: lib/tmpl/page.php:51
+#: lib/Food.php:123 lib/Food.php:124 lib/Food.php:134 lib/Food.php:177
+#: lib/tmpl/page.php:87
 msgid "Меню ежедневного питания"
 msgstr ""
 
-#: lib/Food.php:133 lib/Food.php:146 lib/Food.php:154
+#: lib/Food.php:134 lib/Food.php:147 lib/Food.php:155
 msgid "Настройки"
 msgstr ""
 
-#: lib/Food.php:134
+#: lib/Food.php:135
 msgid "ПИТАНИЕ"
 msgstr ""
 
-#: lib/Food.php:155
+#: lib/Food.php:156
 msgid "Открыть плагин"
 msgstr ""
 
-#: lib/Food.php:277
+#: lib/Food.php:278
 msgid "Настройки сохранены"
 msgstr ""
 
-#: lib/Food.php:354
+#: lib/Food.php:355
 msgid "Автоудаление файлов:"
 msgstr ""
 
-#: lib/Food.php:385
+#: lib/Food.php:386
 msgid "Ошибка: формат файла не поддерживается"
 msgstr ""
 
-#: lib/Food.php:400
+#: lib/Food.php:401
 msgid "Файл загружен"
 msgstr ""
 
-#: lib/Food.php:403
+#: lib/Food.php:404
 msgid "Не удалось переместить файл"
 msgstr ""
 
-#: lib/Food.php:407
+#: lib/Food.php:408
 msgid "Не удалось загрузить файл"
 msgstr ""
 
-#: lib/Food.php:412
+#: lib/Food.php:413
 msgid "Неудачно загруженных файлов:"
 msgstr ""
 
-#: lib/Food.php:423
+#: lib/Food.php:424
 msgid "Удачно загруженных файлов:"
 msgstr ""
 
-#: lib/Food.php:451 lib/Food.php:487 lib/Food.php:529
+#: lib/Food.php:452 lib/Food.php:488 lib/Food.php:530
 msgid "Файл существует."
 msgstr ""
 
-#: lib/Food.php:467
+#: lib/Food.php:468
 msgid "Запрет на переименование файла"
 msgstr ""
 
-#: lib/Food.php:506
+#: lib/Food.php:507
 msgid "Файл переименован."
 msgstr ""
 
-#: lib/Food.php:517
+#: lib/Food.php:518
 msgid "Не удалось переименовать файл."
 msgstr ""
 
-#: lib/Food.php:541 lib/Food.php:585
+#: lib/Food.php:542 lib/Food.php:586
 msgid "Файл не существует."
 msgstr ""
 
-#: lib/Food.php:566
+#: lib/Food.php:567
 msgid "Файл удалён."
 msgstr ""
 
-#: lib/Food.php:575
+#: lib/Food.php:576
 msgid "Файл не был удален."
 msgstr ""
 
-#: lib/tmpl/page.php:61 lib/tmpl/page.php:142
-msgid "Открыть в новой вкладке для просмотра директории"
+#: lib/tmpl/page.php:47
+#, php-format
+msgid "Вы не можете загружать больше %s файл(a/ов)."
+msgstr ""
+
+#: lib/tmpl/page.php:48 lib/tmpl/page.php:55
+msgid "Выберите файлы для загрузки"
+msgstr ""
+
+#: lib/tmpl/page.php:49
+msgid "Нельзя загрузить данный тип файла!"
+msgstr ""
+
+#: lib/tmpl/page.php:50
+msgid "файл"
+msgstr ""
+
+#: lib/tmpl/page.php:51
+msgid "файла"
+msgstr ""
+
+#: lib/tmpl/page.php:52
+msgid "файлов"
+msgstr ""
+
+#: lib/tmpl/page.php:53
+msgid "Выбрано:"
+msgstr ""
+
+#: lib/tmpl/page.php:54
+msgid "Загрузить"
+msgstr ""
+
+#: lib/tmpl/page.php:56
+msgid "Укажите новое имя для файла:"
+msgstr ""
+
+#: lib/tmpl/page.php:57
+#, php-format
+msgid "Удалить файл %s?"
+msgstr ""
+
+#: lib/tmpl/page.php:58
+msgid ""
+"Перетащите сюда файлы *.xlsx или *.pdf для загрузки\n"
+"Или выберите их с помощю диалога"
+msgstr ""
+
+#: lib/tmpl/page.php:60
+msgid ""
+"Перетащите сюда файлы (*.xlsx или *.pdf)\n"
+"Или выберите их с помощю диалога"
 msgstr ""
 
 #: lib/tmpl/page.php:62
-msgid "На верхний уровень"
+msgid "Инструменты"
+msgstr ""
+
+#: lib/tmpl/page.php:63
+msgid "Видимость столбцов"
+msgstr ""
+
+#: lib/tmpl/page.php:64
+msgid ""
+"Видимость столбцов\n"
+"Влияет на Печать"
+msgstr ""
+
+#: lib/tmpl/page.php:66
+msgid "Экспорт"
+msgstr ""
+
+#: lib/tmpl/page.php:67
+msgid "Экспорт в XLSX"
+msgstr ""
+
+#: lib/tmpl/page.php:68
+msgid "Сохранить данные в файл XLSX"
 msgstr ""
 
 #: lib/tmpl/page.php:69
+#, php-format
+msgid "Экспорт %s в XLSX"
+msgstr ""
+
+#: lib/tmpl/page.php:70
+msgid "Экспорт в PDF"
+msgstr ""
+
+#: lib/tmpl/page.php:71
+msgid "Сохранить данные в файл PDF"
+msgstr ""
+
+#: lib/tmpl/page.php:72
+#, php-format
+msgid "Экспорт %s в PDF"
+msgstr ""
+
+#: lib/tmpl/page.php:73
+#, php-format
+msgid "Директория %s"
+msgstr ""
+
+#: lib/tmpl/page.php:74
+msgid "Меню ежедневного питания."
+msgstr ""
+
+#: lib/tmpl/page.php:75
+msgid "Печать"
+msgstr ""
+
+#: lib/tmpl/page.php:76
+msgid "Вывести данные на печать"
+msgstr ""
+
+#: lib/tmpl/page.php:77 options.php:3
+msgid "Настройки «Меню ежедневного питания»"
+msgstr ""
+
+#: lib/tmpl/page.php:97
+msgid "Директория"
+msgstr ""
+
+#: lib/tmpl/page.php:97 lib/tmpl/page.php:178
+msgid "Открыть в новой вкладке для просмотра директории"
+msgstr ""
+
+#: lib/tmpl/page.php:98
+msgid "На верхний уровень"
+msgstr ""
+
+#: lib/tmpl/page.php:105
 msgid "Корневая директория"
 msgstr ""
 
-#: lib/tmpl/page.php:92
+#: lib/tmpl/page.php:128
 msgid "Имя"
 msgstr ""
 
-#: lib/tmpl/page.php:93
+#: lib/tmpl/page.php:129
 msgid "Права"
 msgstr ""
 
-#: lib/tmpl/page.php:94
+#: lib/tmpl/page.php:130
 msgid "Изменён"
 msgstr ""
 
-#: lib/tmpl/page.php:95
+#: lib/tmpl/page.php:131
 msgid "Размер"
 msgstr ""
 
-#: lib/tmpl/page.php:96
+#: lib/tmpl/page.php:132
 msgid "Действия"
 msgstr ""
 
-#: lib/tmpl/page.php:100
+#: lib/tmpl/page.php:136
 msgid "Директории"
 msgstr ""
 
-#: lib/tmpl/page.php:129
+#: lib/tmpl/page.php:165
 msgid "Переименовать"
 msgstr ""
 
-#: lib/tmpl/page.php:129
+#: lib/tmpl/page.php:165
 msgid "Удалить"
 msgstr ""
 
-#: lib/tmpl/page.php:155
+#: lib/tmpl/page.php:191
 msgid "Если возникнут проблемы или вопросы, то обращайтесь в Telegram к"
+msgstr ""
+
+#: options.php:17
+msgid "Дополнительные директории"
+msgstr ""
+
+#: options.php:20
+msgid ""
+"Вводить через пробел, запятую или точку с запятой<br>Директория "
+"<code>food</code> присутствует всегда и независимо от этой настройки"
+msgstr ""
+
+#: options.php:24
+msgid "Автоудаление старых файлов"
+msgstr ""
+
+#: options.php:27
+msgid "Да"
+msgstr ""
+
+#: options.php:28
+msgid "Нет"
+msgstr ""
+
+#: options.php:34
+msgid "Автоудаление старых файлов старше"
+msgstr ""
+
+#: options.php:36
+msgid "Года/Лет"
 msgstr ""

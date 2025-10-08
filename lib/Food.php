@@ -43,7 +43,8 @@ class Food {
 
 	public function __construct() {
 		// Загрузка перевода
-		load_textdomain( $this::FOOD_NAME, $this::FOOD_PATH . '/languages/' . $this::FOOD_NAME . '-' . $this::FOOD_LOCALE . '.mo');
+		load_plugin_textdomain("food-uploader-plugin", false, "food-uploader-plugin/languages");
+		//load_textdomain( "$this::FOOD_NAME", $this::FOOD_PATH . '/languages/' . $this::FOOD_NAME . '-' . $this::FOOD_LOCALE . '.mo');
 		// События, Действия, Фильтры
 		$this->registerAction();
 		$this->registerFilter();
@@ -93,7 +94,7 @@ class Food {
 
 	// Загрузка языка
 	public function food_init() {
-		load_plugin_textdomain( $this::FOOD_NAME, false, $this::FOOD_NAME . '/languages/' );
+		load_plugin_textdomain( "food-uploader-plugin", false, "food-uploader-plugin/languages");
 	}
 
 	// Регистрация опций

@@ -23,8 +23,8 @@ $url = (isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] )) ?
 				<th scope="row"><?= __("Автоудаление старых файлов", "food-uploader-plugin");?></th>
 				<td>
 					<select name="food_auto_delete" value="<?= esc_attr( get_option('food_auto_delete', '0') );?>">
-						<option value="1" <?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "selected" : "";?>>Да</option>
-						<option value="0"<?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "" : "selected";?>>Нет</option>
+						<option value="1" <?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "selected" : "";?>><?= __("Да", "food-uploader-plugin");?></option>
+						<option value="0"<?= esc_attr( get_option('food_auto_delete', '0') ) == "1" ? "" : "selected";?>><?= __("Нет", "food-uploader-plugin");?></option>
 					</select>
 					<p class="description"><em></em></p>
 				</td>
@@ -32,7 +32,7 @@ $url = (isset( $_GET['tab'] ) && ( 'plugin-settings' === $_GET['tab'] )) ?
 			<tr valign="top">
 				<th scope="row"><?= __("Автоудаление старых файлов старше", "food-uploader-plugin");?></th>
 				<td>
-					<input type="number" name="food_auto_year" value="<?= esc_attr( get_option('food_auto_year', '5') );?>" min="1" max="5"> Года/Лет
+					<input type="number" name="food_auto_year" value="<?= esc_attr( get_option('food_auto_year', '5') );?>" min="1" max="5"> <?= __("Года/Лет", "food-uploader-plugin");?>
 					<p class="description"><em></em></p>
 				</td>
 			</tr>

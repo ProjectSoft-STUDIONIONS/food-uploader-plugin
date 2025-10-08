@@ -43,7 +43,43 @@ $versions = array(
 	"app_js" => filemtime($app_js),
 	"main_js" => filemtime($main_js),
 );
+$langArray = array(
+	"alert_error_upload_max"         => __("Вы не можете загружать больше %s файл(a/ов).", "food-uploader-plugin"),
+	"select_upload_files"            => __("Выберите файлы для загрузки", "food-uploader-plugin"),
+	"alert_error_upload_type"        => __("Нельзя загрузить данный тип файла!", "food-uploader-plugin"),
+	"one_file"                       => __("файл", "food-uploader-plugin"),
+	"two_file"                       => __("файла", "food-uploader-plugin"),
+	"thre_file"                      => __("файлов", "food-uploader-plugin"),
+	"selected"                       => __("Выбрано:", "food-uploader-plugin"),
+	"upload"                         => __("Загрузить", "food-uploader-plugin"),
+	"selected_upload_files"          => __("Выберите файлы для загрузки", "food-uploader-plugin"),
+	"prompt_rename"                  => __("Укажите новое имя для файла:", "food-uploader-plugin"),
+	"confirm_delete"                 => __("Удалить файл %s?"),
+	"upload_block_title"             => __("Перетащите сюда файлы *.xlsx или *.pdf для загрузки
+Или выберите их с помощю диалога", "food-uploader-plugin"),
+	"upload_block_before"            => __("Перетащите сюда файлы (*.xlsx или *.pdf)
+Или выберите их с помощю диалога", "food-uploader-plugin"),
+	"tools"                          => __("Инструменты", "food-uploader-plugin"),
+	"colvis"                         => __("Видимость столбцов", "food-uploader-plugin"),
+	"colvis_title"                   => __("Видимость столбцов
+Влияет на Печать", "food-uploader-plugin"),
+	"export"                         => __("Экспорт", "food-uploader-plugin"),
+	"export_excel"                   => __("Экспорт в XLSX", "food-uploader-plugin"),
+	"export_excel_attr_title"        => __("Сохранить данные в файл XLSX", "food-uploader-plugin"),
+	"export_excel_filename"          => __("Экспорт %s в XLSX", "food-uploader-plugin"),
+	"export_pdf"                     => __("Экспорт в PDF", "food-uploader-plugin"),
+	"export_pdf_attr_title"          => __("Сохранить данные в файл PDF", "food-uploader-plugin"),
+	"export_pdf_filename"            => __("Экспорт %s в PDF", "food-uploader-plugin"),
+	"export_title"                   => __("Директория %s", "food-uploader-plugin"),
+	"export_pdf_info"                => __("Меню ежедневного питания.", "food-uploader-plugin"),
+	"print"                          => __("Печать", "food-uploader-plugin"),
+	"print_title"                    => __("Вывести данные на печать", "food-uploader-plugin"),
+	"settings"                       => __("Настройки «Меню ежедневного питания»", "food-uploader-plugin"),
+);
 ?>
+<script>
+	const LANG = <?= json_encode($langArray);?>;
+</script>
 <link rel="stylesheet" href="/viewer/app.min.css?<?= $versions["app_css"];?>">
 <link rel="stylesheet" href="/wp-content/plugins/<?= $this::FOOD_NAME;?>/css/main.min.css?<?= $versions["main_css"];?>">
 <div class="wrap" id="wp-plugins-food">
@@ -58,7 +94,7 @@ $versions = array(
 	if($this->dir):
 ?>
 	<div class="folder-title">
-		<h3>Директория <code>/<?= $this->dir;?>/</code> <a class="food-icon food-icon-new-window" href="/<?= $this->dir;?>/" target="_blank" title="<?= __("Открыть в новой вкладке для просмотра директории", "food-uploader-plugin");?>"></a></h3>
+		<h3><?= __("Директория", "food-uploader-plugin");?> <code>/<?= $this->dir;?>/</code> <a class="food-icon food-icon-new-window" href="/<?= $this->dir;?>/" target="_blank" title="<?= __("Открыть в новой вкладке для просмотра директории", "food-uploader-plugin");?>"></a></h3>
 		<p class="food-title-root"><i class="food-icon food-icon-folder-open-o"></i>&nbsp;&nbsp;&nbsp;<a href="admin.php?page=<?= $this::FOOD_NAME;?>"><?= __("На верхний уровень", "food-uploader-plugin");?></a> / <a href="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>"><?= $this->dir;?></a></p>
 	</div>
 <?php

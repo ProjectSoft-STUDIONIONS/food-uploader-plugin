@@ -22,6 +22,7 @@ module.exports = function(grunt) {
 			"compress"
 		],
 		src: [
+			'bower_components/sprintf/dist/sprintf.min.js',
 			'bower_components/jquery/dist/jquery.js',
 			'bower_components/js-cookie/src/js.cookie.js',
 			'bower_components/pdfmake/build/pdfmake.js',
@@ -174,7 +175,6 @@ module.exports = function(grunt) {
 				},
 				files : {
 					'css/main.css' : [
-						'bower_components/webfont-food/dest/css/foodIcon.css',
 						'src/less/main.less'
 					],
 				}
@@ -356,16 +356,6 @@ module.exports = function(grunt) {
 			},
 		},
 		copy: {
-			/*
-			fonts: {
-				expand: true,
-				cwd: 'bower_components/bootstrap/dist/fonts',
-				src: [
-					'**'
-				],
-				dest: 'fonts/',
-			},
-			*/
 			fontsFood: {
 				expand: true,
 				cwd: 'bower_components/webfont-food/dest/fonts',
@@ -398,7 +388,7 @@ module.exports = function(grunt) {
 						expand: true,
 						flatten : true,
 						src: [
-							'src/languages/*.po'
+							'languages/*.po'
 						],
 						dest: 'languages/',
 						filter: 'isFile'

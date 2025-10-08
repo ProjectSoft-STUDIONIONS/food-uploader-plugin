@@ -70,9 +70,9 @@
 			btnDrag = document.querySelector('.dt-dragdrop-block');
 
 		if(files.length > maxCountFile) {
-			btn && (btn.innerHTML = `Ззагрузить`);
+			btn && (btn.innerHTML = `${LANG.upload}`);
 			btnDrag && btnDrag.setAttribute('data-length', "0");
-			alert(`Вы не можете загружать больше ${maxCountFile} файл(a/ов).` );
+			alert( sprintf(LANG.alert_error_upload_max, maxCountFile) );
 			document.upload.reset();
 			return !1;
 		}
@@ -90,10 +90,10 @@
 					);
 					// Выбор файлов
 					btn && (
-						btn.innerHTML = `Выберите файлы для загрузки`
+						btn.innerHTML = LANG.select_upload_files
 					);
 					console.log(a);
-					alert(`Нельзя загрузить данный тип файла!\n${a.name} - ${a.type}`);
+					alert( LANG.alert_error_upload_type + `\n${a.name} - ${a.type}`);
 					document.upload.reset();
 					return !1;
 				}
@@ -101,16 +101,16 @@
 		}
 		if(out.length){
 			// Загрузка
-			let afterSufix = out.length == 1 ? `файл` : ((out.length > 1 && out.length < 5) ? `файла` : `файлов`),
-				afterPrefix = `Выбрано:`;
+			let afterSufix = out.length == 1 ? LANG.one_file : ((out.length > 1 && out.length < 5) ? LANG.two_file : LANG.thre_file ),
+				afterPrefix = LANG.selected;
 			btn && (
-				btn.innerHTML = `Загрузить`
+				btn.innerHTML = LANG.upload
 			);
 			btnDrag && btnDrag.setAttribute('data-title-after', `${afterPrefix} ${out.length} ${afterSufix}`);
 		}else{
 			// Выбор файлов
 			btn && (
-				btn.innerHTML = `Выберите файлы для загрузки`
+				btn.innerHTML = LANG.selected_upload_files
 			);
 			btnDrag && btnDrag.removeAttribute('data-title-after');
 		}
@@ -176,7 +176,7 @@
 					const segments = file.split('.');
 					const fileExtension = segments.pop();
 					let fileName = segments.join('.');
-					let nwfile = prompt("Укажите новое имя для файла:", fileName);
+					let nwfile = prompt(LANG.prompt_rename, fileName);
 					if(!nwfile) {
 						return !1
 					}
@@ -190,7 +190,7 @@
 					return !1;
 					break;
 				case "delete":
-					if(!confirm(`Удалить файл ${file}?`)){
+					if( !confirm( sprintf( LANG.confirm_delete, file) ) ){
 						return !1;
 					}
 					mode.value = "delete";
@@ -217,8 +217,8 @@
 			className: 'dt-dragdrop-block btn-default btn-block',
 			text: '',
 			attr: {
-				title: `Перетащите сюда файлы *.xlsx или *.pdf для загрузки\nИли выберите их с помощю диалога`,
-				"data-title-before":`Перетащите сюда файлы (*.xlsx или *.pdf)\nИли выберите их с помощю диалога`
+				title: LANG.upload_block_title,
+				"data-title-before": LANG.upload_block_before
 			},
 			tag: "button",
 			action: function (e, dt, node, config) {
@@ -313,7 +313,7 @@
 						// Инструменты
 						{
 							extend: 'collection',
-							text: `Инструменты`,
+							text: LANG.tools,
 							className: 'button-collection-tools btn-default food-icon-tools',
 							dropIcon: false,
 							buttons: [
@@ -321,9 +321,9 @@
 								{
 									extend: 'colvis',
 									className: 'button-colvis btn-default food-icon-tasks',
-									text: `Видимость столбцов`,
+									text: LANG.colvis,
 									attr: {
-										title: `Видимость столбцов\r\nВлияет на Печать`
+										title: LANG.colvis_title
 									},
 									columns: [1,2,3,4],
 									select: true,
@@ -338,7 +338,7 @@
 								// Экспорт
 								{
 									extend: 'collection',
-									text: 'Экспорт',
+									text: LANG.export,
 									className: 'button-collection-tools food-icon-export',
 									dropIcon: false,
 									buttons: [
@@ -346,13 +346,13 @@
 										{
 											extend: 'excel',
 											className: 'btn-default food-icon-export-xlsx',
-											text: 'Экспорт в XLSX',
+											text: LANG.export_excel,
 											download: '',
-											filename: `Экспорт ${searchAPI.dir} в XLSX`,
-											title: `Директория ${url}`,
+											filename: sprintf(LANG.export_excel_filename, searchAPI.dir),
+											title: sprintf(LANG.export_title, url),
 											sheetName: `${searchAPI.dir}`,
 											attr: {
-												title: `Сохранить данные в файл XLSX`
+												title: LANG.export_excel_attr_title
 											},
 											exportOptions: {
 												columns: [':visible']
@@ -443,23 +443,23 @@
 										{
 											extend: 'pdf',
 											className: 'btn-default food-icon-export-pdf',
-											text: 'Экспорт в PDF',
+											text: LANG.export_pdf,
 											download: '',
-											filename: `Экспорт ${searchAPI.dir} в PDF`,
-											title: `Директория ${url}`,
+											filename: sprintf(LANG.export_pdf_filename, searchAPI.dir),
+											title: sprintf(LANG.export_title, url),
 											exportOptions: {
 												columns: [':visible']
 											},
 											attr: {
-												title: `Сохранить данные в файл PDF`
+												title: LANG.export_pdf_attr_title
 											},
 											// Кастомизируем вывод
 											customize: function (doc) {
 												let date = new Date();
 												let dateISO = date.toISOString();
 												let title = [
-													`Меню ежедневного питания.`,
-													`Директория ${url}`
+													LANG.export_pdf_info,
+													LANG.export_title
 												];
 												// Используемый язык экспорта
 												doc.language = 'ru-RU';
@@ -508,9 +508,9 @@
 								{
 									extend: 'print',
 									className: 'button-print btn btn-default food-icon-print',
-									text: `Печать`,
+									text: LANG.print,
 									attr: {
-										title: `Вывести данные на Печать`
+										title: LANG.print_title
 									},
 									exportOptions: {
 										columns: [':visible']
@@ -535,7 +535,7 @@
 						},
 						// Кнопка выбора файлов
 						{
-							text: 'Выберите файлы для загрузки',
+							text: LANG.selected_upload_files,
 							className: 'button-upload btn-success food-icon-flopy-save',
 							action: function (e, dt, node, config) {
 								let uploader, input;
@@ -646,7 +646,7 @@
 	})*/
 	jq(document).on('thickbox:iframe:loaded', function(e) {
 		jq(window).trigger('resize');
-		let title = "Настройки «Меню ежедневного питания»";
+		let title = LANG.settings;
 		jq("#TB_window")
 			.addClass( 'plugin-food-settings-modal' )
 			.attr({
@@ -654,7 +654,7 @@
 				'aria-label': title
 			});
 		// Set title attribute on the iframe.
-		jq("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;Настройки «Меню ежедневного питания»' );
+		jq("#TB_window").find( '#TB_ajaxWindowTitle' ).html( '<i class="dashicons dashicons-admin-generic"></i>&nbsp;' + LANG.settings );
 		jq(window).trigger('resize');
 	});
 	jq(window).on('resize', window.tb_position).trigger('resize');
