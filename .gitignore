@@ -32,3 +32,6 @@ lib/viewer
 *.db
 
 !.gitignore
+
+src/css/*
+docs/index.html
