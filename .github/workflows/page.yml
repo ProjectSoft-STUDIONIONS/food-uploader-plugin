@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Сборка страницы и компонента для обновления
+name: Сборка страницы
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    name: Сборка страницы и компонента для обновления
+    name: Сборка страницы
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
