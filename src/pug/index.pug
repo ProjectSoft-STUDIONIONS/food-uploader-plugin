@@ -45,3 +45,78 @@ html(lang="en")
 		link(rel="preload" href="https://projectsoft-studionions.github.io/food-uploader-plugin/assets/fonts/Lato-ThinItalic.ttf" as="font" type="font/truetype" crossorigin="anonymous")
 		style
 			include ../css/main.css
+	body
+		header
+			div
+				a(href="https://projectsoft-studionions.github.io/")
+			div
+				h1
+					|Плагин «Food File Uploader» для Joomla! CMS
+				p
+					|Плагин <code>food-uploader-plugin</code> для WordPress CMS. Обслуживание директории <code>food</code> сайта школы. Актуально для сайтов школ РФ.
+			div
+				a(href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin" target="_blank")
+					include github.svg
+		main
+			include logo-wordpress.svg
+			h2
+				|Описание
+			div.description
+				p
+					|Плагин <code>food-uploader-plugin</code> для WordPress CMS разработан для обслуживание директории <code>food</code> на сайтах школ Российской Федерации.
+				p
+					|Установку плагина нужно провести через административную панель <strong>WordPress CMS</strong>.
+				p
+					|Скачать <a href="#last-version">последнюю версию</a> плагина для своей версии <strong>Joomla! CMS</strong>.
+				p
+					|Перейти на страницу установки плагинов <code></code>. Дождаться конца установки компонента.
+				p
+					|Плагин установлен. Вам осталось только активировать плагин. Для этого нужно перейти в <code>Плагины</code> и нажать пункт <code>Активировать</code> в блоке плагина.
+				p
+					|Директория <code>food</code> присутствует всегда. Для дополнительных директорий, например индивидуального питания, нужно перейти в <code>Настройки</code> компонета. Кнопка настройки плагина присутствует на странице плагина <strong>Меню ежедневного питания</strong> вправом верхнем углу.
+				p
+					|Вы можете перечислить директории, которые нужно создать. Так же вы можете настроить автоудаление старых файлов, при этом вы можете выбрать временной интервал от одного года до пяти лет. Т. е. если выбран один год, то вы сохраните файлы за текущей год и за прошлый включительно.
+				p
+					|Данная опция позволяет вам сэкономить объем используемого пространства выделенного системой вашего хост провайдера.
+				p
+					//|Так же вы можете настроить <code>Права доступа</code> для ваших Менеджеров. Помните, что не нужно давать доступ к компоненту в публичной части.
+				p
+					//|В систему так же добавляется ссылка на проверку обновлений для компонента <code>com_food</code>. При выходе новой версии вам будет предложено обновление компонента в соответствующем месте определённое вашей системой CMS.
+				p.text-center
+					|<strong>Удачного использования компонента!</strong>
+				h3.text-center
+					|Постскриптум
+				p
+					|Если у вас возникли проблемы с плагином или вы хотите обновить вашу версию <strong>WordPress CMS</strong>, то, по вашему желанию, вы можете обратиться ко мне для последующего обсуждения действий - <a href="https://t.me/ProjectSoft" target="_blank"><em>@ProjectSoft</em></a>
+			h2
+				|Версии
+			div.articles
+				article#last-version
+					head
+						h3
+							|Последняя версия
+					div
+						ul
+							li
+								div
+									span
+										|Для WordPress CMS
+									span.text-right
+										a.btn(href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/latest/download/Для WordPress CMS.zip" download="food-uploader-plugin.zip")
+											|Скачать
+				each version in versions
+					article
+						head
+							h3= version
+						div
+							ul
+								li
+									div
+										span
+											|Для WordPress CMS
+										span.text-right
+											a.btn(href="https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin/releases/download/" + version + "/food-uploader-plugin.zip" download="food-uploader-plugin.zip")
+												|Скачать
+		footer
+			a(href="https://github.com/ProjectSoft-STUDIONIONS" target="_blank")
+				|ProjectSoft
