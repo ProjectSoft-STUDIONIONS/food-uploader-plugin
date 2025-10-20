@@ -29,6 +29,7 @@
 		"grunt-contrib-copy": "^1.0.0",
 		"grunt-contrib-cssmin": "^4.0.0",
 		"grunt-contrib-less": "^3.0.0",
+		"grunt-contrib-pug": "^3.0.0",
 		"grunt-contrib-uglify-es": "^3.3.0",
 		"grunt-group-css-media-queries": "^1.0.1",
 		"grunt-lineending": "^1.0.0",

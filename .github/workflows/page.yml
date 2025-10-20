@@ -1,0 +1,53 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Сборка страницы и компонента для обновления
+
+on:
+  workflow_dispatch:
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    name: Сборка страницы и компонента для обновления
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Установка Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+
+      - name: NPM установка пакетов
+        run: |
+          npm run inst
+
+      - name: Сборка компонента
+        run: |
+          npm run build
+
+      - name: Старт страницы
+        uses: actions/configure-pages@v5
+
+      - name: Загрузка артифактов
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: './docs/'
+
+      - name: Развертывание на странице GitHub - https://projectsoft-studionions.github.io/food-uploader-plugin/
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -19,7 +19,8 @@ module.exports = function(grunt) {
 			"copy",
 			"po2mo",
 			"lineending",
-			"compress"
+			"compress",
+			"pug"
 		],
 		src: [
 			'bower_components/sprintf/dist/sprintf.min.js',
@@ -177,6 +178,9 @@ module.exports = function(grunt) {
 					'css/main.css' : [
 						'src/less/main.less'
 					],
+					'src/css/main.css': [
+						'src/less/site.less'
+					],
 				}
 			},
 		},
@@ -192,13 +196,21 @@ module.exports = function(grunt) {
 					'css/main.css' : [
 						'css/main.css'
 					],
+					'src/css/main.css': [
+						'src/css/main.css'
+					],
 				}
 			},
 		},
 		group_css_media_queries: {
 			group: {
 				files: {
-					'css/main.css': ['css/main.css'],
+					'css/main.css': [
+						'css/main.css'
+					],
+					'src/css/main.css': [
+						'src/css/main.css'
+					],
 				}
 			},
 		},
@@ -231,6 +243,15 @@ module.exports = function(grunt) {
 							'css/main.css'
 						],
 						dest: 'css/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						flatten : true,
+						src: [
+							'src/css/main.css'
+						],
+						dest: 'src/css/',
 						filter: 'isFile'
 					},
 				]
@@ -328,6 +349,7 @@ module.exports = function(grunt) {
 				files: {
 					'food-uploader-plugin.php': ['food-uploader-plugin.php'],
 					'css/main.css': ['css/main.css'],
+					'src/css/main.css': ['src/css/main.css'],
 					'css/main.min.css': ['css/main.min.css'],
 					'js/appjs.js': ['js/appjs.js'],
 					'js/appjs.min.js': ['js/appjs.min.js'],
@@ -352,6 +374,7 @@ module.exports = function(grunt) {
 			minify: {
 				files: {
 					'css/main.min.css' : ['css/main.css'],
+					'src/css/main.css' : ['src/css/main.css'],
 				}
 			},
 		},
@@ -421,6 +444,28 @@ module.exports = function(grunt) {
 					},
 				],
 			},
+		},
+		pug: {
+			docs: {
+				options: {
+					doctype: 'html',
+					client: false,
+					pretty: '',
+					separator:  '',
+					data: function(dest, src) {
+						return {};
+					}
+				},
+				files: [
+					{
+						expand: true,
+						cwd: __dirname + '/src/pug/',
+						src: [ 'index.pug' ],
+						dest: __dirname + '/docs/',
+						ext: '.html'
+					},
+				]
+			}
 		},
 	});
 	grunt.registerTask('default',	gc.default);
