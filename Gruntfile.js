@@ -339,6 +339,19 @@ module.exports = function(grunt) {
 				},
 				src: "edit-file-plugin.php5",
 				dest: "food-uploader-plugin.php"
+			},
+			lib: {
+				options: {
+					patterns: [
+						{
+							match: /%time%/g,
+							replacement: parseInt((new Date()).getTime() / 1000)
+						},
+					],
+					files: [
+						
+					]
+				}
 			}
 		},
 		lineending: {

@@ -250,16 +250,19 @@ class Food {
 				$this->folders = array_filter(array_unique(array_merge($food, $tmp_folders)));
 				sort($this->folders);
 				foreach($this->folders as $t_folder):
-					$str_t_folder = $this::FOOD_ABSPATH . "/" . $t_folder;
-					if(!is_dir($str_t_folder) && !is_file($str_t_folder)):
-						// Создаём
-						@mkdir($this::FOOD_ABSPATH . "/" . $t_folder, 0755, true);
-						@chmod($this::FOOD_ABSPATH . "/" . $t_folder, 0755);
-					endif;
-					// Перезаписываем файл htaccess
-					@file_put_contents($this::FOOD_ABSPATH . "/" . $t_folder . "/.htaccess", $htaccess);
-					if($t_folder !== "food"):
-						$tarr[] = $t_folder;
+					if($t_folder):
+						$t_folder = $this->translitFile($t_folder);
+						$str_t_folder = $this::FOOD_ABSPATH . "/" . $t_folder;
+						if(!is_dir($str_t_folder) && !is_file($str_t_folder)):
+							// Создаём
+							@mkdir($this::FOOD_ABSPATH . "/" . $t_folder, 0755, true);
+							@chmod($this::FOOD_ABSPATH . "/" . $t_folder, 0755);
+						endif;
+						// Перезаписываем файл htaccess
+						@file_put_contents($this::FOOD_ABSPATH . "/" . $t_folder . "/.htaccess", $htaccess);
+						if($t_folder !== "food"):
+							$tarr[] = $t_folder;
+						endif;
 					endif;
 				endforeach;
 			endif;

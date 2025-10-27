@@ -625,11 +625,11 @@
 			dropArea && dropArea.addEventListener('drop', handleDrop, false);
 
 		}, 1000);
-		setTimeout(() => {
+		/*setTimeout(() => {
 			[...document.querySelectorAll('.notice .notice-dismiss')].forEach((el)=>{
 				el.click();
 			});
-		}, 5000);
+		}, 5000);*/
 	}else{
 		jq('.food-row').addClass('row-disabled');
 	}

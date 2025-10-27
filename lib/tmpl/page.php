@@ -107,6 +107,9 @@ $langArray = array(
 <?php
 	endif;
 ?>
+<?php
+	if($this->dir):
+?>
 	<form action="admin.php?page=<?= $this::FOOD_NAME;?>&dir=<?= $this->dir;?>" class="text-right" name="upload" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="mode" value="upload">
 		<input type="file" name="userfiles[]" multiple="" accept=".xlsx,.pdf" max="20" onchange="uploadFiles(this)">
@@ -117,6 +120,9 @@ $langArray = array(
 		<input type="hidden" name="file">
 		<input type="hidden" name="new_file">
 	</form>
+<?php
+	endif;
+?>
 	<div class="food-row hidden">
 		<div class="">
 			<table class="table table-bordered table-hover text-nowrap" style="width: 100%;">
@@ -150,13 +156,14 @@ $langArray = array(
 									$this->dir,
 									$value
 								));
+								$ext = pathinfo($file, PATHINFO_EXTENSION);
 								$perms = substr(sprintf('%o', fileperms($file)), -4);
 								$size = $this->getSize($file);
 								$ltime = strtotime(wp_timezone_string(), filemtime($file));
 								$date = $this->toDateFormat($ltime);
 ?>
 					<tr>
-						<td><i class="food-icon food-icon-file"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
+						<td><i class="food-icon food-icon-file-<?= $ext;?>"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
 						<td><?= $perms; ?></td>
 						<td><?= $date;  ?></td>
 						<td><?= $size;  ?></td>
