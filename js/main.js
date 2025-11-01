@@ -1,6 +1,9 @@
+(function (yjq) {
+
+})(jQuery);
+
 !(function(jq){
 	//$.noConflict();
-
 	const getDateTime = function(timestamp = 0) {
 		let time = new Date(timestamp),
 			date = time.getDate(),
@@ -253,8 +256,13 @@
 			}
 		});
 		let dateFile = new Date();
-		let table = jq('.table').DataTable({
+		let table = jq('.table')
+		table.on('init.dt', function () {
+			table.removeClass('hidden');
+		});
+		table.DataTable({
 			responsive: false,
+			//"pagingType": "input",
 			// Колонки
 			columns: [
 				{ name: 'file'       },
@@ -557,15 +565,15 @@
 						},
 					]
 				},
-				bottomStart: [],
-				bottomEnd: [
-					"info",
-					"paging"
-				]
+				bottomStart: {},
+				bottomEnd: {
+					paging: true,
+					"info": true,
+				},
 			},
 			language: {
 				url: '/wp-content/plugins/food-uploader-plugin/js/ru_RU.json?date=' +dateString(),
-			}
+			},
 		});
 		setTimeout(() => {
 
@@ -625,11 +633,6 @@
 			dropArea && dropArea.addEventListener('drop', handleDrop, false);
 
 		}, 1000);
-		/*setTimeout(() => {
-			[...document.querySelectorAll('.notice .notice-dismiss')].forEach((el)=>{
-				el.click();
-			});
-		}, 5000);*/
 	}else{
 		jq('.food-row').addClass('row-disabled');
 	}

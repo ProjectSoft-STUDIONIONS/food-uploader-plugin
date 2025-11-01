@@ -77,6 +77,7 @@ module.exports = function(grunt) {
 				force: true
 			},
 			all: [
+				'*.zip',
 				'test/',
 				'tests/'
 			]
