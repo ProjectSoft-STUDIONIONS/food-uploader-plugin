@@ -340,17 +340,32 @@ class Food {
 								$this->all['success'][] =  $this->dir . "/" . $name;
 							else:
 								// Добавляем файл в отображение
-								$files[] = $name;
+								$files[$name] = array(
+									"name" => $name,
+									"perms" => substr(sprintf('%o', $fileinfo->getPerms()), -4),
+									"time" => $fileinfo->getMTime(),
+									"size" => $this->getSize($fileinfo->getSize()),
+									"ext" => $ext,
+									"icon" => "food-icon-file-" . $ext,
+									"link" => "/" . join("/", array($this->dir, $name)) //"/" . $this->dir . "/" . $name
+								);
 							endif;
 						else:
 							// Добавляем файл в отображение
-							$files[] = $name;
+							$files[$name] = array(
+								"name" => $name,
+								"perms" => substr(sprintf('%o', $fileinfo->getPerms()), -4),
+								"time" => $fileinfo->getMTime(),
+								"size" => $this->getSize($fileinfo->getSize()),
+								"ext" => $ext,
+								"icon" => "food-icon-file-" . $ext,
+								"link" => "/" . join("/", array($this->dir, $name)) 
+							);
 						endif;
 					endif;
 				endif;
 			endforeach;
-			natsort($files);
-			$files = array_reverse($files, false);
+			krsort($files);
 			// Если информация есть
 			if(count($this->all['success'])):
 				// Отправляем событие с информацией
@@ -640,10 +655,10 @@ class Food {
 	/**
 	 * Получение размера файла
 	 */
-	public function getSize($file) {
+	public function getSize($size = 0) {
 		$sizes      = array('TB' => 1099511627776, 'GB' => 1073741824, 'MB' => 1048576, 'KB' => 1024, 'B' => 1);
 		$precisions = count($sizes) - 1;
-		$size       = filesize($file);
+		//$size       = filesize($file);
 		foreach ($sizes as $unit => $bytes) {
 			if ($size >= $bytes) {
 				return number_format($size / $bytes, $precisions) . ' ' . $unit;

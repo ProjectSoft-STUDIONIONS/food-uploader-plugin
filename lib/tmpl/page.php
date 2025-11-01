@@ -148,28 +148,19 @@ $langArray = array(
 				</thead>
 				<tbody>
 <?php
+					$timezone = wp_timezone();
 					if($this->dir):
 						if(count($this->files)):
 							foreach($this->files as $key => $value):
-								$file = join("/", array(
-									$this::FOOD_ABSPATH,
-									$this->dir,
-									$value
-								));
-								$ext = pathinfo($file, PATHINFO_EXTENSION);
-								$perms = substr(sprintf('%o', fileperms($file)), -4);
-								$size = $this->getSize($file);
-								$ltime = strtotime(wp_timezone_string(), filemtime($file));
-								$date = $this->toDateFormat($ltime);
 ?>
 					<tr>
-						<td><i class="food-icon food-icon-file-<?= $ext;?>"></i><a href="/<?= $this->dir . "/" . $value;?>" target="_blank" class="food-link"><?= $value;?></td>
-						<td><?= $perms; ?></td>
-						<td><?= $date;  ?></td>
-						<td><?= $size;  ?></td>
+						<td><i class="food-icon <?= $value["icon"];?>"></i><a href="<?= $value["link"];?>" target="_blank" class="food-link"><?= $value["name"];?></a></td>
+						<td><?= $value["perms"]; ?></td>
+						<td><?= wp_date( "d-m-Y H:i:s", $value["time"], $timezone );  ?></td>
+						<td><?= $value["size"];  ?></td>
 						<td>
 							<div class="flex">
-								<button class="btn btn-default food-icon food-icon-edit" data-mode="rename" data-file="<?= $value;?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value;?>»"></button><button class="btn btn-danger food-icon food-icon-trash" data-mode="delete" data-file="<?= $value;?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value;?>»"></button>
+								<button class="btn btn-default food-icon food-icon-edit" data-mode="rename" data-file="<?= $value["name"];?>" title="<?= __("Переименовать", "food-uploader-plugin");?> «<?= $value["name"];?>»"></button><button class="btn btn-danger food-icon food-icon-trash" data-mode="delete" data-file="<?= $value["name"];?>" title="<?= __("Удалить", "food-uploader-plugin");?> «<?= $value["name"];?>»"></button>
 							</div>
 						</td>
 					</tr>

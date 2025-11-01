@@ -40,25 +40,18 @@ module.exports = function(grunt) {
 	};
 
 	const getDateTime = function(timestamp = 0) {
-		let time = new Date(timestamp),
-			date = time.getDate(),
-			month = time.getMonth() + 1,
-			year = time.getFullYear(),
-			hour = time.getHours(),
-			minute = time.getMinutes(),
-			second = time.getSeconds(),
-			arrDate = [
-				String(year),
-				leftPad(month, 2, '0'),
-				leftPad(date,  2, '0')
-			],
-			arrTime = [
-				leftPad(hour,   2, '0'),
-				leftPad(minute, 2, '0'),
-				leftPad(second, 2, '0')
-			];
-		return arrDate.join('-') + ' ' + arrTime.join(':');
-
+		let time = new Date(timestamp);
+		return [
+			String(time.getFullYear()),
+			leftPad(time.getMonth() + 1, 2, '0'),
+			leftPad(time.getDate(),  2, '0')
+		].join('-')
+		+ " " +
+		[
+			leftPad(time.getHours(),   2, '0'),
+			leftPad(time.getMinutes(), 2, '0'),
+			leftPad(time.getSeconds(), 2, '0')
+		].join(':');
 	},
 	leftPad = function (str, len, ch) {
 		str = String(str);
@@ -256,103 +249,57 @@ module.exports = function(grunt) {
 					},
 				]
 			},
-			md: {
+			readme: {
 				options: {
 					patterns: [
 						{
-							match: /%time%/g,
-							replacement: parseInt((new Date()).getTime() / 1000)
-						},
-						{
-							match: /%name%/g,
-							replacement: PACK.name
-						},
-						{
-							match: /%description%/g,
-							replacement: PACK.description
-						},
-						{
-							match: /%version%/g,
-							replacement: PACK.version
-						},
-						{
-							match: /%author%/g,
-							replacement: PACK.author
-						},
-						{
-							match: /%homepage%/g,
-							replacement: PACK.homepage
-						},
-						{
-							match: /%license%/g,
-							replacement: PACK.license
-						},
-						{
-							match: /%license_uri%/g,
-							replacement: PACK.license_uri
+							match: /\[comment\].*\)\s+$/s,
+							replacement: `[comment]: <> ( Plugin Name:        Food File Uploader )
+[comment]: <> ( Plugin URI:         https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
+[comment]: <> ( Description:        ${PACK.description} )
+[comment]: <> ( Version:            ${PACK.version} )
+[comment]: <> ( Author:             Чернышёв Андрей aka ProjectSoft <projectsoft2009@yandex.ru> )
+[comment]: <> ( Author URI:         https://github.com/ProjectSoft-STUDIONIONS )
+[comment]: <> ( GitHub Plugin URI:  https://github.com/ProjectSoft-STUDIONIONS/food-uploader-plugin )
+[comment]: <> ( License:            GPL-2.0 )
+[comment]: <> ( License URI:        https://mit-license.org/ )
+[comment]: <> ( Donate link:        https://projectsoft.ru/donate/ )
+`
 						},
 					]
 				},
-				src: "src/md",
+				src: "README.md",
 				dest: "README.md"
 			},
 			php: {
 				options: {
 					patterns: [
 						{
-							match: /%time%/g,
-							replacement: parseInt((new Date()).getTime() / 1000)
-						},
-						{
-							match: /%name%/g,
-							replacement: PACK.name
-						},
-						{
-							match: /%description%/g,
-							replacement: PACK.description
-						},
-						{
-							match: /%version%/g,
-							replacement: PACK.version
-						},
-						{
-							match: /%author%/g,
-							replacement: PACK.author
-						},
-						{
-							match: /%homepage%/g,
-							replacement: PACK.homepage
-						},
-						{
-							match: /%license%/g,
-							replacement: PACK.license
-						},
-						{
-							match: /%license_uri%/g,
-							replacement: PACK.license_uri
-						},
-						{
-							match: /%date%/g,
-							replacement: getDateTime((new Date()).getTime())
+							match: /\/\*.*\*\//s,
+							replacement: `/*
+	Plugin Name:        Food File Uploader
+	Plugin URI:         ${PACK.homepage}
+	Description:        ${PACK.description}
+	Version:            ${PACK.version}
+	Author:             ${PACK.author}
+	Author URI:         https://github.com/ProjectSoft-STUDIONIONS/
+	GitHub Plugin URI:  ${PACK.homepage}
+	License:            ${PACK.license}
+	License URI:        ${PACK.license_uri}
+	Donate link:        https://projectsoft.ru/donate/
+	Domain Path:        languages/
+	Text Domain:        ${PACK.name}
+	Requires at least:  5.7
+	Requires PHP:       7.4
+	Creation Date:      2025-02-06 04:18:00
+	Last Update:        ${getDateTime((new Date()).getTime())}
+*/`
 						},
 					]
 				},
-				src: "edit-file-plugin.php5",
+				src: "food-uploader-plugin.php",
 				dest: "food-uploader-plugin.php"
 			},
-			lib: {
-				options: {
-					patterns: [
-						{
-							match: /%time%/g,
-							replacement: parseInt((new Date()).getTime() / 1000)
-						},
-					],
-					files: [
-						
-					]
-				}
-			}
 		},
 		lineending: {
 			main: {
