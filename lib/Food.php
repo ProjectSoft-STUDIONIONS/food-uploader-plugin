@@ -153,7 +153,7 @@ class Food {
 		if( false === strpos($plugin_file, $this::FOOD_NAME))
 			return $actions;
 		$actions[] = '<a href="options-general.php?page=food-uploader-plugin%2Foptions.php">' . __('Настройки', "food-uploader-plugin") . '</a>';
-		$actions[] = '<a href="admin.php?page=food-uploader-plugin">' . __('Открыть плагин', "food-uploader-plugin") . '</a>';
+		//$actions[] = '<a href="admin.php?page=food-uploader-plugin">' . __('Открыть плагин', "food-uploader-plugin") . '</a>';
 		return $actions;
 	}
 
