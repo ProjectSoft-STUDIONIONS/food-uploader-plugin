@@ -102,17 +102,17 @@ class Food {
 		// Дополнительные директории
 		register_setting(
 			'food-group',
-			'food_folders',
+			'food_folders'
 		);
 		// Включение/Отключение автоудаления старых файлов
 		register_setting(
 			'food-group',
-			'food_auto_delete',
+			'food_auto_delete'
 		);
 		// Насколько лет старые файлы удалять
 		register_setting(
 			'food-group',
-			'food_auto_year',
+			'food_auto_year'
 		);
 	}
 
