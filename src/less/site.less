@@ -256,3 +256,18 @@ body {
 		}
 	}
 }
+
+.embed {
+	display: block;
+	&-16x9 {
+		display: block;
+		position: relative;
+		iframe,
+		video,
+		object {
+			display: block;
+			width: 100%;
+			max-height: fit-content;
+		}
+	}
+}

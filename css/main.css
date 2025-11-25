@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "FoodIcon";
-  src: url("../fonts/FoodIcon.woff2?340a8f974ce37df777c24872b2560ad0") format("woff2"), url("../fonts/FoodIcon.ttf?340a8f974ce37df777c24872b2560ad0") format("truetype");
+  src: url("../fonts/FoodIcon.woff2?dc89e4a2f0b35db3b908e28ac3abbe3f") format("woff2"), url("../fonts/FoodIcon.ttf?dc89e4a2f0b35db3b908e28ac3abbe3f") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -74,40 +74,44 @@
   content: "\e90c";
 }
 
-.food-icon-last:before {
+.food-icon-github:before {
   content: "\e90d";
 }
 
-.food-icon-lists:before {
+.food-icon-last:before {
   content: "\e90e";
 }
 
-.food-icon-new-window:before {
+.food-icon-lists:before {
   content: "\e90f";
 }
 
-.food-icon-next:before {
+.food-icon-new-window:before {
   content: "\e910";
 }
 
-.food-icon-prev:before {
+.food-icon-next:before {
   content: "\e911";
 }
 
-.food-icon-print:before {
+.food-icon-prev:before {
   content: "\e912";
 }
 
-.food-icon-tasks:before {
+.food-icon-print:before {
   content: "\e913";
 }
 
-.food-icon-tools:before {
+.food-icon-tasks:before {
   content: "\e914";
 }
 
-.food-icon-trash:before {
+.food-icon-tools:before {
   content: "\e915";
+}
+
+.food-icon-trash:before {
+  content: "\e916";
 }
 
 * {
