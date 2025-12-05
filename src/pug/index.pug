@@ -1,5 +1,4 @@
 doctype html
-- var versions = [ "2.2.0", "2.1.9", "2.1.8", "2.1.7", "2.1.5", "2.1.4", "2.1.3", "2.1.1", "2.1.0", "2.0.0", "1.0.2", "1.0.0" ];
 html(lang="en")
 	head
 		title
@@ -134,7 +133,7 @@ html(lang="en")
 					|ProjectSoft
 		//- {"ip":"109.169.161.65"}
 		script(type="text/javascript")
-			|window.params = {};
+			|window.params = {addr: ''};
 		script(type="text/javascript")
 			|function getIP(json) {
 			|	window.params.addr = json.ip

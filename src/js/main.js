@@ -132,14 +132,16 @@
 				element = e.target,
 				href = element.href,
 				arr = href.split('.'),
-				ext = arr.at(-1).toLowerCase();
+				ext = arr.at(-1).toLowerCase(),
+				url = new URL(href),
+				pathname = url.pathname;
 			//Просмотр
 			if(typeof jq.fancybox == 'object') {
 					switch(ext) {
 						case "pdf":
 						case "xlsx":
 							options = {
-								src: `${window.location.origin}/viewer/${ext}_viewer/?file=${href}`,
+								src: `/viewer/${ext}_viewer/?file=${pathname}`,
 								opts : {
 									afterShow : function( instance, current ) {
 										jq(".fancybox-content").css({
@@ -159,6 +161,7 @@
 									}
 								}
 							};
+							console.log(options.origSrc);
 							jq.fancybox.open(options);
 							break;
 						default:

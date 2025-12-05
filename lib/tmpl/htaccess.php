@@ -1,6 +1,17 @@
 <?php
 
-$htaccess = 'AddDefaultCharset UTF-8
+$htaccess = '# DISABLE CACHING
+<IfModule mod_headers.c>
+	Header set Cache-Control "no-cache, no-store, must-revalidate"
+	Header set Pragma "no-cache"
+	Header set Expires 0
+	Header unset ETag
+</IfModule>
+
+FileETag None
+# END DISABLE CACHING
+
+AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f
