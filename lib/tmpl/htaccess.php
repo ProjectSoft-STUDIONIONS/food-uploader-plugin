@@ -1,17 +1,6 @@
 <?php
 
-$htaccess = '# DISABLE CACHING
-<IfModule mod_headers.c>
-	Header set Cache-Control "no-cache, no-store, must-revalidate"
-	Header set Pragma "no-cache"
-	Header set Expires 0
-	Header unset ETag
-</IfModule>
-
-FileETag None
-# END DISABLE CACHING
-
-AddDefaultCharset UTF-8
+$htaccess = 'AddDefaultCharset UTF-8
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f
@@ -21,15 +10,28 @@ AddDefaultCharset UTF-8
 # Установить опции
 Options +Indexes +ExecCGI +Includes
 
+# Отключаем кеш
+<IfModule mod_headers.c>
+	ExpiresActive Off
+	Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+	Header set Pragma "no-cache"
+	Header set Expires 0
+	Header unset ETag
+</IfModule>
+
+FileETag None
+
 # Если включён модуль mod_autoindex
 <IfModule mod_autoindex.c>
 
 	# Сброс IndexIgnore
 	IndexIgnoreReset ON
 
+	# Запрещаем индексировать определённые файлы
+	IndexIgnore .htaccess *.shtml *.php *.cgi *.html *.js *.css *.ico
+
 	# Устанавливаем описания
-	# AddDescription "Microsoft Office Excel" .xls .xlsx
-	
+
 	# Устанавливаем иконки
 	DefaultIcon /icons-full/unknown.png
 	
@@ -40,7 +42,8 @@ Options +Indexes +ExecCGI +Includes
 	AddAlt "DIRECTORY" ^^DIRECTORY^^
 	
 	AddIcon /icons-full/folder.png ..
-	AddAlt "Родительская дирректория" ..
+	AddAlt "На верхний уровень" ..
+	AddDescription "На верхний уровень" ..
 	
 	AddIcon /icons-full/aac.png .aac
 	AddIcon /icons-full/ai.png .ai
@@ -67,15 +70,22 @@ Options +Indexes +ExecCGI +Includes
 	AddAlt "Звуковой медиафайл" .wav
 	
 	AddIcon /icons-full/xls.png .xls .xlsx
+	AddAlt "Файл электронной таблицы" .xls .xlsx
 	AddDescription "Microsoft Office Excel" .xls .xlsx
-	
-	AddAltByType "Файл электронной таблицы Microsoft Office Excel" application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 	
 	AddIcon /icons-full/zip.png .zip .rar .tar
 	AddAlt "Сжатый файл" .zip .rar .tar
 
 	AddOutputFilter INCLUDES .shtml
 
+	# Назначаем свои параметры установки файлов для шапки и подвала.
+	HeaderName /icons-full/dirlist_header.shtml
+	ReadmeName /icons-full/dirlist_footer.shtml
+	
+	# Подключаем Стили к шапке
+	# Возможность. Но в нашем случае не нужно.
+	# IndexStyleSheet /icons-full/normalize.css
+	
 	# Установить опции индексирования.
 	IndexOptions IgnoreCase
 	IndexOptions FancyIndexing
@@ -89,19 +99,9 @@ Options +Indexes +ExecCGI +Includes
 	IndexOptions SuppressLastModified
 	IndexOptions IconHeight=32
 	IndexOptions IconWidth=32
-	
+		
 	# Установить опции Сортировки по-умолчанию.
 	IndexOrderDefault Descending Name
-
-	# Назначаем свои параметры установки файлов для шапки и подвала.
-	HeaderName /icons-full/dirlist_header.shtml
-	ReadmeName /icons-full/dirlist_footer.shtml
-	
-	# Подключаем Стили к шапке
-	# Возможность. Но в нашем случае не нужно.
-	# IndexStyleSheet /icons-full/normalize.css
-	
-	# Запрещаем индексировать определённые файлы
-	IndexIgnore .htaccess *.shtml *.php *.cgi *.html *.js *.css *.ico
 </IfModule>
+
 ';

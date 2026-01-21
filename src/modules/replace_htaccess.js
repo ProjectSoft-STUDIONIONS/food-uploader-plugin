@@ -15,18 +15,7 @@ module.exports = function(grunt) {
 			var startDate = grunt.template.date(new Date(), "HH:MM:ss.l");
 			grunt.verbose.writeln('Source      ' + chalk.yellowBright(startDate) + ' : ' + chalk.cyan(src));
 			let fileDump = fs.readFileSync(src).toString();
-			let htaccess = `<?php\n\n$htaccess = '# DISABLE CACHING
-<IfModule mod_headers.c>
-	Header set Cache-Control "no-cache, no-store, must-revalidate"
-	Header set Pragma "no-cache"
-	Header set Expires 0
-	Header unset ETag
-</IfModule>
-
-FileETag None
-# END DISABLE CACHING
-
-${fileDump}\n';\n`
+			let htaccess = `<?php\n\n$htaccess = '${fileDump}\n';\n`;
 			fs.writeFileSync(dest, htaccess, {
 				encoding: 'utf8'
 			});
